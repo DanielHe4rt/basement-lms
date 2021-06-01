@@ -30,8 +30,9 @@ danielhe4rt: hey@danielheart.dev
     1. [] Método de pagamento: Stripe, GerenciaNet, Pagarme, Picpay
     2. [] Vinculação com Twitch: Subzada do Daniel é na faixa
     3. [] Formulário não pagante: Se não houver condições de comprar, deixa o salve que a gente libera!
-5. Fórum
-6. Chat
+5. Gameficação
+6. Fórum
+7. Chat
 
 ### Installation
 * Run `git clone https://github.com/DanielHe4rt/basement-lms`
