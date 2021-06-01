@@ -48,17 +48,31 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
+
+### Laravel Sail Installation
 Execute this comand for install Laravel Sail
 `php artisan sail:install`
 
-Select `mysql` for database
+Pay attention, Laravel Sail changes the `DB_USERNAME` and `DB_PASSWORD`
+
+The new values ​​are `DB_USERNAME=sail` and `DB_PASSWORD=password`
+
+Do not change these values.
+
+Select `mysql` for database in your terminal
 
 Create alias for this commando in your `~/.bashrc`
 
 `alias sail='bash vendor/bin/sail'`
 
-Now, utilize 
-`sail up -d` for up your application.
+```
+If you didn't create the 
+alias sail='bash vendor/bin/sail'
+just run bash vendor/bin/sail' and the desired command every time
+```
+Now, use `sail up -d` for up your application.
+
+<hr>
 
 Email settings (using a provider like Mailgun, Amazon SES, etc)
 
