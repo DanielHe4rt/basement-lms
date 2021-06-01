@@ -1,0 +1,89 @@
+/*!
+ =========================================================
+ * Material Dashboard Pro - v2.2.1
+ =========================================================
+ * Product Page: https://www.creative-tim.com/product/admin-pro
+ * Copyright 2020 Creative Tim (http://www.creative-tim.com)
+ =========================================================
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ */
+
+@import "admin/variables";
+@import "admin/mixins";
+@import "admin/mixins/social-buttons.scss";
+@import "admin/core-bootstrap";
+
+// Core Components
+@import "admin/buttons";
+@import "admin/checkboxes";
+@import "admin/radios";
+@import "admin/badges";
+@import "admin/forms";
+@import "admin/input-group";
+@import "admin/images";
+@import "admin/navbar";
+@import "admin/pagination";
+@import "admin/pills";
+@import "admin/type";
+@import "admin/tabs";
+@import "admin/tooltip";
+@import "admin/popover";
+@import "admin/modal";
+@import "admin/misc";
+@import "admin/headers";
+@import "admin/alerts";
+@import "admin/footers";
+@import "admin/dropdown";
+@import "admin/progress";
+@import "admin/togglebutton";
+@import "admin/ripples";
+@import "admin/tables";
+@import "admin/info-areas";
+
+// Cards
+@import "admin/cards";
+@import "admin/cards/card-signup";
+@import "admin/cards/card-plain";
+@import "admin/cards/card-plain-extend";
+@import "admin/cards/card-stats";
+@import "admin/cards/card-testimonials";
+@import "admin/cards/card-profile";
+@import "admin/cards/card-blog";
+@import "admin/cards/card-product";
+@import "admin/cards/card-pricing";
+@import "admin/cards/card-collapse";
+@import "admin/cards/card-form-horizontal";
+@import "admin/cards/card-background";
+@import "admin/cards/card-rotate";
+
+// Components for PRO
+@import "admin/forms-extend";
+@import "admin/misc-extend";
+@import "admin/footers-extend";
+@import "admin/rtl";
+@import "admin/sidebar-and-main-panel";
+@import "admin/fixed-plugin";
+@import "admin/pages";
+@import "admin/timeline";
+@import "admin/social-buttons";
+
+//plugin css
+@import "admin/plugins/plugin-nouislider";
+@import "admin/plugins/animate";
+@import "admin/plugins/sweetalert2";
+@import "admin/plugins/datatables.net";
+@import "admin/plugins/jquery.jvectormap";
+@import "admin/plugins/plugin-datetime-picker";
+@import "admin/plugins/plugin-fileupload";
+@import "admin/plugins/fullcalendar";
+@import "admin/plugins/wizard-card";
+@import "admin/plugins/chartist";
+@import "admin/plugins/plugin-bootstrap-select";
+@import "admin/plugins/perfect-scrollbar";
+@import "admin/plugins/plugin-tagsinput";
+
+// example pages and sections
+//@import "admin/example-pages";
+
+@import "admin/responsive";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
