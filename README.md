@@ -18,7 +18,7 @@ danielhe4rt: hey@danielheart.dev
         * Bootstrap 4/5
         * Websockets (chat)
         * Azure Stream (streaming de video)
-        * Docker
+        * Docker [X]
         * Larastan
         * Psalm ?
 2. [] Autenticação
