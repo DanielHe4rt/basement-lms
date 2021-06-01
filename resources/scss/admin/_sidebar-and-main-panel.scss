@@ -1,4 +1,4 @@
-.wrapper{
+.wrapper {
     position: relative;
     top: 0;
     height: 100vh;
@@ -13,19 +13,20 @@
     width: 260px;
     @include shadow-big();
 
-    .caret{
-      display: inline-block;
-      width: 0;
-      height: 0;
-      margin-left: 2px;
-      vertical-align: middle;
-      border-top: 4px dashed;
-      border-top: 4px solid\9;
-      border-right: 4px solid transparent;
-      border-left: 4px solid transparent;
+    .caret {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: 2px;
+        vertical-align: middle;
+        border-top: 4px dashed;
+        border-top: 4px solid \9
+    ;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
     }
 
-    .sidebar-wrapper{
+    .sidebar-wrapper {
         position: relative;
         height: calc(100vh - 75px);
         overflow: auto;
@@ -34,31 +35,31 @@
 
         padding-bottom: 30px;
 
-        .dropdown .dropdown-backdrop{
+        .dropdown .dropdown-backdrop {
             display: none !important;
         }
 
-        .navbar-form{
+        .navbar-form {
             border: none;
             box-shadow: none;
 
-          .input-group {
-            font-size: 1.7em;
-            height: 36px;
-            width: 78%;
-            padding-left: 17px;
-          }
+            .input-group {
+                font-size: 1.7em;
+                height: 36px;
+                width: 78%;
+                padding-left: 17px;
+            }
         }
 
         > .nav,
-        .user .user-info{
-            [data-toggle="collapse"] ~ div > ul > li > a{
-                span{
+        .user .user-info {
+            [data-toggle="collapse"] ~ div > ul > li > a {
+                span {
                     display: inline-block;
                     @extend .animation-transition-general;
                 }
 
-                .sidebar-normal{
+                .sidebar-normal {
                     margin: 0;
                     position: relative;
                     transform: translateX(0px);
@@ -68,7 +69,7 @@
 
                 }
 
-                .sidebar-mini{
+                .sidebar-mini {
                     text-transform: uppercase;
                     width: 30px;
                     margin-right: 15px;
@@ -79,7 +80,7 @@
                     display: inherit;
                 }
 
-                i{
+                i {
                     font-size: 17px;
                     line-height: 20px;
                     width: 26px;
@@ -88,7 +89,7 @@
         }
     }
 
-    .logo-tim{
+    .logo-tim {
         border-radius: 50%;
         border: 1px solid #333;
         display: block;
@@ -97,65 +98,65 @@
         float: left;
         overflow: hidden;
 
-        img{
+        img {
             width: 60px;
             height: 60px;
         }
     }
 
-    .nav{
+    .nav {
         margin-top: 15px;
         display: block;
 
-        .caret{
+        .caret {
             margin-top: 13px;
             position: absolute;
             right: 6px;
         }
 
-        li{
-            > a{
-              &:hover,
-              &:focus{
-                  background-color: transparent;
-                  outline: none;
-              }
+        li {
+            > a {
+                &:hover,
+                &:focus {
+                    background-color: transparent;
+                    outline: none;
+                }
             }
 
-            &:first-child > a{
+            &:first-child > a {
                 margin: 0 15px;
             }
 
             &:hover > a,
             & .dropdown-menu a:hover,
             & .dropdown-menu a:focus,
-            &.active > [data-toggle="collapse"]{
+            &.active > [data-toggle="collapse"] {
                 background-color: rgba(200, 200, 200, 0.2);
                 color: $black-color;
                 box-shadow: none;
             }
 
-            &.active > [data-toggle="collapse"]{
-                i{
+            &.active > [data-toggle="collapse"] {
+                i {
                     color: #a9afbb;
                 }
             }
 
             &.active > a,
-            &.active > a i{
+            &.active > a i {
                 color: $white-color;
             }
 
-            &.separator{
+            &.separator {
                 margin: 15px 0;
 
-                &:after{
+                &:after {
                     width: calc(100% - 30px);
                     content: "";
                     position: absolute;
                     height: 1px;
                     left: 15px;
-                    background-color: rgba(180,180,180, .3);
+                    background-color: rgba(180, 180, 180, .3);
                 }
 
                 & + li {
@@ -164,7 +165,7 @@
             }
         }
 
-        p{
+        p {
             margin: 0;
             line-height: 30px;
             font-size: 14px;
@@ -175,7 +176,7 @@
             @extend .animation-transition-general;
         }
 
-        i{
+        i {
             font-size: 24px;
             float: left;
             margin-right: 15px;
@@ -187,18 +188,18 @@
     }
 
     .nav li a,
-    .nav li .dropdown-menu a{
-          margin: 10px 15px 0;
-          border-radius: $border-radius-base;
-          color: $black-color;
-          padding-left: 10px;
-          padding-right: 10px;
-          text-transform: capitalize;
-          font-size: $font-paragraph - 1;
+    .nav li .dropdown-menu a {
+        margin: 10px 15px 0;
+        border-radius: $border-radius-base;
+        color: $black-color;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-transform: capitalize;
+        font-size: $font-paragraph - 1;
     }
 
 
-    .sidebar-background{
+    .sidebar-background {
         position: absolute;
         z-index: 1;
         height: 100%;
@@ -209,7 +210,7 @@
         background-size: cover;
         background-position: center center;
 
-        &:after{
+        &:after {
             position: absolute;
             z-index: 3;
             width: 100%;
@@ -221,7 +222,7 @@
         }
     }
 
-    .logo{
+    .logo {
         padding: 15px 0px;
         margin: 0;
         display: block;
@@ -229,37 +230,36 @@
         z-index: 4;
 
         a.logo-mini,
-        a.logo-normal{
+        a.logo-normal {
             @extend .animation-transition-general;
         }
 
-        a.logo-mini{
+        a.logo-mini {
             opacity: 1;
             float: left;
-            width: 30px;
             text-align: center;
             margin-left: 23px;
             margin-right: 15px;
         }
 
-        a.logo-normal{
+        a.logo-normal {
             display: block;
             opacity: 1;
             @include transform-translate-x(0px);
         }
 
-        &:after{
+        &:after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 15px;
             height: 1px;
             width: calc(100% - 30px);
-            background-color: rgba(180,180,180, .3);
+            background-color: rgba(180, 180, 180, .3);
 
         }
 
-        p{
+        p {
             float: left;
             font-size: 20px;
             margin: 10px 10px;
@@ -267,7 +267,7 @@
             line-height: 20px;
         }
 
-        .simple-text{
+        .simple-text {
             text-transform: uppercase;
             padding: $padding-small-vertical $padding-zero;
             display: inline-block;
@@ -280,7 +280,7 @@
         }
     }
 
-    .logo-tim{
+    .logo-tim {
         border-radius: 50%;
         border: 1px solid #333;
         display: block;
@@ -289,179 +289,181 @@
         float: left;
         overflow: hidden;
 
-        img{
+        img {
             width: 60px;
             height: 60px;
         }
     }
 
-    .user{
+    .user {
         padding-bottom: 20px;
-        margin:20px auto 0;
+        margin: 20px auto 0;
         position: relative;
 
-        &:after{
+        &:after {
             content: '';
             position: absolute;
             bottom: 0;
             right: 15px;
             height: 1px;
             width: calc(100% - 30px);
-            background-color: rgba(180,180,180, .3);
+            background-color: rgba(180, 180, 180, .3);
         }
 
-        .photo{
-            width: 34px;
-            height: 34px;
-            overflow: hidden;
-            float: left;
+        .photo {
+
+
+            //overflow: hidden;
+            //float: left;
             z-index: 5;
             margin-right: 11px;
-            border-radius: 50%;
+            text-align: center;
             margin-left: 23px;
             @include shadow-big();
             @extend .animation-transition-general;
 
-            img{
-                width: 100%;
+            img {
+                border-radius: 50%;
+                width: 80%;
+                height: 100%;
             }
         }
 
-        a{
+        a {
             color: $black-color;
             padding: $padding-base-vertical 15px;
             white-space: nowrap;
         }
 
-        .user-info{
-            > a{
-               display: block;
-               line-height: 18px;
-               font-size: 14px;
+        .user-info {
+            margin-top: 25px;
 
-                > span{
-                   @extend .animation-transition-general;
-                   display: block;
-                   position: relative;
-                   opacity: 1;
+            p {
+                text-align: center;
+                display: block;
+                line-height: 18px;
+                font-size: 14px;
+                color: #fff;
+
+                >  .level {
+
                 }
             }
-
-            .caret{
-                position: absolute;
-                top: 8px;
-                right: 15px;
-            }
         }
     }
 
-    &[data-background-color="black"]{
+    &[data-background-color="black"] {
         @include sidebar-background-color($gray-base, $white-color);
 
-        .nav li .dropdown-menu .dropdown-item{
-          color: $white-color;
+        .nav li .dropdown-menu .dropdown-item {
+            color: $white-color;
         }
     }
 
-    &[data-background-color="red"]{
+    &[data-background-color="red"] {
         @include sidebar-background-color($danger, $white-color);
         background-color: $danger;
 
         .user,
         .logo,
-        .nav li.separator{
-            &:after{
-                background-color: rgba(255,255,255, .3);
+        .nav li.separator {
+            &:after {
+                background-color: rgba(255, 255, 255, .3);
             }
         }
 
-        .nav{
+        .nav {
             li:hover:not(.active) > a,
-            li.active > [data-toggle="collapse"]{
+            li.active > [data-toggle="collapse"] {
                 background-color: rgba(255, 255, 255, 0.1);
             }
         }
     }
 
-    &[data-color="purple"]{
+    &[data-color="purple"] {
         @include set-background-color-button($primary);
     }
-    &[data-color="azure"]{
+
+    &[data-color="azure"] {
         @include set-background-color-button($info);
     }
-    &[data-color="green"]{
+
+    &[data-color="green"] {
         @include set-background-color-button($success);
     }
-    &[data-color="orange"]{
+
+    &[data-color="orange"] {
         @include set-background-color-button($warning);
     }
-    &[data-color="danger"]{
+
+    &[data-color="danger"] {
         @include set-background-color-button($danger);
     }
-    &[data-color="rose"]{
+
+    &[data-color="rose"] {
         @include set-background-color-button($rose);
     }
 
-    &[data-color="white"]{
+    &[data-color="white"] {
         @include set-background-color-button($white-color);
         @include sidebar-active-color($black-color);
     }
 
     &[data-image]:after,
-    &.has-image:after{
+    &.has-image:after {
         opacity: .77;
     }
 }
 
-.off-canvas-sidebar .navbar-collapse{
+.off-canvas-sidebar .navbar-collapse {
     .nav {
         > li > a,
-        > li > a:hover{
+        > li > a:hover {
             color: $white-color;
             margin: 0 15px;
         }
 
         > li > a:focus,
-        > li > a:hover{
+        > li > a:hover {
             background: rgba(200, 200, 200, 0.2);
         }
     }
 }
 
 
-.main-panel{
+.main-panel {
     position: relative;
     float: right;
     width: $sidebar-width;
-    @include transition (0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
+    @include transition(0.33s, cubic-bezier(0.685, 0.0473, 0.346, 1));
 
-    > .content{
+    > .content {
         margin-top: 70px;
         padding: 30px 15px;
         min-height: calc(100vh - 123px);
     }
 
-    > .footer{
+    > .footer {
         border-top: 1px solid #e7e7e7;
     }
 
-    > .navbar{
+    > .navbar {
         margin-bottom: 0;
     }
 
-    .header{
+    .header {
         margin-bottom: 30px;
 
-        .title{
+        .title {
             margin-top: 10px;
             margin-bottom: 10px;
         }
     }
 }
 
-.perfect-scrollbar-on{
+.perfect-scrollbar-on {
     .sidebar,
-    .main-panel{
+    .main-panel {
         height: 100%;
         max-height: 100%;
     }
@@ -470,81 +472,83 @@
 
 .sidebar,
 .main-panel,
-.sidebar-wrapper{
-    -webkit-transition-property: top,bottom,width;
-    transition-property: top,bottom, width;
-    -webkit-transition-duration: .2s,.2s, .35s;
-    transition-duration: .2s,.2s, .35s;
-    -webkit-transition-timing-function: linear,linear,ease;
-    transition-timing-function: linear,linear,ease;
+.sidebar-wrapper {
+    -webkit-transition-property: top, bottom, width;
+    transition-property: top, bottom, width;
+    -webkit-transition-duration: .2s, .2s, .35s;
+    transition-duration: .2s, .2s, .35s;
+    -webkit-transition-timing-function: linear, linear, ease;
+    transition-timing-function: linear, linear, ease;
     -webkit-overflow-scrolling: touch;
 }
 
-.visible-on-sidebar-regular{
+.visible-on-sidebar-regular {
     display: inline-block !important;
 }
-.visible-on-sidebar-mini{
+
+.visible-on-sidebar-mini {
     display: none !important;
 }
 
 @media (min-width: 991px) {
-    .sidebar-mini{
-        .visible-on-sidebar-regular{
+    .sidebar-mini {
+        .visible-on-sidebar-regular {
             display: none !important;
         }
-        .visible-on-sidebar-mini{
+
+        .visible-on-sidebar-mini {
             display: inline-block !important;
         }
 
         .sidebar,
-        .sidebar .sidebar-wrapper{
+        .sidebar .sidebar-wrapper {
             width: 80px;
         }
 
-        .main-panel{
+        .main-panel {
             width: $sidebar-mini-width;
         }
 
-        .sidebar{
+        .sidebar {
             display: block;
             font-weight: 200;
             z-index: 9999;
 
-            .logo{
-                a.logo-normal{
+            .logo {
+                a.logo-normal {
                     opacity: 0;
                     @include transform-translate-x(-25px);
                 }
             }
 
-            .sidebar-wrapper{
+            .sidebar-wrapper {
                 > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
                 .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
                 .user .user-info > a > span,
-                > .nav li > a p{
+                > .nav li > a p {
                     @include transform-translate-x(-25px);
                     opacity: 0;
                 }
             }
         }
 
-        .sidebar:hover{
+        .sidebar:hover {
             width: 260px;
 
-            .logo{
-                a.logo-normal{
+            .logo {
+                a.logo-normal {
                     opacity: 1;
                     @include transform-translate-x(0px);
                 }
             }
 
-            .sidebar-wrapper{
+            .sidebar-wrapper {
                 width: 260px;
 
                 > .nav li > a p,
                 > .nav [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
                 .user .user-info [data-toggle="collapse"] ~ div > ul > li > a .sidebar-normal,
-                .user .user-info > a > span{
+                .user .user-info > a > span {
                     @include transform-translate-x(0px);
                     opacity: 1;
                 }
@@ -554,5 +558,5 @@
 }
 
 .sidebar[data-background-color=black] {
-  background: #191919;
+    background: #191919;
 }

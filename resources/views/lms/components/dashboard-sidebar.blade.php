@@ -4,46 +4,28 @@
 
       Tip 2: you can also add an image using data-image tag
   -->
-    <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-mini">
-            CT
+    <div class="logo">
+        <a href="#" class="simple-text logo-mini">
+            LMS
         </a>
-        <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
-        </a></div>
+        <a href="#" class="simple-text logo-normal">
+            {{ config('app.name') }}
+        </a>
+    </div>
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="../assets/img/faces/avatar.jpg">
+                <img src="https://www.telegraph.co.uk/content/dam/technology/2021/01/28/Screenshot-2021-01-28-at-13-20-35_trans_NvBQzQNjv4BqEGKV9LrAqQtLUTT1Z0gJNRFI0o2dlzyIcL3Nvd0Rwgc.png">
             </div>
             <div class="user-info">
-                <a data-toggle="collapse" href="#collapseExample" class="username">
-              <span>
-                Tania Andrew
-                <b class="caret"></b>
-              </span>
-                </a>
-                <div class="collapse" id="collapseExample">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="sidebar-mini"> MP </span>
-                                <span class="sidebar-normal"> My Profile </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="sidebar-mini"> EP </span>
-                                <span class="sidebar-normal"> Edit Profile </span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="sidebar-mini"> S </span>
-                                <span class="sidebar-normal"> Settings </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <p>
+                    <span class="level">
+                        Lvl. 1
+                    </span>
+                    <span class="username">
+                        Doge the Dog
+                    </span>
+                </p>
             </div>
         </div>
         <ul class="nav">
