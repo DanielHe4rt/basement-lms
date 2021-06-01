@@ -49,15 +49,41 @@ DB_PASSWORD=root
 ```
 
 
+### Laravel Sail Installation
+Execute this comand for install Laravel Sail
+`php artisan sail:install`
+
+Pay attention, Laravel Sail changes the `DB_USERNAME` and `DB_PASSWORD`
+
+The new values ​​are `DB_USERNAME=sail` and `DB_PASSWORD=password`
+
+Do not change these values.
+
+Select `mysql` for database in your terminal
+
+Create alias for this commando in your `~/.bashrc`
+
+`alias sail='bash vendor/bin/sail'`
+
+```
+If you didn't create the 
+alias sail='bash vendor/bin/sail'
+just run bash vendor/bin/sail' and the desired command every time
+```
+Now, use `sail up -d` for up your application.
+
+<hr>
+
 Email settings (using a provider like Mailgun, Amazon SES, etc)
 
-* Run `php artisan key:generate`
-* Run `php artisan migrate`
-* For Auth API (to configure Laravel Passport), run: `php artisan passport:install`
-* Run `npm install`
-* Run `php artisan db:seed`
+* Run `sail artisan key:generate`
+* Run `sail artisan migrate`
+* For Auth API (to configure Laravel Passport), run: `sail artisan passport:install`
+* Run `sail npm install`
+* Run `sail artisan db:seed`
 
-* Start the Laravel server `php artisan serve --port=8000`
+* Start the Websocket server (for chat functionality) `sail artisan websockets:serve`
 
-* Start the Websocket server (for chat functionality) `php artisan websockets:serve`
 
+
+The application is running on `localhost:80`
