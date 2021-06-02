@@ -9,7 +9,7 @@ services:
                 WWWGROUP: '${WWWGROUP}'
         image: sail-8.0/app
         ports:
-            - '${APP_PORT:-8000}:80'
+            - "8000:80"
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
@@ -22,7 +22,7 @@ services:
     mysql:
         image: 'mysql:8.0'
         ports:
-            - '${FORWARD_DB_PORT:-3307}:3306'
+            - "3307:3306"
         environment:
             MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
             MYSQL_DATABASE: '${DB_DATABASE}'
