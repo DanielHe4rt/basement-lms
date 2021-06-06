@@ -72,6 +72,10 @@ just run bash vendor/bin/sail' and the desired command every time
 ```
 Now, use `sail up -d` for up your application.
 
+
+> If there has been any change in `docker-compose.yml` it is recommended to use
+`sail up -d --build` to build new containers, after that just use `sail up`
+>
 <hr>
 
 Email settings (using a provider like Mailgun, Amazon SES, etc)
@@ -86,4 +90,4 @@ Email settings (using a provider like Mailgun, Amazon SES, etc)
 
 
 
-The application is running on `localhost:80`
+The application is running on `localhost:8000`
