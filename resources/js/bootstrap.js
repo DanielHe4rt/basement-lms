@@ -3,6 +3,29 @@ import $ from 'jquery';
 window._ = require('lodash');
 window.$ = window.jQuery = $;
 window.Popper = require('popper.js').default;
+
+/**
+ * Basic Toastr config
+ */
+
+window.toastr = require('toastr')
+window.toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

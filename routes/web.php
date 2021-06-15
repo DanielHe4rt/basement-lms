@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use LMS\Auth\Http\Controllers\AuthController;
+use LMS\Auth\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('lms.dashboard');
+});
+
+
+Route::get('/login', [ViewController::class, 'viewLogin'])->name('login');
+Route::get('/register', [ViewController::class, 'viewRegister'])->name('register');
+
+Route::prefix('auth')->group(function () {
+    Route::post('/register', [AuthController::class, 'postRegister'])->name('auth-register');
+    Route::post('/login', [AuthController::class, 'postAuthenticate'])->name('auth-login');
+    Route::post('/logout', [AuthController::class, 'postAuthenticate'])->name('auth-logout')->middleware('auth');
 });
