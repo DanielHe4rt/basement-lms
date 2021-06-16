@@ -28,5 +28,13 @@ return [
             'terms' => 'Eu concordo com os <a href=":link">termos e condições.</a>.',
             'submit' => 'Registrar'
         ]
+    ],
+    'login' => [
+        'title' => 'Login',
+        'form' => [
+            'email' => 'Email...',
+            'password' => 'Senha...',
+            'submit' => 'Entrar',
+        ]
     ]
 ];

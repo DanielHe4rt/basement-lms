@@ -1,4 +1,5 @@
 @extends('auth::template.app')
+@section('page', 'register')
 @section('content')
     <div class="row">
         <div class="col-md-10 ml-auto mr-auto">
@@ -137,7 +138,7 @@
                     },
                     data: $(this).serialize(),
                     success: function (data) {
-                        toastr.success("registrado com sucesso!")
+                        toastr.success("Registrado com sucesso!")
                         setTimeout(function () {
                             window.location.href = "{{ route('login') }}"
                         }, 2000);

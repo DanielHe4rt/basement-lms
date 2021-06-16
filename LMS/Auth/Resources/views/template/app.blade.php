@@ -15,7 +15,7 @@
 @yield('navbar', View::make('auth::components.navbar'))
 <!-- End Navbar -->
 <div class="wrapper wrapper-full-page">
-    <div class="page-header register-page header-filter" filter-color="black">
+    <div class="page-header @yield('page')-page header-filter" filter-color="black">
         <div class="container">
             @yield('content')
         </div>

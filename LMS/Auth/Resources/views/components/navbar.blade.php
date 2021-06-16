@@ -12,21 +12,21 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
+                <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="material-icons">dashboard</i>
                         Home
                         <div class="ripple-container"></div>
                     </a>
                 </li>
-                <li class="nav-item  active ">
-                    <a href="../pages/register.html" class="nav-link">
+                <li class="nav-item {{ Route::currentRouteName() == 'register' ? 'active' : '' }}">
+                    <a href="{{ route('register') }}" class="nav-link">
                         <i class="material-icons">person_add</i>
                         Register
                     </a>
                 </li>
-                <li class="nav-item ">
-                    <a href="../pages/login.html" class="nav-link">
+                <li class="nav-item {{ Route::currentRouteName() == 'login' ? 'active' : '' }}">
+                    <a href="{{ route('login') }}" class="nav-link">
                         <i class="material-icons">fingerprint</i>
                         Login
                     </a>

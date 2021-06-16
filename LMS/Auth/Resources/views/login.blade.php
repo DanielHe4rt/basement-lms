@@ -1,136 +1,59 @@
 @extends('auth::template.app')
+@section('page', 'login')
 @section('content')
-    <div class="row">
-        <div class="col-md-10 ml-auto mr-auto">
-            <div class="card card-signup">
-                <h2 class="card-title text-center">Registrar</h2>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5 ml-auto">
-                            <div class="info info-horizontal">
-                                <div class="icon icon-rose">
-                                    <i class="material-icons">timeline</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title"> Aprenda 10x mais rapido</h4>
-                                    <p class="description">
-                                        Nosso marketing é muito bom e vai te fazer acreditar que vc vai aprender
-                                        10x mais rápido tipo o marketing dos cara lá.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="info info-horizontal">
-                                <div class="icon icon-primary">
-                                    <i class="material-icons">code</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Desenvolvido com Laravel</h4>
-                                    <p class="description">
-                                        Essa plataforma foi feita inteiramente com Laravel, então todo o processo
-                                        vai ser feito com PHP e se você não gostar pau no seu cu.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="info info-horizontal">
-                                <div class="icon icon-info">
-                                    <i class="material-icons">group</i>
-                                </div>
-                                <div class="description">
-                                    <h4 class="info-title">Conecte com pessoas</h4>
-                                    <p class="description">
-                                        Enquanto você aprende, você também tem acesso a uma comunidade EXCLUSIVA
-                                        de pessoas que também estão aprendendo e eu to lá tirando dúvida.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 mr-auto">
-                            <div class="social text-center">
-                                <button class="btn btn-just-icon btn-round btn-twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </button>
-                                <button class="btn btn-just-icon btn-round btn-google">
-                                    <i class="fab fa-google"></i>
-                                </button>
-                                <h4 class="mt-3"> ou </h4>
-                            </div>
-                            <form id="registerForm" class="form" method="POST" action="{{ route('auth-register') }}">
-                                @csrf
-                                <div class="form-group has-default bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                              <i class="material-icons">face</i>
-                                            </span>
-                                        </div>
-                                        <input type="text" name="name" class="form-control" placeholder="Nome Sobrenome...">
-                                    </div>
-                                </div>
-                                <div class="form-group has-default bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                              <i class="material-icons">mail</i>
-                                            </span>
-                                        </div>
-                                        <input type="email" name="email" class="form-control" placeholder="Email...">
-                                    </div>
-                                </div>
-                                <div class="form-group has-default bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                              <i class="material-icons">account_circle</i>
-                                            </span>
-                                        </div>
-                                        <input type="text" name="username" class="form-control" placeholder="Nickname">
-                                    </div>
-                                </div>
-                                <div class="form-group has-default bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                              <i class="material-icons">lock_outline</i>
-                                            </span>
-                                        </div>
-                                        <input type="password" name="password" placeholder="Senha..." class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group has-default bmd-form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">
-                                              <i class="material-icons">lock_outline</i>
-                                            </span>
-                                        </div>
-                                        <input type="password" name="password_confirmation" placeholder="Confirmar Senha..." class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="" checked="">
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                        Eu concordo com os
-                                        <a href="#something">termos e condições.</a>.
-                                    </label>
-                                </div>
-                                <div class="text-center">
-                                    <input type="submit" class="btn btn-primary btn-round mt-4" value="Registrar">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+<div class="row" style="margin-top: 25% !important">
+    <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
+        <form id="loginForm" class="form" method="POST" action="{{ route('auth-login') }}">
+            @csrf
+            <div class="card card-login">
+            <div class="card-header card-header-rose text-center">
+                <h4 class="card-title">{{ trans('auth::view.login.title') }}</h4>
+                <div class="social-line">
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                        <i class="fab fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-white">
+                        <i class="fab fa-google-plus"></i>
+                    </a>
                 </div>
             </div>
-        </div>
+            <div class="card-body">
+                <span class="bmd-form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                    </span>
+                    </div>
+                    <input type="email" name="email" class="form-control" placeholder="{{ trans('auth::view.login.form.email') }}">
+                </div>
+                </span>
+                <span class="bmd-form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                    </span>
+                    </div>
+                    <input type="password" name="password" class="form-control" placeholder="{{ trans('auth::view.login.form.password')}}">
+                </div>
+                </span>
+            </div>
+            <div class="card-footer justify-content-center">
+                <button type="submit" class="btn btn-rose btn-link btn-lg">{{ trans('auth::view.login.form.submit')}}</button>
+            </div>
+            </div>
+        </form>
     </div>
+</div>
 @endsection
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $("#registerForm").submit(function (e) {
+            $("#loginForm").submit(function (e) {
                 e.preventDefault();
 
                 $.ajax({
@@ -141,9 +64,9 @@
                     },
                     data: $(this).serialize(),
                     success: function (data) {
-                        toastr.success("registrado com sucesso!")
+                        toastr.success("Logado com sucesso!")
                         setTimeout(function () {
-                            window.location.href = "{{ route('login') }}"
+                            window.location.href = "{{ route('dashboard') }}"
                         }, 2000);
                     },
                     error: function (data) {

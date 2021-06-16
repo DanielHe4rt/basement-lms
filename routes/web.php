@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('lms.dashboard');
-});
+})->name('dashboard');
 
 
 Route::get('/login', [ViewController::class, 'viewLogin'])->name('login');

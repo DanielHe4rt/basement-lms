@@ -12,7 +12,7 @@ return [
             '2nd' => [
                 'material-icon' => 'code',
                 'title' => 'Powered by Laravel',
-                'description' => 'This platform was built with Laravel Framework, so the entire process will be done with PHP and if you dont like it go fuck yourself',
+                'description' => 'This platform was built with Laravel Framework, so the entire process will be done with PHP and if you dont like it go fuck yourself.',
             ],
             '3rd' => [
                 'material-icon' => 'group',
@@ -28,6 +28,14 @@ return [
             'password_confirmation' => 'Confirm Password...',
             'terms' => 'I agree with <a href=":link">terms and conditions</a>.',
             'submit' => 'Submit'
+        ]
+    ],
+    'login' => [
+        'title' => 'Login',
+        'form' => [
+            'email' => 'Email...',
+            'password' => 'Password...',
+            'submit' => 'Login',
         ]
     ]
 ];
