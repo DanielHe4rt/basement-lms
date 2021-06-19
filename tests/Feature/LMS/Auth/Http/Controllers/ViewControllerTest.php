@@ -11,10 +11,20 @@ class ViewControllerTest extends TestCase
     public function testGuestCanViewRegisterPage()
     {
         // Act
-        $response = $this->get(route('login'));
+        $response = $this->get(route('register'));
 
         // Assert
         $response->assertOk();
-        $response->assertSee('Registrar');
+        $response->assertSee('Register');
+    }
+
+    public function testGuestCanViewLoginPage()
+    {
+        // Act
+        $response = $this->get(route('login'));
+        // Assert
+
+        $response->assertOk();
+        $response->assertSee('Login');
     }
 }
