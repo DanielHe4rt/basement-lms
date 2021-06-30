@@ -15,7 +15,8 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="https://www.telegraph.co.uk/content/dam/technology/2021/01/28/Screenshot-2021-01-28-at-13-20-35_trans_NvBQzQNjv4BqEGKV9LrAqQtLUTT1Z0gJNRFI0o2dlzyIcL3Nvd0Rwgc.png">
+                <img
+                    src="https://www.telegraph.co.uk/content/dam/technology/2021/01/28/Screenshot-2021-01-28-at-13-20-35_trans_NvBQzQNjv4BqEGKV9LrAqQtLUTT1Z0gJNRFI0o2dlzyIcL3Nvd0Rwgc.png">
             </div>
             <div class="user-info">
                 <p>
@@ -101,10 +102,20 @@
             <li class="nav-item ">
                 <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                     <i class="material-icons">apps</i>
-                    <p> Components
+                    <p> Admin Panel
                         <b class="caret"></b>
                     </p>
                 </a>
+                <div class="collapse " id="componentsExamples" style="">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-mini"> C </span>
+                                <span class="sidebar-normal"> Courses </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             @endrole
         </ul>
