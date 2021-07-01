@@ -15,8 +15,7 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img
-                    src="https://www.telegraph.co.uk/content/dam/technology/2021/01/28/Screenshot-2021-01-28-at-13-20-35_trans_NvBQzQNjv4BqEGKV9LrAqQtLUTT1Z0gJNRFI0o2dlzyIcL3Nvd0Rwgc.png">
+                <img src="{{ asset('storage/doge.jpeg') }}">
             </div>
             <div class="user-info">
                 <p>
