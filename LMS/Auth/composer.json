@@ -1,6 +1,0 @@
-{
-    "name": "basement-lms/auth",
-    "require": {
-        "spatie/laravel-permission": "^4.2"
-    }
-}
