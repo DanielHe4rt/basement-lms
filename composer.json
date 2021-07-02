@@ -11,7 +11,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
-        "spatie/laravel-permission": "^4.2"
+        "wikimedia/composer-merge-plugin": "^2.0.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -49,6 +49,18 @@
     "extra": {
         "laravel": {
             "dont-discover": []
+        },
+        "merge-plugin": {
+            "include": [
+                "LMS/*/composer.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": false,
+            "merge-extra-deep": false,
+            "merge-scripts": false
         }
     },
     "config": {
