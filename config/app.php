@@ -179,7 +179,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
 
         // LMS PROVIDERS
-        \LMS\Auth\Providers\AuthServiceProvider::class
+        \LMS\Auth\Providers\AuthServiceProvider::class,
+        \LMS\Courses\Providers\CourseServiceProvider::class
 
     ],
 
