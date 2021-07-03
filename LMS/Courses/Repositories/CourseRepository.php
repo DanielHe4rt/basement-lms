@@ -20,6 +20,7 @@ class CourseRepository
     public function create(array $data): Course
     {
         $data['author_id'] = Auth::id();
+        $data['status_id'] = 1;
         $data['cover_path'] = Storage::disk('public')->put('courses_covers/', $data['cover']);
         return $this->model->create($data);
     }

@@ -21,7 +21,15 @@
                     <h4 class="card-title">Cursos</h4>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-warning">
+                                {{ $error }}
+                            </div>
+                        @endforeach
+                    @endif
+                    <form action="{{ route('instructor-courses-create') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" name="title"
@@ -81,7 +89,7 @@
                                     <span class="btn btn-raised btn-round btn-default btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
-                                        <input type="file" name="..."/>
+                                        <input type="file" name="cover"/>
                                     </span>
                                     <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists"
                                        data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>

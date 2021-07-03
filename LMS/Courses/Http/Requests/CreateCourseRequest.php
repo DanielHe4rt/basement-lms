@@ -4,7 +4,9 @@
 namespace LMS\Courses\Http\Requests;
 
 
-class CreateCourseRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class CreateCourseRequest extends FormRequest
 {
 
     public function authorize()
@@ -15,7 +17,7 @@ class CreateCourseRequest
     public function rules()
     {
         return [
-            'course_level_id' => 'required|exists:course_levels',
+            'course_level_id' => 'required|exists:course_levels,id',
             'title' => 'required|string|max:60',
             'subtitle' => 'required|string|max:120',
             'description' => 'required|string',

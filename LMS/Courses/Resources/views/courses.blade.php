@@ -20,17 +20,24 @@
                     <div class="table-responsive">
                         <table class="table table-shopping">
                             <tbody>
-                            <tr>
+                            @foreach($courses as $course)
+                                <tr>
                                 <td>
                                     <div class="img-container">
                                         <img src="{{ asset('storage/doge.jpeg') }}" alt="...">
                                     </div>
                                 </td>
                                 <td class="td-name">
-                                    <a>Laravel4Noobs</a>
+                                    <a>{{ $course->title }}</a>
                                     <br>
-                                    <span class="badge badge-primary">Publicado</span>
-                                    <small>Gratuito</small>
+                                    @if($course->published_at)
+                                        <span class="badge badge-primary">Publicado</span>
+                                    @else
+                                        <span class="badge badge-secondary">Rascunho</span>
+                                    @endif
+
+
+                                    <small>{{ $course->paid ? 'Pago' : 'Gratuito' }}</small>
                                 </td>
                                 <td>
                                     <a>Número de inscritos: 100</a>
@@ -59,10 +66,10 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary" type="button">Gerenciar</button>
+                                    <a class="btn btn-primary" href="{{ route('instructor-course-manage', ['course' => $course]) }}">Gerenciar</a>
                                 </td>
                             </tr>
-
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

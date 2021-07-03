@@ -40,5 +40,6 @@ Route::prefix('auth')->group(function () {
 Route::prefix('instructor/courses')->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
-    Route::post('/', [CoursesController::class, 'postCourse'])->name('post-book');
+    Route::get('/{course}/manage', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
+    Route::post('/', [CoursesController::class, 'postCourse'])->name('instructor-courses-create');
 });
