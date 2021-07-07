@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use LMS\Auth\Http\Controllers\AuthController;
-use LMS\Auth\Http\Controllers\ViewController;
 use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
 use LMS\Courses\Http\Controllers\CoursesController;
+use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
 
 /*
@@ -42,4 +42,9 @@ Route::prefix('instructor/courses')->group(function () {
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
     Route::get('/{course}/manage', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
     Route::post('/', [CoursesController::class, 'postCourse'])->name('instructor-courses-create');
+    Route::delete('/{course}', [CoursesController::class, 'deleteCourse'])->name('instructor-courses-delete');
+
+    Route::prefix('levels')->group(function () {
+        Route::get('/', [LevelController::class, 'getLevels'])->name('get-course-levels');
+    });
 });

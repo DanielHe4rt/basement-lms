@@ -18,8 +18,7 @@ class ViewController extends Controller
     }
 
     public function viewCreateCourse(): View
-    {
-
+    {    
         return view('courses::newCourse');
     }
 

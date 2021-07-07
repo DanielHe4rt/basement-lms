@@ -20,7 +20,7 @@
                     <div class="table-responsive">
                         <table class="table table-shopping">
                             <tbody>
-                            @foreach($courses as $course)
+                            @forelse($courses as $course)
                                 <tr>
                                 <td>
                                     <div class="img-container">
@@ -35,8 +35,6 @@
                                     @else
                                         <span class="badge badge-secondary">Rascunho</span>
                                     @endif
-
-
                                     <small>{{ $course->paid ? 'Pago' : 'Gratuito' }}</small>
                                 </td>
                                 <td>
@@ -67,9 +65,14 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-primary" href="{{ route('instructor-course-manage', ['course' => $course]) }}">Gerenciar</a>
+                                    <button class="btn btn-danger delete-course" data-course="{{ $course->id}}">Deletar</button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <p>
+                                    Parece que você não tem nenhum curso cadastrado.
+                                </p>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -77,4 +80,35 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(() => {
+            $('button.delete-course').click(function () {
+                let id = $(this).data('course');
+                console.log($(this).data('course'));
+                let url = "{{ route('instructor-courses-delete', ['course' => ':id']) }}".replace(':id', id);
+
+                $.ajax({
+                    url: url,
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': "{{csrf_token()}}"
+                    },
+                    success: function () {
+                        toastr.success('Curso deletado com sucesso!');
+                        setTimeout(() => {
+                            window.location.href = "{{ route('instructor-courses') }}";
+                        }, 750)
+                    },
+                    error: function () {
+                        toastr.error('Ocorreu um erro ao criar o curso.');
+                        return false;
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
 @endsection

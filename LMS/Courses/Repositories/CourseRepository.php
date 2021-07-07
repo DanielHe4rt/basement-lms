@@ -24,4 +24,9 @@ class CourseRepository
         $data['cover_path'] = Storage::disk('public')->put('courses_covers/', $data['cover']);
         return $this->model->create($data);
     }
+
+    public function delete(int $id): bool | null
+    {
+        return $this->model->destroy($id);
+    }
 }
