@@ -18,7 +18,7 @@
                     <div class="card-icon">
                         <i class="material-icons">assignment</i>
                     </div>
-                    <h4 class="card-title">Cursos</h4>
+                    <h4 class="card-title">Novo Curso</h4>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('instructor-courses-create') }}" method="POST" enctype="multipart/form-data" id="createCourseForm">
