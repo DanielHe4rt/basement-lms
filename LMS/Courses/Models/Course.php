@@ -9,10 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LMS\Auth\Models\User;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
 
-class Course extends Model
+class Course extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $table = 'courses';
 
@@ -23,7 +26,6 @@ class Course extends Model
         'title',
         'subtitle',
         'description',
-        'cover_path',
         'paid',
         'published_at',
     ];
@@ -31,6 +33,11 @@ class Course extends Model
     protected $casts = [
         'paid' => 'bool',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('courses-covers');
+    }
 
     public function author(): BelongsTo
     {

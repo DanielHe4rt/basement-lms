@@ -78,7 +78,7 @@
                             <div class="row fileinput fileinput-new" data-provides="fileinput">
                                 <div class="col-6">
                                     <div class="fileinput-new thumbnail img-raised">
-                                        <img src="{{ asset('storage/' . $course->cover_path) }}"
+                                        <img src="{{ $course->getFirstMedia()->getUrl() }}"
                                              rel="nofollow" alt="...">
                                     </div>
                                     <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>

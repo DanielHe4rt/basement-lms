@@ -24,7 +24,7 @@
                                 <tr>
                                 <td>
                                     <div class="img-container">
-                                        <img src="{{ asset('storage/doge.jpeg') }}" alt="...">
+                                        <img src="{{ $course->getFirstMedia()->getUrl() }}" alt="...">
                                     </div>
                                 </td>
                                 <td class="td-name">

@@ -21,7 +21,6 @@ class CreateCoursesTable extends Migration
             $table->string('title',60);
             $table->string('subtitle', 120);
             $table->text('description');
-            $table->text('cover_path');
             $table->boolean('paid');
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

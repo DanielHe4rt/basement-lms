@@ -37,16 +37,6 @@ class CoursesControllerTest extends TestCase
             'paid' => false
         ];
 
-        Storage::shouldReceive('disk')
-            ->with(m::type('string'))
-            ->once()
-            ->andReturnSelf();
-
-        Storage::shouldReceive('put')
-            ->with(m::type('string'), $payload['cover'])
-            ->once()
-            ->andReturn(m::type('string'));
-
         // Act
         $this->actingAs($user);
         $response = $this->post(route('instructor-courses-create'), $payload);
@@ -54,6 +44,8 @@ class CoursesControllerTest extends TestCase
         // Assert
         $response->assertCreated()
             ->assertSee($payload['title']);
+
+
     }
 
     public function testUserCanDeleteACourse()

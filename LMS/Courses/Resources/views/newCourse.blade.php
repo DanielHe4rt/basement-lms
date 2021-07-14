@@ -112,7 +112,8 @@
                 error: () => toastr.error('Falha ao buscar níveis.')
             })
 
-            $('#createCourseForm').submit(() => {
+            $('#createCourseForm').submit(function(e) {
+                e.preventDefault()
                 let form = $(this);
 
                 $.ajax({

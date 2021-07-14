@@ -5,7 +5,6 @@ namespace LMS\Courses\Repositories;
 
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use LMS\Courses\Models\Course;
 
 class CourseRepository
@@ -21,8 +20,12 @@ class CourseRepository
     {
         $data['author_id'] = Auth::id();
         $data['status_id'] = 1;
-        $data['cover_path'] = Storage::disk('public')->put('courses_covers/', $data['cover']);
-        return $this->model->create($data);
+
+        $model = $this->model->create($data);
+        $model->addMediaFromRequest('cover')
+            ->toMediaCollection();
+
+        return $model;
     }
 
     public function delete(int $id): bool | null

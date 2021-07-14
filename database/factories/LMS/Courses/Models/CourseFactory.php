@@ -31,7 +31,6 @@ class CourseFactory extends Factory
             'title' => $this->faker->title,
             'subtitle' => $this->faker->sentence,
             'description' => $this->faker->sentence,
-            'cover_path' => $this->faker->filePath(),
             'paid' => false,
             'published_at' => null,
         ];
