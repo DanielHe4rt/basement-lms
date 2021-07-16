@@ -9,15 +9,16 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h4 class="card-title">Cursos</h4>
+                            <h4 class="card-title">{{ trans('courses::view.general.title') }}</h4>
                         </div>
                         <div class="col text-right">
-                            <a href="{{ route('instructor-courses-new') }}" class="btn btn-primary mt-3 mr-3">Novo Curso</a>
+                            <a href="{{ route('instructor-courses-new') }}" class="btn btn-primary mt-3 mr-3">{{ trans('courses::view.general.newCourse') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <hr>
                         <table class="table table-shopping">
                             <tbody>
                             @forelse($courses as $course)
@@ -31,19 +32,19 @@
                                     <a>{{ $course->title }}</a>
                                     <br>
                                     @if($course->published_at)
-                                        <span class="badge badge-primary">Publicado</span>
+                                        <span class="badge badge-primary">{{ trans('courses::view.general.card.status.published') }}</span>
                                     @else
-                                        <span class="badge badge-secondary">Rascunho</span>
+                                        <span class="badge badge-secondary">{{ trans('courses::view.general.card.status.sketch') }}</span>
                                     @endif
-                                    <small>{{ $course->paid ? 'Pago' : 'Gratuito' }}</small>
+                                    <small>{{ $course->paid ? trans('courses::view.general.card.monetize.paid') : trans('courses::view.general.card.monetize.free') }}</small>
                                 </td>
                                 <td>
-                                    <a>Número de inscritos: 100</a>
+                                    <a>{{ trans('courses::view.general.card.students', ['number' => 123]) }}</a>
                                     <br>
-                                    <a>Número de inscritos do mês: 50</a>
+                                    <a>{{ trans('courses::view.general.card.monthlyStudents', ['number' => 123]) }}</a>
                                 </td>
                                 <td class="td-number text-center">
-                                    <a>Classificação do curso</a>
+                                    <a>{{ trans('courses::view.general.card.stars') }}</a>
                                     <div>
                                         <span class="material-icons-outlined">
                                             star_rate
@@ -64,8 +65,12 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('instructor-course-manage', ['course' => $course]) }}">Gerenciar</a>
-                                    <button class="btn btn-danger delete-course" data-course="{{ $course->id}}">Deletar</button>
+                                    <a class="btn btn-primary" href="{{ route('instructor-course-manage', ['course' => $course]) }}">
+                                        {{ trans('courses::view.general.card.actions.manage') }}
+                                    </a>
+                                    <button class="btn btn-danger delete-course" data-course="{{ $course->id}}">
+                                        {{ trans('courses::view.general.card.actions.delete') }}
+                                    </button>
                                 </td>
                             </tr>
                             @empty

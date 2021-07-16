@@ -12,5 +12,6 @@ class CourseServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__ . '/../Database/migrations');
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'courses');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'courses');
     }
 }
