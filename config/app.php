@@ -175,13 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        // CUSTOM PROVIDERS
-        Spatie\Permission\PermissionServiceProvider::class,
-
         // LMS PROVIDERS
-        \LMS\Auth\Providers\AuthServiceProvider::class,
-        \LMS\Courses\Providers\CourseServiceProvider::class
-
+        \LMS\Core\Providers\CoreProvider::class,
     ],
 
     /*
