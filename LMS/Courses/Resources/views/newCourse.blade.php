@@ -24,37 +24,40 @@
                     <form action="{{ route('instructor-courses-create') }}" method="POST" enctype="multipart/form-data" id="createCourseForm">
                         @csrf
                         <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" required
-                                   aria-describedby="courseTitle" placeholder="Enter course title." maxlength="60">
+                            <label for="title">{{ trans('courses::view.manage.form.title.field') }}</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                   aria-describedby="courseTitle" placeholder="{{ trans('courses::view.manage.form.title.placeholder') }}" maxlength="60">
                         </div>
 
                         <div class="form-group">
-                            <label for="subtitle">Subtitle</label>
-                            <input type="text" class="form-control" id="subtitle" name="subtitle" required
-                                   aria-describedby="courseSubtitle" placeholder="Enter course subtitle."
+                            <label for="subtitle">{{ trans('courses::view.manage.form.subtitle.field') }}</label>
+                            <input type="text" class="form-control" id="subtitle" name="subtitle"
+                                   aria-describedby="courseSubtitle" placeholder="{{ trans('courses::view.manage.form.subtitle.placeholder') }}"
                                    maxlength="120">
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" id="description" name="description" required
-                                      rows="5" aria-describedby="courseDescription"
-                                      placeholder="Write a short resume of your course."></textarea>
+                            <label for="description">{{ trans('courses::view.manage.form.description.field') }}</label>
+                            <textarea class="form-control" id="description" name="description" rows="5"
+                                      aria-describedby="courseDescription"
+                                      placeholder="{{ trans('courses::view.manage.form.description.placeholder') }}"></textarea>
                         </div>
                         <div class="form-row mb-5">
                             <div class="col">
                                 <div class="form-group">
-                                    <select class="form-control" id="paid" name="paid" required>
-                                        <option value="0" selected>Gratuito</option>
-                                        <option value="1">Pago</option>
+                                    <select class="form-control" id="paid" name="paid">
+                                        <option value="0">{{ trans('courses::view.manage.form.paid.false') }}</option>
+                                        <option value="1">{{ trans('courses::view.manage.form.paid.true') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <select class="form-control" id="course_level_id" name="course_level_id" required>
-                                        <option value="" selected disabled>Select the course level.</option>
+                                    <select class="form-control" id="course_level_id" name="course_level_id">
+                                        <option value="" selected disabled>{{ trans('courses::view.manage.form.level.field') }}</option>
+                                        <option value="1">{{ trans('courses::view.manage.form.level.beginner') }}</option>
+                                        <option value="2">{{ trans('courses::view.manage.form.level.intermediate') }}</option>
+                                        <option value="3">{{ trans('courses::view.manage.form.level.advanced') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -70,12 +73,7 @@
                             </div>
                             <div class="col-6">
                                 <div>
-                                    <p>
-                                        Faça o upload da imagem do seu curso aqui. Ela deve atender aos nossos padrões
-                                        de qualidade da imagem do curso para ser aceita. Diretrizes importantes: ter 750
-                                        x 422 pixels, estar no formato .jpg, .jpeg,. gif ou .png. e não ter nenhum texto
-                                        na imagem.
-                                    </p>
+                                    <p>{{ trans('courses::view.manage.form.cover') }}</p>
                                     <span class="btn btn-raised btn-round btn-default btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
@@ -86,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('courses::view.manage.form.submit') }}</button>
                     </form>
                 </div>
             </div>

@@ -12,6 +12,7 @@
                             <h4 class="card-title">{{ trans('courses::view.general.title') }}</h4>
                         </div>
                         <div class="col text-right">
+
                             <a href="{{ route('instructor-courses-new') }}" class="btn btn-primary mt-3 mr-3">{{ trans('courses::view.general.newCourse') }}</a>
                         </div>
                     </div>

@@ -20,7 +20,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h4 class="card-title">Cursos</h4>
+                            <h4 class="card-title">{{ trans('courses::view.manage.title') }}</h4>
                         </div>
                     </div>
                 </div>
@@ -36,40 +36,40 @@
                         <form action="{{ route('instructor-courses-create') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
-                                <label for="title">Title</label>
+                                <label for="title">{{ trans('courses::view.manage.form.title.field') }}</label>
                                 <input type="text" class="form-control" id="title" name="title" value="{{ $course->title }}"
-                                       aria-describedby="courseTitle" placeholder="Enter course title." maxlength="60">
+                                       aria-describedby="courseTitle" placeholder="{{ trans('courses::view.manage.form.title.placeholder') }}" maxlength="60">
                             </div>
 
                             <div class="form-group">
-                                <label for="subtitle">Subtitle</label>
+                                <label for="subtitle">{{ trans('courses::view.manage.form.subtitle.field') }}</label>
                                 <input type="text" class="form-control" id="subtitle" name="subtitle" value="{{ $course->subtitle }}"
-                                       aria-describedby="courseSubtitle" placeholder="Enter course subtitle."
+                                       aria-describedby="courseSubtitle" placeholder="{{ trans('courses::view.manage.form.subtitle.placeholder') }}"
                                        maxlength="120">
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Description</label>
+                                <label for="description">{{ trans('courses::view.manage.form.description.field') }}</label>
                                 <textarea class="form-control" id="description" name="description" rows="5"
                                           aria-describedby="courseDescription"
-                                          placeholder="Write a short resume of your course.">{{ $course->description }}</textarea>
+                                          placeholder="{{ trans('courses::view.manage.form.description.placeholder') }}">{{ $course->description }}</textarea>
                             </div>
                             <div class="form-row mb-5">
                                 <div class="col">
                                     <div class="form-group">
                                         <select class="form-control" id="paid" name="paid">
-                                            <option value="0" {{ !$course->paid ? 'selected' : '' }}>Gratuito</option>
-                                            <option value="1" {{ $course->paid ? 'selected' : '' }}>Pago</option>
+                                            <option value="0" {{ !$course->paid ? 'selected' : '' }}>{{ trans('courses::view.manage.form.paid.false') }}</option>
+                                            <option value="1" {{ $course->paid ? 'selected' : '' }}>{{ trans('courses::view.manage.form.paid.true') }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <select class="form-control" id="course_level_id" name="course_level_id">
-                                            <option value="" selected disabled>Select the course level.</option>
-                                            <option value="1">Beginner</option>
-                                            <option value="2">Intermediate</option>
-                                            <option value="3">Advanced</option>
+                                            <option value="" selected disabled>{{ trans('courses::view.manage.form.level.field') }}</option>
+                                            <option value="1">{{ trans('courses::view.manage.form.level.beginner') }}</option>
+                                            <option value="2">{{ trans('courses::view.manage.form.level.intermediate') }}</option>
+                                            <option value="3">{{ trans('courses::view.manage.form.level.advanced') }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -85,12 +85,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div>
-                                        <p>
-                                            Faça o upload da imagem do seu curso aqui. Ela deve atender aos nossos padrões
-                                            de qualidade da imagem do curso para ser aceita. Diretrizes importantes: ter 750
-                                            x 422 pixels, estar no formato .jpg, .jpeg,. gif ou .png. e não ter nenhum texto
-                                            na imagem.
-                                        </p>
+                                        <p>{{ trans('courses::view.manage.form.cover') }}</p>
                                         <span class="btn btn-raised btn-round btn-default btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
@@ -101,7 +96,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <button type="submit" class="btn btn-primary">{{ trans('courses::view.manage.form.submit') }}</button>
                         </form>
                     </div>
                 </div>
