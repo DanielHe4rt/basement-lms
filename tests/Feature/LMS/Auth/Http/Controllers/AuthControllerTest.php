@@ -65,7 +65,7 @@ class AuthControllerTest extends TestCase
         ]);
     }
 
-    public function testUserShouldNotAuthenticateWithoutCredentials()
+    public function testUserShouldNotAuthenticateWithInvalidCredentials()
     {
         // Prepare
         $user = User::factory()->create();
@@ -88,18 +88,18 @@ class AuthControllerTest extends TestCase
 
         // Act
         $this->actingAs($user);
-        $response = $this->post(route('auth-logout'));
+        $response = $this->get(route('auth-logout'));
 
         // Assert
         $response->assertRedirect('/');
     }
 
-    public function testUserShouldBeRedirectedIfTriesToLogoutWithoutLogin()
+    public function testUserShouldBeRedirectedUponUnauthenticatedLogoutAttempt()
     {
         // Act
-        $response = $this->post(route('auth-logout'));
+        $response = $this->get(route('auth-logout'));
 
         // Assert
-        $response->assertRedirect(route('auth-login'));
+        $response->assertRedirect(route('login'));
     }
 }

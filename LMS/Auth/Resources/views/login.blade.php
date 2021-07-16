@@ -54,8 +54,6 @@
     <script>
         $(document).ready(function() {
             $("#loginForm").submit(function (e) {
-                e.preventDefault();
-
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
@@ -76,6 +74,7 @@
                         }
                     }
                 });
+                return false;
             });
         });
     </script>
