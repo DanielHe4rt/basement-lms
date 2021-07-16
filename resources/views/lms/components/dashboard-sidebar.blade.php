@@ -108,7 +108,7 @@
                 <div class="collapse " id="componentsExamples" style="">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('instructor-courses') }}">
                                 <span class="sidebar-mini"> C </span>
                                 <span class="sidebar-normal"> Courses </span>
                             </a>
