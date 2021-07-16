@@ -6,7 +6,7 @@ namespace Tests\Feature\LMS\Course\Http\Controllers;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Storage;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 use LMS\Courses\Models\Course;
 use Tests\TestCase;
 
@@ -62,7 +62,6 @@ class ViewControllerTest extends TestCase
         // Act
         $this->actingAs($course->author);
         $response = $this->get(route('instructor-course-manage', ['course' => $course->id]));
-        $response->dump();
 
         // Assert
         $response->assertOk()

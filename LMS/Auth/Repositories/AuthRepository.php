@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\UnauthorizedException;
 use LMS\Auth\Mail\SendGreetings;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 
 class AuthRepository
 {

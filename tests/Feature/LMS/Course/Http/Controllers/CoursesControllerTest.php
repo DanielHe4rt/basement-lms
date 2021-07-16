@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 use LMS\Courses\Models\Course;
 use Mockery as m;
 use Tests\TestCase;

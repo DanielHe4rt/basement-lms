@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories\LMS\Auth\Models;
+namespace Database\Factories\LMS\User\Models;
 
 use Illuminate\Support\Facades\Hash;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

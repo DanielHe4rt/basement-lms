@@ -1,6 +1,6 @@
 <?php
 
-namespace LMS\Auth\Models;
+namespace LMS\User\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

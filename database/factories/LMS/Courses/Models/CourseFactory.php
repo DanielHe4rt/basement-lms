@@ -5,7 +5,7 @@ namespace Database\Factories\LMS\Courses\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 use LMS\Courses\Models\Course;
 
 class CourseFactory extends Factory

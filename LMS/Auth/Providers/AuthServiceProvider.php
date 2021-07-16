@@ -28,11 +28,5 @@ class AuthServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'auth');
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'auth');
         $this->registerPolicies();
-
-        Gate::before(function ($user, $ability) {
-            if ($user->hasRole('admin')) {
-                return true;
-            }
-        });
     }
 }
