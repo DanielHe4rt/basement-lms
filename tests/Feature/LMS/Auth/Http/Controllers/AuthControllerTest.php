@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Mail;
 use LMS\Auth\Mail\SendGreetings;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase

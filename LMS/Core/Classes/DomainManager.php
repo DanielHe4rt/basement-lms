@@ -14,7 +14,7 @@ class DomainManager {
     use \LMS\Core\Traits\Singleton;
 
     const DIRECTORIES = [
-        '../LMS/'
+        __DIR__ . "/../../"
     ];
 
     public array $domains = [];
@@ -79,7 +79,6 @@ class DomainManager {
     {
         foreach (self::DIRECTORIES as $dir){
             $domains = [];
-
             $dirPath = realpath($dir);
             if (!File::isDirectory($dirPath)) {
                 return $domains;
@@ -176,10 +175,10 @@ class DomainManager {
 
 
 
-    public function getProviders(): array{
+    public function getProviders(): array
+    {
 
         $providers = [];
-
         /** @var DomainInterface $domainObj **/
         foreach ($this->domains as $domainObj) {
             $providers =  array_merge($providers, $domainObj->registerProvider());

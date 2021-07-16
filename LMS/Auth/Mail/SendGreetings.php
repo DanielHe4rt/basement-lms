@@ -5,7 +5,7 @@ namespace LMS\Auth\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use LMS\Auth\Models\User;
+use LMS\User\Models\User;
 
 class SendGreetings extends Mailable
 {
