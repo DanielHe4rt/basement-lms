@@ -7,7 +7,9 @@ namespace LMS\Courses\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use LMS\Modules\Models\Module;
 use LMS\User\Models\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -52,5 +54,10 @@ class Course extends Model implements HasMedia
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function modules(): HasMany
+    {
+        return $this->hasMany(Module::class);
     }
 }
