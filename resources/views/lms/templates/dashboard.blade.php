@@ -21,6 +21,7 @@
         @yield('footer', View::make('lms.components.dashboard-footer'))
     </div>
 </div>
+@yield('extras')
 
 <script src="{{asset('js/admin.js')}}"></script>
 @yield('scripts')
