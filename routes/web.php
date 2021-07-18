@@ -6,6 +6,8 @@ use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
+use LMS\Modules\Http\Controllers\ModulesController;
+use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +42,20 @@ Route::prefix('auth')->group(function () {
 Route::prefix('instructor/courses')->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
-    Route::get('/{course}/manage', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
+    Route::prefix('/{course}')->group(function () {
+        Route::prefix('/manage')->group(function() {
+            Route::get('/', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
+        });
+
+
+        Route::prefix('/curriculum')->group(function() {
+            Route::get('/', [ModulesViewController::class, 'viewCourseModulesPage'])->name('instructor-course-curriculum');
+            Route::post('/modules', [ModulesController::class, 'postCourseModule'])->name('instructor-course-module-new');
+            Route::delete('/modules/{module}', [ModulesController::class, 'deleteCourseModule'])->name('instructor-course-module-delete');
+        });
+
+    });
+
     Route::post('/', [CoursesController::class, 'postCourse'])->name('instructor-courses-create');
     Route::delete('/{course}', [CoursesController::class, 'deleteCourse'])->name('instructor-courses-delete');
 
