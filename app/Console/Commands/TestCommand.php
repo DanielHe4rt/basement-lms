@@ -77,7 +77,7 @@ class TestCommand extends Command
 
         $locatorName = 'locator-' . date('Ymd-His');
         $this->info('generating streaming locator...');
-        $locator = $mediaService->createStreamingLocator($locatorName, $assetOutput);
+        $mediaService->createStreamingLocator($locatorName, $assetOutput);
 
         $this->info('fetching locator url...');
         $paths = $mediaService->listStreamingLocatorPaths($locatorName);
