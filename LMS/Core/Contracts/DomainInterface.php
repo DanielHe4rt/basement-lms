@@ -6,12 +6,7 @@ namespace LMS\Core\Contracts;
 
 abstract class DomainInterface
 {
-    private bool $disabled;
-
-    public function __construct($disabled = false)
-    {
-        $this->disabled = $disabled;
-    }
+    protected bool $disabled = false;
 
     public function isDisabled(): bool
     {

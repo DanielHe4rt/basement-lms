@@ -3,17 +3,19 @@
 namespace LMS\Core\Classes;
 
 use LMS\Core\Contracts\DomainInterface;
-use LMS\Core\Exceptions\DomainNotExistsException;
-use LMS\Core\Exceptions\DomainExtendException;
 use RecursiveIteratorIterator;
 use Illuminate\Support\Facades\File;
 use RecursiveDirectoryIterator;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 
 class DomainManager {
 
     use \LMS\Core\Traits\Singleton;
+
+    const DIRECTORIES = [
+        __DIR__ . "/../../"
+    ];
 
     public array $domains = [];
     public bool $booted = false;
@@ -22,9 +24,6 @@ class DomainManager {
     protected array $pathMap;
 
 
-    /**
-     * @codeCoverageIgnore
-     */
     protected function init()
     {
         $this->loadDomains();
@@ -62,7 +61,7 @@ class DomainManager {
         return $classNames;
     }
 
-    public function normalizeClassName($name): string
+    private function normalizeClassName($name): string
     {
         if (is_object($name)) {
             $name = get_class($name);
@@ -78,100 +77,82 @@ class DomainManager {
      */
     public function getVendorAndDomainNames(): array
     {
-        $dir = __DIR__ . "/../../";
-        $domains = [];
-        $dirPath = realpath($dir);
-        if (!File::isDirectory($dirPath)) {
+        foreach (self::DIRECTORIES as $dir){
+            $domains = [];
+            $dirPath = realpath($dir);
+            if (!File::isDirectory($dirPath)) {
+                return $domains;
+            }
+
+
+            $it = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator($dirPath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS)
+            );
+            $it->setMaxDepth(1);
+            $it->rewind();
+
+            while ($it->valid()) {
+                if ($it->isFile() && (strtolower($it->getFilename()) == "domain.php")) {
+                    $filePath = dirname($it->getPathname());
+                    $domainName = basename($filePath);
+                    $vendorName = basename(dirname($filePath));
+                    $domains[$vendorName][$domainName] = $filePath;
+                }
+
+                $it->next();
+            }
+
             return $domains;
         }
 
-
-        $it = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($dirPath, RecursiveDirectoryIterator::FOLLOW_SYMLINKS)
-        );
-        $it->setMaxDepth(1);
-        $it->rewind();
-
-        while ($it->valid()) {
-            if ($it->isFile() && (strtolower($it->getFilename()) == "domain.php")) {
-                $filePath = dirname($it->getPathname());
-                $domainName = basename($filePath);
-                $vendorName = basename(dirname($filePath));
-                $domains[$vendorName][$domainName] = $filePath;
-            }
-
-            $it->next();
-        }
-
-        return $domains;
     }
 
     /**
      * Loads a single domain into the manager.
      *
-     * @param string|object $namespace Eg: Lms\Auth
+     * @param string $namespace Eg: Lms\Auth
      * @param string $path Eg: 'LMS/Auth';
      * @return void|DomainInterface
-     * @throws DomainNotExistsException
-     * @throws DomainExtendException
      */
-    public function loadDomain($namespace, string $path)
+    public function loadDomain(string $namespace, string $path)
     {
-        $class = $this->getDomainClassName($namespace);
+        $className = $namespace . '\Domain';
 
-        // Not a valid domain!
-        if (is_string($class) && !class_exists($class)) {
-            throw new DomainNotExistsException('Domain ' . $class . ' could not be instantiated.');
-        }
+        try {
+            // Not a valid domain!
+            if (!class_exists($className)) {
+                return;
+            }
 
-        if(realpath($path) === false){
-            throw new DomainNotExistsException('Path ' . $path . ' not exists.');
-        }
-
-        if(!is_subclass_of($class, DomainInterface::class)){
-            throw new DomainExtendException('The domain must extend the abstract class \LMS\Core\Contracts\DomainInterface');
-        }
-
-
-        if(!is_object($class)){
             /**
              * @var DomainInterface $classObj
              */
-            $class = new $class();
-        }
-
-        $classId = $this->getIdentifier($class);
-        /*
-         * Check for disabled domains
-         */
-        if ($class->isDisabled()){
+            $classObj = new $className();
+        } catch (\Throwable $e) {
+            Log::error('Domain ' . $className . ' could not be instantiated.', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
             return;
         }
 
-        $this->domains[$classId] = $class;
+        $classId = $this->getIdentifier($classObj);
+
+        /*
+         * Check for disabled domains
+         */
+        if ($classObj->isDisabled()){
+            return;
+        }
+
+        $this->domains[$classId] = $classObj;
         $this->pathMap[$classId] = $path;
         $this->normalizedMap[strtolower($classId)] = $classId;
 
 
-        return $class;
-    }
-
-    /**
-     * @param object|string $class
-     * @return string|object
-     */
-    private function getDomainClassName($class)
-    {
-        if(is_object($class)){
-            return $class;
-        }
-
-        if(is_string($class)  && !Str::endsWith($class, 'Domain')){
-            return $class . '\Domain';
-        }
-
-
-        return $class;
+        return $classObj;
     }
 
     /**
@@ -193,11 +174,10 @@ class DomainManager {
     }
 
 
-    /**
-     * @return array
-     */
+
     public function getProviders(): array
     {
+
         $providers = [];
         /** @var DomainInterface $domainObj **/
         foreach ($this->domains as $domainObj) {
