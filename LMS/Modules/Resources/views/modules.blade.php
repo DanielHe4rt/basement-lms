@@ -3,22 +3,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header card-header-rose card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">assignment</i>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="card-title">Lista de Módulos </h4>
-                        </div>
-                        <div class="col text-right">
-                            <button id="newModuleBtn"
-                                    class="btn btn-primary mt-3 mr-3">Criar Módulo
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <x-courses::course-navbar :course="$course" />
+
                 <div class="card-body">
+                    <button id="newModuleBtn" class="btn btn-primary mt-3 mr-3">Criar Módulo</button>
                     @forelse($course->modules()->orderBy('order')->get() as $module)
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
