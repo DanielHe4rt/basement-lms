@@ -1,7 +1,11 @@
 <?php
 return [
+    'navbar' => [
+        'landingPage' => 'Landing Page',
+        'grade' => 'Grade Curricular'
+    ],
+
     'general' => [
-        'title' => 'Seus Cursos',
         'newCourse' => 'Novo Curso',
         'empty' => 'Parece que você não tem nenhum curso cadastrado.',
         'card' => [

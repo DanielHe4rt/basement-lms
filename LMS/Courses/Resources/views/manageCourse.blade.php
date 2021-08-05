@@ -14,16 +14,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header card-header-rose card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">assignment</i>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="card-title">{{ trans('courses::view.manage.title') }}</h4>
-                        </div>
-                    </div>
-                </div>
+                <x-courses::course-navbar :course="$course"/>
+
                 <div class="card-body">
                     <div class="card-body">
                         @if($errors->any())
