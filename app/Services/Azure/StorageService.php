@@ -27,8 +27,7 @@ class StorageService
 
     public function auth(): array
     {
-        $tenant = config('streaming.azure.tenant_id');
-        $uri = "https://login.microsoftonline.com/$tenant/oauth2/token";
+        $uri = config('streaming.azure.tenant_oauth_url');
 
         $response = $this->client->post($uri, [
             'form_params' => [

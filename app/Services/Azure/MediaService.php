@@ -18,7 +18,7 @@ class MediaService
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => 'https://management.azure.com'
+            'base_uri' => config('streaming.azure.management_url')
         ]);
     }
 
