@@ -45,7 +45,7 @@ $ cd basement-lms
 ```
 3. Rode o comando de instalação das bibliotecas PHP do composer para que possamos ter todas nossas depedências do projeto instaladas.
 ```terminal
-composer install
+$ composer install
 ``` 
 4. Copie o arquivo de configuração de exemplo para um arquivo de configuração real:
 ```terminal
@@ -78,7 +78,7 @@ $ php artisan sail:install
 2. Selecione `mariadb` ou `mysql` conforme a preferência.
 3. Crie um alias em seu ~/.bashrc (ou seu ~/.zshrc caso use zsh).
 ```terminal
-echo 'alias sail=\'bash vendor/bin/sail\'' >> ~/.bashrc
+$ echo 'alias sail=\'bash vendor/bin/sail\'' >> ~/.bashrc
 ```
 
 > **Obs 1:** Caso você não crie o alias 'sail' será necessário utilizar 'bash vendor/bin/sail' seguido do comando que deseja usar toda vez que quiser usar um comando.
