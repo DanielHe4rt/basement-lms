@@ -63,6 +63,8 @@ DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
+> Caso precise de ajuda com o terminal você pode consultar o [zsh4noobs](https://github.com/edersonferreira/zsh4noobs) ou o [wsl4noobs](https://github.com/SaLandini/wsl4noobs).
+
 ### Instalação Laravel Sails
 
 > **Importante**: Certifique-se que as portas 80 e 3306 do seu computador estão liberadas, caso seja necessário desative o serviço de BD e Apache, caso contrário poderão ocorrer falhas por essas portas estarem ocupadas no processo de subir a imagem do Sail.
