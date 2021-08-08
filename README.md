@@ -102,6 +102,15 @@ $ sail up -d
 
 > Caso seja mudado algo em `docker-compose.yml` é recomendado que use o comando `sail up -d --build`` para fazer a build dos novos containers e em seguida `sail up`.
 
+6. Precisamos entrar no nosso Docker e dar as permissões de escrita para as pastas de log e storage do Laravel:
+```
+$ sail root-shell
+# chmod -R 777 storage
+# chmod -R 777 bootstrap/cache
+```
+
+#### Pronto! Agora basta acessar [http://localhost/](http://localhost/) e começar os trabalhos.
+
 <hr>
 
 Email settings (using a provider like Mailgun, Amazon SES, etc)
