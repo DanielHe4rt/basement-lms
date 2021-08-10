@@ -34,48 +34,83 @@ danielhe4rt: hey@danielheart.dev
 6. Fórum
 7. Chat
 
-### Installation
-* Run `git clone https://github.com/DanielHe4rt/basement-lms`
-* `cd basement-lms`
-* Run `composer install` (install composer beforehand)
-* From the projects root run `cp .env.example .env`
-* Configure your `.env` file, with:
+### Instalação
+1. Clone este repositório usando esse comando:
+```terminal
+$ git clone  https://github.com/DanielHe4rt/basement-lms
+```
+2. Acesse a pasta do projeto em seu terminal:
+```terminal
+$ cd basement-lms
+```
+3. Rode o comando de instalação das bibliotecas PHP do composer para que possamos ter todas nossas depedências do projeto instaladas.
+```terminal
+$ composer install
+``` 
+4. Copie o arquivo de configuração de exemplo para um arquivo de configuração real:
+```terminal
+$ cp .env.example .env
+```
 
-Database settings
+5. (Opcional) caso **não** vá utilizar o Sail como recomendamos é necessário mudar os valores em .env para que ele possa acessar seu Banco de Dados, os valores são:
+    * **DB_DATABASE**: Que é o nome do Banco de Dados (BD) que você precisa criar previamente.
+    * **DB_USERNAME**: O nome do usuário do seu BD.
+    * **DB_PASSWORD**: A senha desse usuário.
+Configurações padrão (de exemplo):
 ```
 DB_DATABASE=lms_laravel
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
 
+> Caso precise de ajuda com o terminal você pode consultar o [zsh4noobs](https://github.com/edersonferreira/zsh4noobs) ou o [wsl4noobs](https://github.com/SaLandini/wsl4noobs).
 
-### Laravel Sail Installation
-Execute this comand for install Laravel Sail
-`php artisan sail:install`
+### Instalação Laravel Sails
 
-Pay attention, Laravel Sail changes the `DB_USERNAME` and `DB_PASSWORD`
+> **Importante**: Certifique-se que as portas 80 e 3306 do seu computador estão liberadas, caso seja necessário desative o serviço de BD e Apache, caso contrário poderão ocorrer falhas por essas portas estarem ocupadas no processo de subir a imagem do Sail.
 
-The new values ​​are `DB_USERNAME=sail` and `DB_PASSWORD=password`
-
-Do not change these values.
-
-Select `mysql` for database in your terminal
-
-Create alias for this commando in your `~/.bashrc`
-
-`alias sail='bash vendor/bin/sail'`
-
+1. Execute esse comando para instalar a ferramenta Sail em seu projeto Laravel
+```terminal
+$ php artisan sail:install
 ```
-If you didn't create the 
-alias sail='bash vendor/bin/sail'
-just run bash vendor/bin/sail' and the desired command every time
+> **Obs:** Preste atenção que Laravel Sail irá trocar a chave `DB_USERNAME` e `DB_PASSWORD` para `DB_USERNAME=sail` e `DB_PASSWORD=password`. **Não** mude esses valores.
+
+2. Selecione `mariadb` ou `mysql` conforme a preferência.
+3. Crie um alias em seu ~/.bashrc (ou seu ~/.zshrc caso use zsh).
+```terminal
+$ echo 'alias sail=\'bash vendor/bin/sail\'' >> ~/.bashrc
 ```
-Now, use `sail up -d` for up your application.
 
+> **Obs 1:** Caso você não crie o alias 'sail' será necessário utilizar 'bash vendor/bin/sail' seguido do comando que deseja usar toda vez que quiser usar um comando.
 
-> If there has been any change in `docker-compose.yml` it is recommended to use
-`sail up -d --build` to build new containers, after that just use `sail up`
->
+> **Obs 2:** Dependendo seu sistema e suas políticas de segurança pode ser que seja necessário usar o comando **sudo** para elevar as permissões.
+```
+4. Adicione algumas chaves necessárias para que o docker possa fazer a build da imagem, para isso rode os comandos.
+```terminal
+$ export APP_SERVICE=${APP_SERVICE:-"laravel.test"}
+$ export DB_PORT=${DB_PORT:-3306}
+$ export WWWUSER=${WWWUSER:-$UID}
+$ export WWWGROUP=${WWWGROUP:-$(id -g)}
+```
+(*Isso é devido a uma falha de configuração na imagem padrão do Laravel que o Sails usa e é explicado [aqui](https://stackoverflow.com/a/67508274) pode ser que futuramente não seja necessário.*)
+
+5. Agora use o comando para subir sua aplicação.
+```terminal
+$ sail up -d
+```
+> Pode ser necessário **sudo**.
+
+> Caso seja mudado algo em `docker-compose.yml` é recomendado que use o comando `sail up -d --build`` para fazer a build dos novos containers e em seguida `sail up`.
+
+6. Precisamos entrar no nosso Docker e dar as permissões de escrita para as pastas de log e storage do Laravel:
+```
+$ sail root-shell
+# chmod -R 777 storage
+# chmod -R 777 bootstrap/cache
+```
+
+#### Pronto! Agora basta acessar [http://localhost/](http://localhost/) e começar os trabalhos.
+
 <hr>
 
 Email settings (using a provider like Mailgun, Amazon SES, etc)
