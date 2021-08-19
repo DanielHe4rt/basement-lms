@@ -5,6 +5,7 @@ namespace Tests\Feature\LMS\Course\Http\Controllers;
 
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Storage;
 use LMS\User\Models\User;
 use LMS\Courses\Models\Course;
@@ -12,7 +13,7 @@ use Tests\TestCase;
 
 class ViewControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, WithFaker;
 
     public function setUp(): void
     {
@@ -24,7 +25,7 @@ class ViewControllerTest extends TestCase
         // Prepare
         Storage::fake();
         $course = Course::factory()->create();
-        $course->addMedia(storage_path('app/tests/doge.jpeg'))
+        $course->addMedia($this->faker->image())
             ->preservingOriginal()
             ->toMediaCollection();
 
@@ -54,7 +55,7 @@ class ViewControllerTest extends TestCase
         // Prepare
         Storage::fake();
         $course = Course::factory()->create();
-        $course->addMedia(storage_path('app/tests/doge.jpeg'))
+        $course->addMedia($this->faker->image())
             ->preservingOriginal()
             ->toMediaCollection();
 
