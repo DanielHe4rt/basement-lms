@@ -1,5 +1,9 @@
 <?php
 return [
+    'navbar' => [
+        'landingPage' => 'Landing Page',
+        'grade' => 'Curriculum Grade'
+    ],
     'general' => [
         'title' => 'My Courses',
         'newCourse' => 'New Course',
@@ -23,7 +27,6 @@ return [
         ]
     ],
     'manage' => [
-        'title' => 'Manage Course',
         'form' => [
             'title' => [
                 'field' => 'Title',

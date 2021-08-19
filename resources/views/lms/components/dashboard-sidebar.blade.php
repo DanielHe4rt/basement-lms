@@ -15,7 +15,7 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="{{ asset('storage/doge.jpeg') }}">
+                <img src="https://placehold.it/300x300">
             </div>
             <div class="user-info">
                 <p>
