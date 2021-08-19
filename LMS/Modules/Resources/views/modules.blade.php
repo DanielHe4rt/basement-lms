@@ -6,29 +6,37 @@
                 <x-courses::course-navbar :course="$course" />
 
                 <div class="card-body">
-                    <button id="newModuleBtn" class="btn btn-primary mt-3 mr-3">Criar Módulo</button>
+                    <button id="newModuleBtn" class="btn btn-info mt-3 mr-3">Criar Módulo</button>
                     @forelse($course->modules()->orderBy('order')->get() as $module)
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
-                                    <h4 class="card-title">#{{ $module->order }} - {{ $module->name }}</h4>
+                                    <h4 class="card-title">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                #{{ $module->order }} - {{ $module->name }}
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="text-right">
+                                                    <button class="btn btn-danger btn-sm btnDeleteModule" data-id="{{ $module->id }}">
+                                                        X
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </h4>
                                     <p class="card-category">{{ $module->description }}</p>
+
                                 </div>
+
 
                             </div>
                             <div class="card-body">
-                                <table class="table">
-                                    <tbody class="text-center">
-                                    <tr>
-                                        Você não lições ainda =/
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="text-right">
-                                    <button class="btn btn-danger btn-sm btnDeleteModule" data-id="{{ $module->id }}">
-                                        X
-                                    </button>
-                                </div>
+
+                                <x-lessons::lesson :module="$module"/>
+
                             </div>
                         </div>
                     @empty
