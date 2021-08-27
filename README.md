@@ -100,7 +100,7 @@ $ sail up -d
 ```
 > Pode ser necessário **sudo**.
 
-> Caso seja mudado algo em `docker-compose.yml` é recomendado que use o comando `sail up -d --build`` para fazer a build dos novos containers e em seguida `sail up`.
+> Caso seja mudado algo em `docker-compose.yml` é recomendado que use o comando `sail up -d --build` para fazer a build dos novos containers e em seguida `sail up`.
 
 6. Precisamos entrar no nosso Docker e dar as permissões de escrita para as pastas de log e storage do Laravel:
 ```
