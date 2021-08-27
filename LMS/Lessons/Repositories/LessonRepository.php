@@ -74,7 +74,6 @@ class LessonRepository
         $model->addMediaFromRequest('video')
             ->toMediaCollection();
 
-
         dispatch(new AzureStreamingEncode($model));
         return $model;
     }

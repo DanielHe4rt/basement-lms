@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LMS\Modules\Models\Module;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Lesson extends Model implements HasMedia
 {
@@ -38,6 +39,15 @@ class Lesson extends Model implements HasMedia
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->extractVideoFrameAtSecond(0)
+            ->performOnCollections('default');
     }
 
     public function module()

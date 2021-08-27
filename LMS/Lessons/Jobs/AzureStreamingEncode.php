@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use LMS\Lessons\Models\Lesson;
 
 class AzureStreamingEncode implements ShouldQueue
@@ -103,6 +104,8 @@ class AzureStreamingEncode implements ShouldQueue
 
         $this->lesson->setInfo('status', 'done');
         $this->lesson->setStreamingUrls($urls);
+
+        $this->deleteFile();
     }
 
     private function getStreamingUrls($streamingPaths): array
@@ -125,6 +128,11 @@ class AzureStreamingEncode implements ShouldQueue
             $this->lesson->setInfo('percent', $progress);
             sleep(5);
         } while ($jobInfo['properties']['outputs'][0]['progress'] < 99);
+    }
+
+    private function deleteFile()
+    {
+        unlink($this->lesson->getFirstMediaPath());
     }
 
 

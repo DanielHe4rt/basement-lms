@@ -19,9 +19,12 @@
             <tbody id="lesson-upload-{{$lesson->id}}">
             @if($media = $lesson->getFirstMedia())
                 <tr>
-                    <td>{{ $media->file_name }}</td>
+                    <td>
+                        <img src="{{ $media->getUrl('thumb') }}" class="img-thumbnail">
+                        {{ $media->file_name }}
+                    </td>
                     <td>{{ $media->mime_type }}</td>
-                    <td>{{ $lesson->video['info']['status'] }} {{ $lesson->video['info']['percent'] > 0 ? $lesson->video['info']['percent'] . "%" : "" }}</td>
+                    <td>{{ $lesson->video['info']['status'] }} {{ $lesson->video['info']['status'] == 'encoding' ? $lesson->video['info']['percent'] . "%" : "" }}</td>
                     <td>{{ $lesson->updated_at->format('Y-m-d H:i:s') }}</td>
                 </tr>
             @else
