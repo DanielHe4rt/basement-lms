@@ -6,6 +6,7 @@ use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
+use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
 use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
 
@@ -52,6 +53,12 @@ Route::prefix('instructor/courses')->group(function () {
             Route::get('/', [ModulesViewController::class, 'viewCourseModulesPage'])->name('instructor-course-curriculum');
             Route::post('/modules', [ModulesController::class, 'postCourseModule'])->name('instructor-course-module-new');
             Route::delete('/modules/{module}', [ModulesController::class, 'deleteCourseModule'])->name('instructor-course-module-delete');
+
+            Route::prefix('/{module}/lessons')->group(function() {
+                Route::post('/', [LessonsController::class, 'postLesson'])->name('instructor-course-lesson-new');
+                Route::post('/{lesson}/uploadVideo', [LessonsController::class, 'postLessonVideo'])->name('instructor-course-lesson-video-upload');
+                Route::put('/{lesson}', [LessonsController::class, 'putLesson'])->name('instructor-course-lesson-update');
+            });
         });
 
     });

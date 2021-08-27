@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -8,6 +9,7 @@ class CreateMediaTable extends Migration
 {
     public function up()
     {
+        Builder::$defaultMorphKeyType = 'uuid';
         Schema::create('media', function (Blueprint $table) {
             $table->bigIncrements('id');
 
