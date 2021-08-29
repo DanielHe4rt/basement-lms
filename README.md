@@ -14,25 +14,34 @@ danielhe4rt: hey@danielheart.dev
 
 ### Projeto
 1. [] Base do Projeto
-    * Tecnologias:
-        * Bootstrap 4/5
-        * Websockets (chat)
-        * Azure Stream (streaming de video)
-        * Docker [X]
-        * Larastan
-        * Psalm ?
+   1. Tecnologias:
+      1. [x] Bootstrap 4/5
+      2. [x] Azure Stream 
+      3. [x] Docker 
+      4. [] Larastan
 2. [] Autenticação
-    * [] Métodos base: Sessão
-    * [] Métodos custom: Discord e Twitch
+    * [x] Métodos base: Sessão
+    * [] Métodos custom: Google, Github e Twitch
 3. [] Cursos
-    1. [] Modelagem base:
+    1. [] Modelagem Admin
+       1. [X] Pagina de Criação de cursos
+       2. [X] Pagina de Criação de módulos
+          1. [] Ordenação de módulos
+       3. [X] Pagina de Criação de Lições
+          1. [X] Lições de Video
+          2. [X] Lições em Artigos
+          3. [] Lições em Quiz 
+          4. [] Ordenação de Lições
+    2. [] Modelagem User 
+       1. [] Pagina inicial com todos os cursos
+       2. [] Pagina principal de um curso
+       3. [] Pagina para assistir o curso
 4. [] Subscrição
     1. [] Método de pagamento: Stripe, GerenciaNet, Pagarme, Picpay
     2. [] Vinculação com Twitch: Subzada do Daniel é na faixa
     3. [] Formulário não pagante: Se não houver condições de comprar, deixa o salve que a gente libera!
 5. Gameficação
-6. Fórum
-7. Chat
+
 
 ### Instalação
 1. Clone este repositório usando esse comando:
