@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\UnauthorizedException;
 use LMS\Modules\Http\Requests\CreateModuleRequest;
 use LMS\Courses\Models\Course;
+use LMS\Modules\Http\Requests\UpdateModuleRequest;
 use LMS\Modules\Models\Module;
 use LMS\Modules\Repositories\ModuleRepository;
 
@@ -22,13 +23,26 @@ class ModulesController
         $this->repository = $repository;
     }
 
+    public function getCourseModule(Request $request, Course $course, Module $module)
+    {
+        $result = $this->repository->find($course, $module);
+        return response()->json($result);
+    }
+
     public function postCourseModule(CreateModuleRequest $request, Course $course): JsonResponse
     {
         $payload = $request->validated();
-
         $result = $this->repository->createModule($course, $payload);
 
         return response()->json($result, Response::HTTP_CREATED);
+    }
+
+    public function putCourseModule(UpdateModuleRequest $request, Course $course, Module $module)
+    {
+        $payload = $request->validated();
+        $result = $this->repository->update($module, $payload);
+
+        return response()->json($result);
     }
 
     public function deleteCourseModule(Course $course, Module $module): JsonResponse

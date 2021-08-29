@@ -4,6 +4,7 @@
 /public/css
 /public/js
 /storage/*.key
+/storage/media-library
 /vendor
 /.idea
 .env

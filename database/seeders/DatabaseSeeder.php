@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(CourseLevelsSeeder::class);
         $this->call(CourseStatusSeeder::class);
+        $this->call(LessonTypeSeeder::class);
+
+        if (config('app.env') == 'local') {
+            $this->call(SystemBaseSeeder::class);
+        }
     }
 }

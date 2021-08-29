@@ -45,7 +45,7 @@ class ModulesControllerTest extends TestCase
             ->create();
 
         foreach ($course->modules as $key => $module) {
-            $module->update(['order' => $key - 1]);
+            $module->update(['order' => $key]);
         }
 
         // Act
@@ -73,7 +73,7 @@ class ModulesControllerTest extends TestCase
             ->create();
 
         foreach ($course->modules as $key => $module) {
-            $module->update(['order' => $key - 1]);
+            $module->update(['order' => $key ]);
         }
 
         // Act
@@ -87,6 +87,41 @@ class ModulesControllerTest extends TestCase
             ->orderBy('order')
             ->get()
             ->map(fn(Module $module) => $module->order);
+
+        $response->assertNoContent();
+        $this->assertEquals($expected, $actual->toArray());
+    }
+
+    public function UserCanUpdateModule()
+    {
+        // Prepare
+        $course = Course::factory()
+            ->has(Module::factory()->count(6))
+            ->create();
+
+        foreach ($course->modules as $key => $module) {
+            $module->update(['order' => $key]);
+        }
+
+        // Act
+        $this->actingAs($course->author);
+        $response = $this->put(
+            route('instructor-course-module-update', ['course' => $course, 'module' => 2]),
+            ['order' => 4]
+        );
+
+        // Assert
+        $expected = [0, 1, 2, 3, 4];
+        $actual = $course->refresh()
+            ->modules()
+            ->orderBy('order')
+            ->get()
+            ->map(fn(Module $module) => ['id' => $module->id, 'order' => $module->order]);
+
+        foreach ($actual as $key => $value) {
+            dump('id: ' . $value['id'] . " - order: " . $value['order']);
+        }
+        dd();
 
         $response->assertNoContent();
         $this->assertEquals($expected, $actual->toArray());
