@@ -1,9 +1,9 @@
 <div class="row justify-content-center">
-    <div class="col-12 col-md-10">
-        <div id="accordion" role="tablist" >
+    <div class="col-12 col-md-12">
+        <div id="accordion" role="tablist">
             @forelse($module->lessons()->orderBy('created_at')->get() as $key => $lesson)
-                <div class="card-collapse">
-                    <div class="card-header" role="tab" id="headingOne">
+                <div class="card card-collapse">
+                    <div class="card-header " role="tab" id="headingOne">
                         <h5 class="mb-0">
                             <a data-toggle="collapse" href="#collapse-{{ $lesson->id }}" aria-expanded="false"
                                aria-controls="collapseOne"
@@ -43,7 +43,7 @@
                 </div>
 
             @empty
-                Nenhuma aula ainda =/
+                Nenhuma aula ainda =/<br>
             @endforelse
                 <button class="btn btn-primary btnNewLesson" data-id="{{ $module->id }}">Criar lição</button>
         </div>

@@ -40,7 +40,9 @@ Route::prefix('auth')->group(function () {
 });
 
 
-Route::prefix('instructor/courses')->group(function () {
+Route::prefix('instructor/courses')
+    ->middleware('auth')
+    ->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
     Route::prefix('/{course}')->group(function () {
@@ -48,10 +50,11 @@ Route::prefix('instructor/courses')->group(function () {
             Route::get('/', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
         });
 
-
         Route::prefix('/curriculum')->group(function() {
             Route::get('/', [ModulesViewController::class, 'viewCourseModulesPage'])->name('instructor-course-curriculum');
             Route::post('/modules', [ModulesController::class, 'postCourseModule'])->name('instructor-course-module-new');
+            Route::get('/{module}', [ModulesController::class, 'getCourseModule'])->name('instructor-course-module-get');
+            Route::put('/{module}', [ModulesController::class, 'putCourseModule'])->name('instructor-course-module-update');
             Route::delete('/modules/{module}', [ModulesController::class, 'deleteCourseModule'])->name('instructor-course-module-delete');
 
             Route::prefix('/{module}/lessons')->group(function() {

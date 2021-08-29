@@ -3,6 +3,12 @@
 namespace Tests\Feature\LMS\Lesson\Http\Controllers;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Storage;
+use LMS\Lessons\Jobs\AzureStreamingEncode;
+use LMS\Lessons\Models\Lesson;
 use LMS\Modules\Models\Module;
 use LMS\User\Models\User;
 use Tests\TestCase;
@@ -33,7 +39,6 @@ class LessonsControllerTest extends TestCase
             route('instructor-course-lesson-new', ['course' => $module->course, 'module' => $module]),
             $payload
         );
-        $response->dump();
 
         // Assert
         $response->assertOk();
@@ -56,9 +61,33 @@ class LessonsControllerTest extends TestCase
             route('instructor-course-lesson-new', ['course' => $module1->course, 'module' => $module2]),
             $payload
         );
-        $response->dump();
 
         // Assert
         $response->assertStatus(422);
+    }
+
+    public function testUserCanUploadVideoAtLesson()
+    {
+        // Prepare
+        Storage::fake();
+        Bus::fake();
+
+        $lesson = Lesson::factory()->create();
+        $lesson->initVideoStream();
+
+        $payload = [
+            'video' => UploadedFile::fake()->create('fodase.mp4')
+        ];
+
+        // Act
+        $this->actingAs($lesson->module->course->author);
+        $response = $this->post(
+            route('instructor-course-lesson-video-upload', ['course' => $lesson->module->course, 'module' => $lesson->module, 'lesson' => $lesson]),
+            $payload
+        );
+
+        // Assert
+        Bus::assertDispatched(AzureStreamingEncode::class);
+        $response->assertOk();
     }
 }

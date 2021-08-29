@@ -81,7 +81,7 @@ class LessonRepository
     private function checkVideoCanBeEncoded($model): void
     {
         if (!in_array($model->getStatus(), ['waiting', 'done'])) {
-            throw new \Exception('aaaaaaaaaaaaaaa');
+            throw new \Exception('O arquivo ainda está sendo processado. Aguarde finalizar para executar outra ação.');
         }
     }
 

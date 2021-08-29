@@ -5,10 +5,12 @@ namespace LMS\Lessons\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
+use LMS\Courses\Models\Course;
 use LMS\Lessons\Http\Requests\CreateLessonRequest;
 use LMS\Lessons\Http\Requests\UpdateLessonRequest;
 use LMS\Lessons\Http\Requests\UploadLessonVideoRequest;
 use LMS\Lessons\Repositories\LessonRepository;
+use LMS\Modules\Models\Module;
 
 class LessonsController extends Controller
 {
@@ -19,11 +21,7 @@ class LessonsController extends Controller
         $this->repository = $repository;
     }
 
-    public function getLessons()
-    {
-    }
-
-    public function postLesson(CreateLessonRequest $request): JsonResponse
+    public function postLesson(CreateLessonRequest $request, Course $course, Module $module): JsonResponse
     {
         try {
             return response()->json($this->repository->createLesson($request->validated()));
@@ -36,9 +34,6 @@ class LessonsController extends Controller
 
     }
 
-    public function getLesson()
-    {
-    }
 
     public function putLesson(UpdateLessonRequest $request)
     {
@@ -52,9 +47,6 @@ class LessonsController extends Controller
         }
     }
 
-    public function deleteLesson()
-    {
-    }
 
     public function postLessonVideo(UploadLessonVideoRequest $request)
     {
@@ -62,7 +54,7 @@ class LessonsController extends Controller
             return response()->json($this->repository->uploadVideo($request->validated()));
         } catch (\Exception $exception) {
             return response()->json(
-                ['error' => [$exception->getMessage()]],
+                ['errors' => ['e' => [$exception->getMessage()]]],
                 422
             );
         }

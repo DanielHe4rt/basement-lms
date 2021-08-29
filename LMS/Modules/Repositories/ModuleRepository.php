@@ -36,10 +36,10 @@ class ModuleRepository
         }
 
         $module->delete();
-        return $this->reorderModules($course, $module->order);
+        return $this->reorderModulesAfterDelete($course, $module->order);
     }
 
-    private function reorderModules(Course $course, int $lastOrder): bool
+    private function reorderModulesAfterDelete(Course $course, int $lastOrder): bool
     {
         $modules = $course->modules()
             ->where('order', '>=', $lastOrder)
@@ -52,5 +52,27 @@ class ModuleRepository
         return true;
     }
 
+    public function find(Course $course, Module $module)
+    {
+        $module->count = $course->modules()->count();
+
+        return $module;
+    }
+
+    public function update(Module $module, array $payload)
+    {
+        $currentOrder = $module->order;
+        $module->update($payload);
+        if ($currentOrder != $payload['order']) {
+            $this->reorderModules($module->course, $module->refresh(), $currentOrder);
+        }
+
+        return $module;
+    }
+
+    private function reorderModules(Course $course, Module $currentModule, int $currentOrder)
+    {
+        // TODO: reordenação de módulos
+    }
 
 }

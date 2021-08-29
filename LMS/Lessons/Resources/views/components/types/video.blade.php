@@ -2,10 +2,16 @@
     <div class="col-12">
         <form action="">
             @csrf
+            @if(in_array($lesson->getStatus(), ['waiting', 'done']))
             <div class="form-group">
-                <label for="inputVideo-{{$lesson->id}}" class="btn btn-primary btn-block">Clique aqui pra subir a porra do arquivo</label>
+                <label for="inputVideo-{{$lesson->id}}" class="btn btn-primary btn-block">Faça upload do arquivo</label>
                 <input id="inputVideo-{{$lesson->id}}" data-lessonId="{{$lesson->id}}" data-moduleId="{{$lesson->module_id}}" type="file" class="form-control inputUpload" style="border: 1px solid black;">
             </div>
+            @else
+                <div class="form-group">
+                    <button disabled for="inputVideo-{{$lesson->id}}" class="btn btn-primary btn-block">Aguarde o arquivo terminar de ser processado.</button>
+                </div>
+            @endif
         </form>
         <table class="table table-striped">
             <thead>

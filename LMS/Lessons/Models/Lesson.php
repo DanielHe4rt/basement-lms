@@ -2,8 +2,11 @@
 
 namespace LMS\Lessons\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use LMS\Lessons\Enums\LessonTypes;
+use LMS\Lessons\Enums\UploadStatus;
 use LMS\Modules\Models\Module;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -11,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Lesson extends Model implements HasMedia
 {
-    use InteractsWithMedia;
+    use InteractsWithMedia, HasFactory;
 
     public $incrementing = false;
 
@@ -33,7 +36,9 @@ class Lesson extends Model implements HasMedia
 
     public function getVideoAttribute()
     {
-        return json_decode($this->attributes['content'] ?? [], true);
+        return $this->attributes['type_id'] == LessonTypes::VIDEO
+            ? json_decode($this->attributes['content'] ?? [], true)
+            : [];
     }
 
     public function type(): BelongsTo
@@ -59,7 +64,7 @@ class Lesson extends Model implements HasMedia
         $videoAttr = [
             'streamingUrls' => [],
             'info' => [
-                'status' => 'waiting',
+                'status' => UploadStatus::WAITING,
                 'percent' => 0
             ]
         ];

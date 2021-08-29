@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Storage;
+use LMS\Lessons\Enums\UploadStatus;
 use LMS\Lessons\Models\Lesson;
 
 class AzureStreamingEncode implements ShouldQueue
@@ -71,22 +72,22 @@ class AzureStreamingEncode implements ShouldQueue
 
 
         $mediaService->createAsset($assetInput);
-        $this->lesson->setInfo('status', 'creating asset');
+        $this->lesson->setInfo('status', UploadStatus::CREATING_ASSET);
 
         $permissions = $mediaService->grantAssetPermissions($assetInput);
-        $this->lesson->setInfo('status', 'granting permissions');
+        $this->lesson->setInfo('status', UploadStatus::GRANTING_PERMISSION);
 
 
-        $this->lesson->setInfo('status', 'preparing to upload');
+        $this->lesson->setInfo('status', UploadStatus::PREPARING_UPLOAD);
         $assetUrl = $permissions['assetContainerSasUrls'][0];
         $storageService->uploadFile($assetUrl, $this->lesson->getFirstMediaPath());
 
-        $this->lesson->setInfo('status', 'generating output asset');
+        $this->lesson->setInfo('status', UploadStatus::OUTPUT_ASSET);
         $mediaService->createAsset($assetOutput);
         $this->lesson->setInfo('asset', $assetOutput);
 
         $encodeJob = $mediaService->startEncodingJob($assetInput, $assetOutput);
-        $this->lesson->setInfo('status', 'encoding');
+        $this->lesson->setInfo('status', UploadStatus::ENCODING_MEDIA);
 
 
         $this->encodeMedia($mediaService, $encodeJob['name']);
@@ -96,13 +97,13 @@ class AzureStreamingEncode implements ShouldQueue
         $locatorName = 'locator-' . date('Ymd-His');
         $this->lesson->setInfo('locator', $locatorName);
         $mediaService->createStreamingLocator($locatorName, $assetOutput);
-        $this->lesson->setInfo('status', 'creating locator');
+        $this->lesson->setInfo('status', UploadStatus::CREATING_LOCATOR);
 
         $paths = $mediaService->listStreamingLocatorPaths($locatorName);
 
         $urls = $this->getStreamingUrls($paths['streamingPaths']);
 
-        $this->lesson->setInfo('status', 'done');
+        $this->lesson->setInfo('status', UploadStatus::DONE);
         $this->lesson->setStreamingUrls($urls);
 
         $this->deleteFile();
@@ -114,7 +115,7 @@ class AzureStreamingEncode implements ShouldQueue
         foreach ($streamingPaths as $path) {
             $urls[] = [
                 'protocol' => $path['streamingProtocol'],
-                'url' => 'https://basement-brso.streaming.media.azure.net/' . $path['paths'][0]
+                'url' => config('streaming.azure.streaming_url') . $path['paths'][0]
             ];
         }
         return $urls;

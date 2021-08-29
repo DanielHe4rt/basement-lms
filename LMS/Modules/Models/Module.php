@@ -24,10 +24,7 @@ class Module extends Model
         'order'
     ];
 
-    public function getOrderAttribute()
-    {
-        return ++$this->attributes['order'];
-    }
+
 
     protected $casts = [
         'order' => 'integer'

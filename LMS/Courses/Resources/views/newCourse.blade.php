@@ -55,9 +55,6 @@
                                 <div class="form-group">
                                     <select class="form-control" id="course_level_id" name="course_level_id">
                                         <option value="" selected disabled>{{ trans('courses::view.manage.form.level.field') }}</option>
-                                        <option value="1">{{ trans('courses::view.manage.form.level.beginner') }}</option>
-                                        <option value="2">{{ trans('courses::view.manage.form.level.intermediate') }}</option>
-                                        <option value="3">{{ trans('courses::view.manage.form.level.advanced') }}</option>
                                     </select>
                                 </div>
                             </div>
