@@ -5,6 +5,7 @@ namespace LMS\Lessons\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use LMS\Lessons\Enums\LessonTypes;
 use LMS\Lessons\Enums\UploadStatus;
 use LMS\Modules\Models\Module;
@@ -35,14 +36,14 @@ class Lesson extends Model implements HasMedia
         'video'
     ];
 
-    public function getVideoAttribute()
+    public function getVideoAttribute(): array
     {
         return $this->attributes['type_id'] == LessonTypes::VIDEO
             ? json_decode($this->attributes['content'] ?? [], true)
             : [];
     }
 
-    public function getDurationAttribute()
+    public function getDurationAttribute(): string
     {
         return substr($this->attributes['duration'], 3, 6);
     }
@@ -61,12 +62,12 @@ class Lesson extends Model implements HasMedia
             ->performOnCollections('default');
     }
 
-    public function module()
+    public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class);
     }
 
-    public function initVideoStream()
+    public function initVideoStream(): void
     {
         $videoAttr = [
             'streamingUrls' => [],
@@ -105,7 +106,7 @@ class Lesson extends Model implements HasMedia
         return $videoAttr['info']['status'];
     }
 
-    public function getStreamingUrl($type = 'Hls')
+    public function getStreamingUrl($type = 'Hls'): array
     {
         $videoAttr = json_decode($this->attributes['content'], true);
 
@@ -113,7 +114,7 @@ class Lesson extends Model implements HasMedia
             ->first(fn($types) => $types['protocol'] == $type);
     }
 
-    public function whoWatched()
+    public function whoWatched(): BelongsToMany
     {
         return $this->belongsToMany(
             User::class,

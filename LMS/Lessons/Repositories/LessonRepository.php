@@ -94,13 +94,11 @@ class LessonRepository
     {
         try {
             $duration = FFProbe::create()
-                ->format($model->getFirstMediaPath()) // extracts file informations
+                ->format($model->getFirstMediaPath())
                 ->get('duration');
-            $model->update([
-                'duration' => gmdate('H:i:s', $duration)
-            ]);
+            $model->update(['duration' => gmdate('H:i:s', $duration)]);
         } catch (\Exception) {
-            // TODO: sei lá
+            // TODO: implementar logger
         }
     }
 

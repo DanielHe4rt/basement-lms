@@ -6,6 +6,7 @@ namespace LMS\Courses\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use LMS\Courses\Models\Course;
 
 class CourseRepository
@@ -21,6 +22,7 @@ class CourseRepository
     {
         $data['author_id'] = Auth::id();
         $data['status_id'] = 1;
+        $data['slug'] = Str::slug($data['title']);
 
         $model = $this->model->create($data);
         $model->addMediaFromRequest('cover')

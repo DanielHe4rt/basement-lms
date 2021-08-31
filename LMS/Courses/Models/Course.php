@@ -83,14 +83,9 @@ class Course extends Model implements HasMedia
 
     public function getLessonsWatchedAttribute(): int
     {
-        if(Auth::check()) {
-           return $this->watched()
-               ->wherePivotIn(
-                   'lesson_id',
-                   collect($this->lessons)->pluck('id')->toArray()
-               )->count();
-        }
-        return 0;
+        return Auth::check()
+            ? $this->watched()->wherePivotIn('lesson_id', collect($this->lessons)->pluck('id')->toArray())->count()
+            : 0;
     }
 
     public function students(): BelongsToMany
