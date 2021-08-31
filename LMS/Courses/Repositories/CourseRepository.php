@@ -4,6 +4,7 @@
 namespace LMS\Courses\Repositories;
 
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use LMS\Courses\Models\Course;
 
@@ -31,5 +32,10 @@ class CourseRepository
     public function delete(int $id): bool | null
     {
         return $this->model->destroy($id);
+    }
+
+    public function enroll(Course $course)
+    {
+        Auth::user()->enrollments()->attach($course, ['joined_at' => Carbon::now()]);
     }
 }

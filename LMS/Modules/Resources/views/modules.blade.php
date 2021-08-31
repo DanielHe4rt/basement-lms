@@ -393,7 +393,7 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        toastr.success("eaeaeaeaeeaeaeaeaeae")
+                        toastr.success("Video enviado!")
                     },
                     error: function (data) {
                         let errors = data.responseJSON.errors ?? data.errors;

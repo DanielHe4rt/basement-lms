@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use LMS\Lessons\Enums\LessonTypes;
 use LMS\Lessons\Enums\UploadStatus;
 use LMS\Modules\Models\Module;
+use LMS\User\Models\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -41,6 +42,11 @@ class Lesson extends Model implements HasMedia
             : [];
     }
 
+    public function getDurationAttribute()
+    {
+        return substr($this->attributes['duration'], 3, 6);
+    }
+
     public function type(): BelongsTo
     {
         return $this->belongsTo(Type::class);
@@ -60,7 +66,8 @@ class Lesson extends Model implements HasMedia
         return $this->belongsTo(Module::class);
     }
 
-    public function initVideoStream() {
+    public function initVideoStream()
+    {
         $videoAttr = [
             'streamingUrls' => [],
             'info' => [
@@ -96,5 +103,23 @@ class Lesson extends Model implements HasMedia
     {
         $videoAttr = json_decode($this->attributes['content'], true);
         return $videoAttr['info']['status'];
+    }
+
+    public function getStreamingUrl($type = 'Hls')
+    {
+        $videoAttr = json_decode($this->attributes['content'], true);
+
+        return collect($videoAttr['streamingUrls'])
+            ->first(fn($types) => $types['protocol'] == $type);
+    }
+
+    public function whoWatched()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_watched_lessons',
+            'lesson_id',
+            'user_id'
+        )->withPivot(['course_id', 'watched_at']);
     }
 }

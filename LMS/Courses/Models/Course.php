@@ -4,11 +4,15 @@
 namespace LMS\Courses\Models;
 
 
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use LMS\Lessons\Models\Lesson;
 use LMS\Modules\Models\Module;
 use LMS\User\Models\User;
 use Spatie\MediaLibrary\HasMedia;
@@ -29,11 +33,17 @@ class Course extends Model implements HasMedia
         'subtitle',
         'description',
         'paid',
+        'slug',
         'published_at',
     ];
 
     protected $casts = [
         'paid' => 'bool',
+    ];
+
+    protected $appends = [
+        'lessonsCount',
+        'lessonsWatched'
     ];
 
     public function registerMediaCollections(): void
@@ -48,7 +58,7 @@ class Course extends Model implements HasMedia
 
     public function level(): BelongsTo
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(Level::class, 'course_level_id');
     }
 
     public function status(): BelongsTo
@@ -60,4 +70,47 @@ class Course extends Model implements HasMedia
     {
         return $this->hasMany(Module::class);
     }
+
+    public function lessons(): HasManyThrough
+    {
+        return $this->hasManyThrough(Lesson::class, Module::class);
+    }
+
+    public function getLessonsCountAttribute(): int
+    {
+        return $this->lessons()->count();
+    }
+
+    public function getLessonsWatchedAttribute(): int
+    {
+        if(Auth::check()) {
+           return $this->watched()
+               ->wherePivotIn(
+                   'lesson_id',
+                   collect($this->lessons)->pluck('id')->toArray()
+               )->count();
+        }
+        return 0;
+    }
+
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'course_users',
+            'course_id',
+            'user_id'
+        )->withPivot('created_at');
+    }
+
+    public function watched(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_watched_lessons',
+            'course_id',
+            'user_id'
+        )->withPivot(['lesson_id', 'watched_at']);
+    }
+
 }

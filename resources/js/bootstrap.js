@@ -3,6 +3,7 @@ import $ from 'jquery';
 window._ = require('lodash');
 window.$ = window.jQuery = $;
 window.Popper = require('popper.js').default;
+window.Plyr = require('plyr')
 
 /**
  * Basic Toastr config

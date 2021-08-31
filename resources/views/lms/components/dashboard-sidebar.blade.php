@@ -30,9 +30,9 @@
         </div>
         <ul class="nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('dashboard') }}">
+                    <i class="material-icons">house</i>
                     <p>
-                        <i class="fa fa-cog"></i>
                         Dashboard
                     </p>
                 </a>

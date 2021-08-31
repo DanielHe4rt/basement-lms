@@ -29,6 +29,16 @@ Route::get('/dashboard', function () {
     return view('lms.dashboard');
 })->name('dashboard')->middleware('auth');
 
+Route::prefix('courses')
+    ->middleware('auth')
+    ->group(function () {
+    Route::get('/{slug}', [CoursesViewController::class, 'viewCourse'])->name('course-preview');
+    Route::post('/{course}/join', [CoursesController::class, 'postEnrollment'])->name('course-join');
+    Route::get('/{slug}/learn', [CoursesViewController::class, 'viewCourseLessonRedirect'])->name('course-lesson-redirect');
+    Route::get('/{slug}/learn/lessons/{lesson}', [CoursesViewController::class, 'viewCourseLesson'])->name('course-lesson');
+    Route::put('/{slug}/learn/lessons/{lesson}', [LessonsController::class, 'putLessonStatus'])->name('course-lesson-watched');
+});
+
 
 Route::get('/login', [AdminViewController::class, 'viewLogin'])->name('login');
 Route::get('/register', [AdminViewController::class, 'viewRegister'])->name('register');

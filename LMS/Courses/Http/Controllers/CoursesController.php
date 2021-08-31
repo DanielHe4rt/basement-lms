@@ -5,6 +5,7 @@ namespace LMS\Courses\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use LMS\Courses\Models\Course;
 use LMS\Courses\Repositories\CourseRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -34,8 +35,14 @@ class CoursesController extends Controller
 
         $deleted = $this->repository->delete($course);
         return response()->json($deleted, $deleted
-                ? Response::HTTP_NO_CONTENT
-                : Response::HTTP_INTERNAL_SERVER_ERROR
+            ? Response::HTTP_NO_CONTENT
+            : Response::HTTP_INTERNAL_SERVER_ERROR
         );
+    }
+
+    public function postEnrollment(Course $course)
+    {
+        $this->repository->enroll($course);
+        return back();
     }
 }
