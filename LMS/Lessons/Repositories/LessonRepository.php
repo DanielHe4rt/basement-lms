@@ -2,6 +2,9 @@
 
 namespace LMS\Lessons\Repositories;
 
+use Carbon\Carbon;
+use FFMpeg\FFProbe;
+use Illuminate\Support\Facades\Auth;
 use LMS\Courses\Models\Course;
 use LMS\Lessons\Contracts\LessonTypeContract;
 use LMS\Lessons\Enums\LessonTypes;
@@ -74,6 +77,8 @@ class LessonRepository
         $model->addMediaFromRequest('video')
             ->toMediaCollection();
 
+        $this->setVideoDuration($model);
+
         dispatch(new AzureStreamingEncode($model));
         return $model;
     }
@@ -83,6 +88,32 @@ class LessonRepository
         if (!in_array($model->getStatus(), ['waiting', 'done'])) {
             throw new \Exception('O arquivo ainda está sendo processado. Aguarde finalizar para executar outra ação.');
         }
+    }
+
+    private function setVideoDuration($model): void
+    {
+        try {
+            $duration = FFProbe::create()
+                ->format($model->getFirstMediaPath())
+                ->get('duration');
+            $model->update(['duration' => gmdate('H:i:s', $duration)]);
+        } catch (\Exception) {
+            // TODO: implementar logger
+        }
+    }
+
+    public function handleWatchedLesson(array $payload)
+    {
+        $user = Auth::user();
+        $lesson = $this->model->find($payload['lesson_id']);
+        $alreadyWatched = $user->watched()->find($lesson);
+
+        return $alreadyWatched
+            ? $user->watched()->detach($lesson)
+            : $user->watched()->attach($lesson, [
+                'course_id' => $lesson->module->course_id,
+                'watched_at' => Carbon::now()
+            ]);
     }
 
 }

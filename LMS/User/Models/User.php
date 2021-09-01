@@ -4,11 +4,13 @@ namespace LMS\User\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use LMS\Courses\Models\Course;
+use LMS\Lessons\Models\Lesson;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -59,5 +61,25 @@ class User extends Authenticatable
     public function courses(): HasMany
     {
         return $this->hasMany(Course::class, 'author_id');
+    }
+
+    public function enrollments(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Course::class,
+            'course_users',
+            'user_id',
+            'course_id'
+        );
+    }
+
+    public function watched(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Lesson::class,
+            'user_watched_lessons',
+            'user_id',
+            'lesson_id'
+        )->withPivot(['course_id', 'watched_at']);
     }
 }

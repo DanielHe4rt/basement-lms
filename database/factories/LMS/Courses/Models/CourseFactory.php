@@ -33,6 +33,7 @@ class CourseFactory extends Factory
             'description' => $this->faker->sentence,
             'paid' => false,
             'published_at' => null,
+            'slug' => $this->faker->slug(3),
         ];
     }
 }

@@ -7,8 +7,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Request;
 use LMS\Courses\Models\Course;
 use LMS\Lessons\Http\Requests\CreateLessonRequest;
+use LMS\Lessons\Http\Requests\LessonWatchedStatusRequest;
 use LMS\Lessons\Http\Requests\UpdateLessonRequest;
 use LMS\Lessons\Http\Requests\UploadLessonVideoRequest;
+use LMS\Lessons\Models\Lesson;
 use LMS\Lessons\Repositories\LessonRepository;
 use LMS\Modules\Models\Module;
 
@@ -58,6 +60,12 @@ class LessonsController extends Controller
                 422
             );
         }
+    }
+
+    public function putLessonStatus(LessonWatchedStatusRequest $request): JsonResponse
+    {
+        $result = $this->repository->handleWatchedLesson($request->validated());
+        return response()->json($result);
     }
 
 }

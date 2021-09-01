@@ -5,9 +5,11 @@ namespace LMS\Lessons\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use LMS\Lessons\Enums\LessonTypes;
 use LMS\Lessons\Enums\UploadStatus;
 use LMS\Modules\Models\Module;
+use LMS\User\Models\User;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -34,11 +36,16 @@ class Lesson extends Model implements HasMedia
         'video'
     ];
 
-    public function getVideoAttribute()
+    public function getVideoAttribute(): array
     {
         return $this->attributes['type_id'] == LessonTypes::VIDEO
             ? json_decode($this->attributes['content'] ?? [], true)
             : [];
+    }
+
+    public function getDurationAttribute(): string
+    {
+        return substr($this->attributes['duration'], 3, 6);
     }
 
     public function type(): BelongsTo
@@ -55,12 +62,13 @@ class Lesson extends Model implements HasMedia
             ->performOnCollections('default');
     }
 
-    public function module()
+    public function module(): BelongsTo
     {
         return $this->belongsTo(Module::class);
     }
 
-    public function initVideoStream() {
+    public function initVideoStream(): void
+    {
         $videoAttr = [
             'streamingUrls' => [],
             'info' => [
@@ -96,5 +104,23 @@ class Lesson extends Model implements HasMedia
     {
         $videoAttr = json_decode($this->attributes['content'], true);
         return $videoAttr['info']['status'];
+    }
+
+    public function getStreamingUrl($type = 'Hls'): array
+    {
+        $videoAttr = json_decode($this->attributes['content'], true);
+
+        return collect($videoAttr['streamingUrls'])
+            ->first(fn($types) => $types['protocol'] == $type);
+    }
+
+    public function whoWatched(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_watched_lessons',
+            'lesson_id',
+            'user_id'
+        )->withPivot(['course_id', 'watched_at']);
     }
 }

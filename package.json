@@ -23,6 +23,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "jquery": "^3.6.0",
         "material-icons": "^0.7.0",
+        "plyr": "^3.6.8",
         "popper.js": "^1.16.1",
         "toastr": "^2.1.4"
     }

@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="{{asset('css/admin.css')}}">
     @yield('css')
 </head>
-<body class="" data-new-gr-c-s-check-loaded="8.876.0" data-gr-ext-installed="">
+<body>
 
 <div class="wrapper ">
     @yield('sidebar', View::make('lms.components.dashboard-sidebar'))
     <div class="main-panel">
         <!-- Navbar -->
         @yield('navbar', View::make('lms.components.dashboard-navbar'))
+
         <!-- End Navbar -->
         <div class="content">
             @yield('content')

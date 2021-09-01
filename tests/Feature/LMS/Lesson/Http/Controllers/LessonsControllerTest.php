@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\LMS\Lesson\Http\Controllers;
 
+use FFMpeg\FFProbe;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Bus;
@@ -76,8 +77,9 @@ class LessonsControllerTest extends TestCase
         $lesson->initVideoStream();
 
         $payload = [
-            'video' => UploadedFile::fake()->create('fodase.mp4')
+            'video' => UploadedFile::fake()->create('fakelesson.mp4')
         ];
+
 
         // Act
         $this->actingAs($lesson->module->course->author);

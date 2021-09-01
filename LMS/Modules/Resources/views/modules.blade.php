@@ -224,7 +224,7 @@
                         content: content
                     },
                     success: function (data) {
-                        toastr.success("aaaaaaaaa fodase!")
+                        toastr.success("Artigo salvo!")
                     },
                     error: function (data) {
                         let errors = data.responseJSON.errors;
@@ -393,7 +393,7 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        toastr.success("eaeaeaeaeeaeaeaeaeae")
+                        toastr.success("Video enviado!")
                     },
                     error: function (data) {
                         let errors = data.responseJSON.errors ?? data.errors;

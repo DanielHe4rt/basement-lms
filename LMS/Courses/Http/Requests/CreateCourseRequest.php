@@ -23,6 +23,7 @@ class CreateCourseRequest extends FormRequest
             'description' => 'required|string',
             'cover' => 'required|mimes:png,jpeg',
             'paid' => 'required|bool',
+            'slug' => 'string'
         ];
     }
 
