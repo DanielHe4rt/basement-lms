@@ -33,8 +33,8 @@ class CoursesControllerTest extends TestCase
             'title' => 'php4noobs',
             'subtitle' => 'o melhor apenas',
             'description' => 'vai caralho',
-            'slug' => 'fodase',
-            'cover' => UploadedFile::fake()->image('fodase.png'),
+            'slug' => 'php4noobs',
+            'cover' => UploadedFile::fake()->image('super-thumb.png'),
             'paid' => false
         ];
 

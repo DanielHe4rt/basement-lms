@@ -88,7 +88,6 @@
         }
 
         $(document).ready(function () {
-            // Fodase isso aqui
             $('body').addClass('sidebar-mini');
             md.misc.sidebar_mini_active = true;
         });

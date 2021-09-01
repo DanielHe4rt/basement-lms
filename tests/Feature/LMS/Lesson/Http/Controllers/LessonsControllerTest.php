@@ -77,7 +77,7 @@ class LessonsControllerTest extends TestCase
         $lesson->initVideoStream();
 
         $payload = [
-            'video' => UploadedFile::fake()->create('fodase.mp4')
+            'video' => UploadedFile::fake()->create('fakelesson.mp4')
         ];
 
 
