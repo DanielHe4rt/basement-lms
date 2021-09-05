@@ -101,7 +101,7 @@
             <li class="nav-item ">
                 <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
                     <i class="material-icons">apps</i>
-                    <p> Admin Panel
+                    <p> Courses & Stuff
                         <b class="caret"></b>
                     </p>
                 </a>
@@ -111,6 +111,30 @@
                             <a class="nav-link" href="{{ route('instructor-courses') }}">
                                 <span class="sidebar-mini"> C </span>
                                 <span class="sidebar-normal"> Courses </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" data-toggle="collapse" href="#paymentsAndBillings">
+                    <i class="material-icons">credit_card</i>
+                    <p> Payments & Billings
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div class="collapse" id="paymentsAndBillings" style="">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('billings-providers-list') }}">
+                                <span class="sidebar-mini"> PP </span>
+                                <span class="sidebar-normal"> Payment Providers </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('billings-plans-list') }}">
+                                <span class="sidebar-mini"> PS </span>
+                                <span class="sidebar-normal"> Plans and Subscriptions </span>
                             </a>
                         </li>
                     </ul>

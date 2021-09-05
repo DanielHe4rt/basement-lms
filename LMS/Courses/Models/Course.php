@@ -43,8 +43,16 @@ class Course extends Model implements HasMedia
 
     protected $appends = [
         'lessonsCount',
-        'lessonsWatched'
+        'lessonsWatched',
+        'progress'
     ];
+
+    public function getProgressAttribute() {
+
+        return $this->lessonsWatched && $this->lessonsCount
+            ?number_format(($this->lessonsWatched / $this->lessonsCount ?? 0) * 100,2)
+            : 0;
+    }
 
     public function registerMediaCollections(): void
     {

@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         if (config('app.env') == 'local') {
             $this->call(SystemBaseSeeder::class);
         }
+
+        $this->call(BillingProvidersSeeder::class);
     }
 }

@@ -80,7 +80,7 @@
                                                 <span class="progress-badge">Progresso do curso</span>
                                                 <div class="progress" style="height: 9px">
                                                     <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="25"
-                                                          style="width: {{ number_format(($course->lessonsWatched / $course->lessonsCount) * 100,2) }}%;">
+                                                          style="width: {{ $course->progress }}%;">
                                                     </div>
                                                 </div>
                                             </div>
