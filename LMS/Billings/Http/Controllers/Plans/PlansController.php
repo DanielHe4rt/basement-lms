@@ -4,7 +4,7 @@ namespace LMS\Billings\Http\Controllers\Plans;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LMS\Billings\Http\Requests\Plans\CreatePlanRequest;
+use LMS\Billings\Http\Requests\Plans\CreateCardRequest;
 use LMS\Billings\Repositories\Plans\PlanRepository;
 
 class PlansController extends Controller
@@ -16,7 +16,7 @@ class PlansController extends Controller
         $this->repository = $repository;
     }
 
-    public function postPlan(CreatePlanRequest $request)
+    public function postPlan(CreateCardRequest $request)
     {
         try {
             $result = $this->repository->createPlan($request->validated());

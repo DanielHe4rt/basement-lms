@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use LMS\Auth\Http\Controllers\AuthController;
 use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
+use LMS\Billings\Http\Controllers\Cards\CardController;
+use LMS\Billings\Http\Controllers\Cards\ViewController as CardsViewController;
 use LMS\Billings\Http\Controllers\Plans\PlansController;
 use LMS\Billings\Http\Controllers\Plans\ViewController as PlansViewController;
 use LMS\Billings\Http\Controllers\Providers\ProvidersController;
@@ -62,6 +64,12 @@ Route::prefix('billings')->middleware('auth')->group(function () {
     Route::prefix('/plans')->group(function() {
         Route::get('/', [PlansViewController::class, 'viewPlans'])->name('billings-plans-list');
         Route::post('/', [PlansController::class, 'postPlan'])->name('billings-plans-create');
+    });
+
+    Route::prefix('/cards')->group(function() {
+        Route::get('/', [CardsViewController::class, 'viewCard'])->name('billings-card-view');
+        Route::post('/', [CardController::class, 'postCard'])->name('billings-card-create');
+        Route::delete('/', [CardController::class, 'deleteCard'])->name('billings-card-delete');
     });
 });
 

@@ -116,7 +116,7 @@
                     },
                     data: $(this).serialize(),
                     success: function (data) {
-                        toastr.success("Artigo salvo!")
+                        toastr.success("Plano criado!")
                     },
                     error: function (data) {
                         let errors = data.responseJSON.errors;
