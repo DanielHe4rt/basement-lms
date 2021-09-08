@@ -40,7 +40,7 @@
                                     <tr>
                                         <td>{{ $plan->name }}</td>
                                         <td>{{ $plan->interval }}</td>
-                                        <td>{{ $plan->subscription->price }}</td>
+                                        <td>{{ $plan->price }}</td>
                                         <td>
                                             <button class="btn btn-warning">Editar</button>
                                             <button class="btn btn-danger">Deletar</button>

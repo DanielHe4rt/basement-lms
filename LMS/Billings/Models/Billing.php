@@ -19,7 +19,7 @@ class Billing extends Model
     protected $fillable = [
         'id',
         'provider_id',
-        'subscription_id',
+        'plan_id',
         'user_id',
         'status',
         'data',
@@ -31,10 +31,11 @@ class Billing extends Model
         return $this->belongsTo(Provider::class);
     }
 
-    public function subscription(): BelongsTo
+    public function plan(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class);
+        return $this->belongsTo(Plan::class);
     }
+
 
     public function user(): BelongsTo
     {

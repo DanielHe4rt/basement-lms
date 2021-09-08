@@ -4,12 +4,14 @@ namespace LMS\User\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use LMS\Billings\Models\Billing;
 use LMS\Billings\Models\Card;
 use LMS\Courses\Models\Course;
 use LMS\Lessons\Models\Lesson;
@@ -30,6 +32,10 @@ class User extends Authenticatable
         'username',
         'last_seen',
         'password',
+        'phone_number',
+        'document_number',
+        'birthdate',
+        'plan_id',
     ];
 
     /**
@@ -54,6 +60,16 @@ class User extends Authenticatable
     public function setPasswordAttribute($value): void
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function plan(): BelongsTo
+    {
+        return $this->belongsTo();
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class);
     }
 
     public function seen()
@@ -89,5 +105,10 @@ class User extends Authenticatable
     public function card(): HasOne
     {
         return $this->hasOne(Card::class);
+    }
+
+    public function billings(): HasMany
+    {
+        return $this->hasMany(Billing::class);
     }
 }

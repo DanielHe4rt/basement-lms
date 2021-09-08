@@ -25,22 +25,11 @@ class PlanRepository extends AbstractRepository
                 $payload['name'],
                 $payload['interval']
             );
-            $subscription = $provider->createSubscription(
-                $plan['id'],
-                $payload['name'],
-                $this->formatPrice($payload['price'])
-            );
+
             $payload['data'] = $plan['id'];
             $payload['provider_id'] = $this->provider;
 
-            $plan = $this->model->create($payload);
-            $plan->subscription()
-                ->create([
-                    'data' => $subscription['id'],
-                    'price' => $payload['price']
-                ]);
-
-            return $plan->load('subscription');
+            return $this->model->create($payload);
         });
     }
 
@@ -48,8 +37,4 @@ class PlanRepository extends AbstractRepository
         return $this->model->where('provider_id', $this->provider)->paginate();
     }
 
-    private function formatPrice(string $price): string
-    {
-        return str_replace(['.',','], '', $price);
-    }
 }

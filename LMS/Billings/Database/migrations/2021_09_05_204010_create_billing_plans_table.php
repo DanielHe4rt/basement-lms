@@ -20,6 +20,7 @@ class CreateBillingPlansTable extends Migration
             $table->string('name');
             $table->integer('interval');
             $table->integer('repeats')->nullable();
+            $table->string('price');
             $table->string('data');
             $table->timestamps();
         });

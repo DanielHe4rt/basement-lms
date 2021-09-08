@@ -90,4 +90,19 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
             'id' => $result['data']['subscription_id']
         ];
     }
+
+    public function makePayment(int $subscriptionId, array $payload): array
+    {
+        $uri = sprintf('/v1/subscription/%s/pay', $subscriptionId);
+        $response = $this->client->request('POST', $uri, [
+            'headers' => ['Authorization' => 'Bearer ' . $this->accessToken],
+            'json' => $payload
+        ]);
+
+        $result = json_decode($response->getBody(), true);
+        return $result;
+        return [
+            'id' => $result['data']['subscription_id']
+        ];
+    }
 }

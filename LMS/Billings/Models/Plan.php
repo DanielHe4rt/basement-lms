@@ -14,11 +14,8 @@ class Plan extends Model
         'name',
         'interval',
         'repeats',
+        'price',
         'data'
     ];
 
-    public function subscription(): HasOne
-    {
-        return $this->hasOne(Subscription::class);
-    }
 }

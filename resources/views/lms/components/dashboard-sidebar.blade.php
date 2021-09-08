@@ -68,23 +68,24 @@
                 <div class="collapse" id="paymentsAndBillings" style="">
                     <ul class="nav">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('billings-invoices') }}">
+                                <span class="sidebar-mini"> I </span>
+                                <span class="sidebar-normal"> Invoices </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('billings-card-view') }}">
                                 <span class="sidebar-mini"> CC </span>
                                 <span class="sidebar-normal"> Credit Card </span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('billings-providers-list') }}">
+                            <a class="nav-link" href="{{ route('billings-subscriptions-view') }}">
                                 <span class="sidebar-mini"> S </span>
                                 <span class="sidebar-normal"> Subscription </span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('billings-providers-list') }}">
-                                <span class="sidebar-mini"> I </span>
-                                <span class="sidebar-normal"> Invoices </span>
-                            </a>
-                        </li>
+
                         @role('admin')
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('billings-providers-list') }}">

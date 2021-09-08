@@ -3,18 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use LMS\Auth\Http\Controllers\AuthController;
 use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
+use LMS\Billings\Http\Controllers\Billings\BillingsController;
+use LMS\Billings\Http\Controllers\Billings\ViewController as BillingsViewController;
 use LMS\Billings\Http\Controllers\Cards\CardController;
 use LMS\Billings\Http\Controllers\Cards\ViewController as CardsViewController;
 use LMS\Billings\Http\Controllers\Plans\PlansController;
 use LMS\Billings\Http\Controllers\Plans\ViewController as PlansViewController;
 use LMS\Billings\Http\Controllers\Providers\ProvidersController;
 use LMS\Billings\Http\Controllers\Providers\ViewController as ProviderViewController;
+use LMS\Billings\Http\Controllers\Subscriptions\SubscriptionController;
+use LMS\Billings\Http\Controllers\Subscriptions\ViewController as SubscriptionViewController;
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
 use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
 use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
+use LMS\User\Http\Controllers\MeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +61,13 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('billings')->middleware('auth')->group(function () {
+
+    Route::get('/', [BillingsViewController::class,'viewBillings'])->name('billings-invoices');
+
+    Route::prefix('/payments')->group(function() {
+        Route::post('/', [BillingsController::class, 'postBilling'])->name('billings-payments-create');
+    });
+
     Route::prefix('/providers')->group(function() {
         Route::get('/', [ProviderViewController::class, 'viewProviders'])->name('billings-providers-list');
         Route::put('/{provider}', [ProvidersController::class, 'putProvider'])->name('billings-providers-update');
@@ -71,8 +83,16 @@ Route::prefix('billings')->middleware('auth')->group(function () {
         Route::post('/', [CardController::class, 'postCard'])->name('billings-card-create');
         Route::delete('/', [CardController::class, 'deleteCard'])->name('billings-card-delete');
     });
+
+    Route::prefix('/subscriptions')->group(function() {
+        Route::get('/', [SubscriptionViewController::class, 'viewSubscriptions'])->name('billings-subscriptions-view');
+        Route::post('/', [SubscriptionController::class, 'postCard'])->name('billings-subscription-create');
+    });
 });
 
+Route::prefix('users/me')->middleware('auth')->group(function () {
+     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
+});
 
 Route::prefix('instructor/courses')->middleware('auth')->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
