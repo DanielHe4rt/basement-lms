@@ -15,7 +15,7 @@ class CreateBillingRequest extends FormRequest
     {
         return [
             'payment_token' => 'required',
-            'plan_id' => 'required',
+            'plan_id' => 'required|exists:billing_plans,id',
             'last_digits' => 'required|min:4|max:4',
             'brand' => 'required|string'
         ];

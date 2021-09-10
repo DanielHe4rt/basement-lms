@@ -23,7 +23,7 @@ abstract class AbstractRepository
     {
         return match (Str::slug($this->providerName)) {
             'gerencianet' => new GerencianetService(),
-            default => throw new \Exception('fudeu')
+            default => throw new \Exception('Repository not found')
         };
     }
 }

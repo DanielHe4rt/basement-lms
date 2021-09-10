@@ -28,10 +28,6 @@ class BillingRepository extends AbstractRepository
     {
         $plan = Plan::find($payload['plan_id']);
 
-        if (!$plan) {
-            throw new \Exception('Plano não encontrado');
-        }
-
         $servicePayload = app(PaymentTransformer::class)->handle($payload);
         $service = $this->getProvider();
         $service->authenticate();
@@ -90,14 +86,15 @@ class BillingRepository extends AbstractRepository
         }
     }
 
-    public function getUserBillings($id)
+    public function getUserBillings(int $id)
     {
         $billings = User::find($id)
             ->billings()
             ->orderByDesc('created_at')
             ->get();
+
         if (!$billings) {
-            throw new \Exception('n tem nada aqui');
+            return false;
         }
 
         $provider = $this->getProvider();
