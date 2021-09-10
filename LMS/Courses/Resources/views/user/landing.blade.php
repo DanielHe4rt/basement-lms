@@ -109,20 +109,18 @@
                     Grade Curricular
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Special title treatment</h4>
                     <div id="accordion" role="tablist">
                         @foreach($course->modules()->orderBy('order')->get() as $key => $module)
                             <div class="card card-collapse">
-                                <div class="card-header" role="tab" id="moduleH-{{ $key }}">
+                                <div class="card-header">
                                     <h5 class="mb-0">
-                                        <a data-toggle="collapse" href="#module-{{ $key }}" aria-expanded="true">
+                                        <a data-toggle="collapse" href="#module-{{ $key }}" aria-expanded="true" data-parent="#accordion">
                                             {{ $key + 1 }} {{ $module->name }} {{ $module->duration }}
                                             <i class="material-icons">keyboard_arrow_down</i>
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="module-{{ $key }}" class="collapse {{ $key == 0 ? 'show' : '' }}"
-                                     role="tabpanel">
+                                <div id="module-{{ $key }}" class="collapse {{ $key == 0 ? 'show' : '' }}" role="tabpanel">
                                     <div class="card-body">
                                         <table class="table">
                                             @foreach($module->lessons as $key => $lesson)
@@ -139,7 +137,7 @@
                                                             🤔
                                                             @break;
                                                         @endswitch
-                                                        Aula {{ $counter++ }} -{{ $lesson->title }}
+                                                        Aula {{ $counter++ }} - {{ $lesson->title }}
                                                     </td>
                                                     <td>  {{ $lesson->duration }}</td>
                                                 </tr>
