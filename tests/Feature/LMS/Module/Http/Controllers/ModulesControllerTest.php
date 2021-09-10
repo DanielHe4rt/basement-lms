@@ -27,6 +27,7 @@ class ModulesControllerTest extends TestCase
             'name' => 'introdução ao curso dos cara',
             'description' => 'mais qlqr coisa ai pra vc',
         ];
+        $course->author->assignRole('admin');
 
         // Act
         $this->actingAs($course->author);
@@ -44,11 +45,13 @@ class ModulesControllerTest extends TestCase
             ->has(Module::factory()->count(6))
             ->create();
 
+
         foreach ($course->modules as $key => $module) {
             $module->update(['order' => $key]);
         }
-
+        $course->author->assignRole('admin');
         // Act
+
         $this->actingAs($course->author);
         $response = $this->delete(route('instructor-course-module-delete', ['course' => $course, 'module' => 4]));
 
@@ -75,7 +78,7 @@ class ModulesControllerTest extends TestCase
         foreach ($course->modules as $key => $module) {
             $module->update(['order' => $key ]);
         }
-
+        $course->author->assignRole('admin');
         // Act
         $this->actingAs($course->author);
         $response = $this->delete(route('instructor-course-module-delete', ['course' => $course, 'module' => 1]));
@@ -102,6 +105,7 @@ class ModulesControllerTest extends TestCase
         foreach ($course->modules as $key => $module) {
             $module->update(['order' => $key]);
         }
+        $course->author->assignRole('admin');
 
         // Act
         $this->actingAs($course->author);
