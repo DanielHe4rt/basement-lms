@@ -316,9 +316,9 @@
             //overflow: hidden;
             //float: left;
             z-index: 5;
-            margin-right: 11px;
+            //margin-right: 11px;
             text-align: center;
-            margin-left: 23px;
+            margin: 10px;
             @include shadow-big();
             @extend .animation-transition-general;
 
