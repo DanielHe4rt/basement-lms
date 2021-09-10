@@ -83,8 +83,7 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
                     ]
                 ],
                 'metadata' => [
-//                    'notification_url' => route('billing-callbacks', ['provider' => 'gerencianet'])
-                    'notification_url' => 'http://api.webhookinbox.com/i/IiZMq79w/in/'
+                    'notification_url' => route('billing-callbacks', ['provider' => 'gerencianet'])
                 ]
             ]
         ]);
