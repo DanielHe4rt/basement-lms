@@ -15,7 +15,7 @@ class CreateCardRequest extends FormRequest
     {
         return [
             'card' => 'required',
-            'last_digits' => 'required|min:4|max:4',
+            'last_digits' => 'required|min:4|max:4|numeric',
             'brand' => 'required|string'
         ];
     }
