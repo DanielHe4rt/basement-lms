@@ -30,7 +30,8 @@ class UserFactory extends Factory
             'username' => $this->faker->userName,
             'password' => 'secret',
             'remember_token' => Str::random(10),
-            'last_seen' => now()
+            'last_seen' => now(),
+            'plan_id' => null
         ];
     }
 

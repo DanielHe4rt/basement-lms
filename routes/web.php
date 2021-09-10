@@ -3,12 +3,23 @@
 use Illuminate\Support\Facades\Route;
 use LMS\Auth\Http\Controllers\AuthController;
 use LMS\Auth\Http\Controllers\ViewController as AdminViewController;
+use LMS\Billings\Http\Controllers\Billings\BillingsController;
+use LMS\Billings\Http\Controllers\Billings\ViewController as BillingsViewController;
+use LMS\Billings\Http\Controllers\Cards\CardController;
+use LMS\Billings\Http\Controllers\Cards\ViewController as CardsViewController;
+use LMS\Billings\Http\Controllers\Plans\PlansController;
+use LMS\Billings\Http\Controllers\Plans\ViewController as PlansViewController;
+use LMS\Billings\Http\Controllers\Providers\ProvidersController;
+use LMS\Billings\Http\Controllers\Providers\ViewController as ProviderViewController;
+use LMS\Billings\Http\Controllers\Subscriptions\SubscriptionController;
+use LMS\Billings\Http\Controllers\Subscriptions\ViewController as SubscriptionViewController;
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
 use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
 use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
+use LMS\User\Http\Controllers\MeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +43,12 @@ Route::get('/dashboard', function () {
 Route::prefix('courses')
     ->middleware('auth')
     ->group(function () {
-    Route::get('/{slug}', [CoursesViewController::class, 'viewCourse'])->name('course-preview');
-    Route::post('/{course}/join', [CoursesController::class, 'postEnrollment'])->name('course-join');
-    Route::get('/{slug}/learn', [CoursesViewController::class, 'viewCourseLessonRedirect'])->name('course-lesson-redirect');
-    Route::get('/{slug}/learn/lessons/{lesson}', [CoursesViewController::class, 'viewCourseLesson'])->name('course-lesson');
-    Route::put('/{slug}/learn/lessons/{lesson}', [LessonsController::class, 'putLessonStatus'])->name('course-lesson-watched');
-});
+        Route::get('/{slug}', [CoursesViewController::class, 'viewCourse'])->name('course-preview');
+        Route::post('/{course}/join', [CoursesController::class, 'postEnrollment'])->name('course-join');
+        Route::get('/{slug}/learn', [CoursesViewController::class, 'viewCourseLessonRedirect'])->name('course-lesson-redirect');
+        Route::get('/{slug}/learn/lessons/{lesson}', [CoursesViewController::class, 'viewCourseLesson'])->name('course-lesson');
+        Route::put('/{slug}/learn/lessons/{lesson}', [LessonsController::class, 'putLessonStatus'])->name('course-lesson-watched');
+    });
 
 
 Route::get('/login', [AdminViewController::class, 'viewLogin'])->name('login');
@@ -49,25 +60,56 @@ Route::prefix('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'getLogout'])->name('auth-logout')->middleware('auth');
 });
 
+Route::prefix('billings')->middleware('auth')->group(function () {
 
-Route::prefix('instructor/courses')
-    ->middleware('auth')
-    ->group(function () {
+    Route::get('/', [BillingsViewController::class,'viewBillings'])->name('billings-invoices');
+
+    Route::prefix('/payments')->group(function() {
+        Route::post('/', [BillingsController::class, 'postBilling'])->name('billings-payments-create');
+    });
+
+    Route::prefix('/providers')->group(function() {
+        Route::get('/', [ProviderViewController::class, 'viewProviders'])->name('billings-providers-list');
+        Route::put('/{provider}', [ProvidersController::class, 'putProvider'])->name('billings-providers-update');
+    });
+
+    Route::prefix('/plans')->group(function() {
+        Route::get('/', [PlansViewController::class, 'viewPlans'])->name('billings-plans-list');
+        Route::post('/', [PlansController::class, 'postPlan'])->name('billings-plans-create');
+    });
+
+    Route::prefix('/cards')->group(function() {
+        Route::get('/', [CardsViewController::class, 'viewCard'])->name('billings-card-view');
+        Route::post('/', [CardController::class, 'postCard'])->name('billings-card-create');
+        Route::delete('/', [CardController::class, 'deleteCard'])->name('billings-card-delete');
+    });
+
+    Route::prefix('/subscriptions')->group(function() {
+        Route::get('/', [SubscriptionViewController::class, 'viewSubscriptions'])->name('billings-subscriptions-view');
+        Route::post('/', [SubscriptionController::class, 'postCard'])->name('billings-subscription-create');
+    });
+});
+
+Route::prefix('users/me')->middleware('auth')->group(function () {
+     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
+});
+
+Route::prefix('instructor/courses')->middleware('auth')->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
     Route::prefix('/{course}')->group(function () {
-        Route::prefix('/manage')->group(function() {
+        Route::prefix('/manage')->group(function () {
             Route::get('/', [CoursesViewController::class, 'viewCourseManagement'])->name('instructor-course-manage');
         });
 
-        Route::prefix('/curriculum')->group(function() {
+        Route::prefix('/curriculum')->group(function () {
             Route::get('/', [ModulesViewController::class, 'viewCourseModulesPage'])->name('instructor-course-curriculum');
             Route::post('/modules', [ModulesController::class, 'postCourseModule'])->name('instructor-course-module-new');
             Route::get('/{module}', [ModulesController::class, 'getCourseModule'])->name('instructor-course-module-get');
             Route::put('/{module}', [ModulesController::class, 'putCourseModule'])->name('instructor-course-module-update');
             Route::delete('/modules/{module}', [ModulesController::class, 'deleteCourseModule'])->name('instructor-course-module-delete');
 
-            Route::prefix('/{module}/lessons')->group(function() {
+            Route::prefix('/{module}/lessons')->group(function () {
                 Route::post('/', [LessonsController::class, 'postLesson'])->name('instructor-course-lesson-new');
                 Route::post('/{lesson}/uploadVideo', [LessonsController::class, 'postLessonVideo'])->name('instructor-course-lesson-video-upload');
                 Route::put('/{lesson}', [LessonsController::class, 'putLesson'])->name('instructor-course-lesson-update');
@@ -83,3 +125,6 @@ Route::prefix('instructor/courses')
         Route::get('/', [LevelController::class, 'getLevels'])->name('get-course-levels');
     });
 });
+
+
+Route::post('payments/{provider}/' . config('paymentProviders.secret'), [BillingsController::class, 'getCallback'])->name('billing-callbacks');

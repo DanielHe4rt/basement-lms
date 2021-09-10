@@ -6,6 +6,8 @@ namespace LMS\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Gate;
+use LMS\User\Models\User;
+use LMS\User\Observers\UserObserver;
 
 class UserProvider extends ServiceProvider
 {
@@ -17,5 +19,7 @@ class UserProvider extends ServiceProvider
                 return true;
             }
         });
+
+        User::observe(UserObserver::class);
     }
 }

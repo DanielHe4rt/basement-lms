@@ -52,10 +52,14 @@ class LessonRepository
         if ($includesLesson) {
             $belongsTo = $belongsTo->lessons()
                 ->find($payload['lesson_id']);
+
+            if (!$belongsTo) {
+                throw new \Exception('Essa lição não pertence à esse módulo');
+            }
         }
 
         if (!$belongsTo) {
-            throw new \Exception('deu merda');
+            throw new \Exception('Esse módulo não pertence à esse curso.');
         }
     }
 

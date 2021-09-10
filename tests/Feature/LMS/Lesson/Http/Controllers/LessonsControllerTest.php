@@ -4,6 +4,7 @@ namespace Tests\Feature\LMS\Lesson\Http\Controllers;
 
 use FFMpeg\FFProbe;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Event;
