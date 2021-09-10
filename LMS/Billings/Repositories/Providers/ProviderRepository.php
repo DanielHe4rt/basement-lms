@@ -13,13 +13,17 @@ class ProviderRepository
         $this->model = new Provider();
     }
 
-    public function activateProvider(Provider $provider): bool
+    public function activateProvider(Provider $provider): void
+    {
+        $this->turnProvidersOff();
+        $provider->turnOn();
+    }
+
+    private function turnProvidersOff(): void
     {
         foreach ($this->model->all() as $providerItem) {
             $providerItem->turnOff();
         }
-        $provider->turnOn();
-        return true;
     }
 
 }

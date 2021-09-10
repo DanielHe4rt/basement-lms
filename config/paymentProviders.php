@@ -2,6 +2,7 @@
 
 return [
     'environment' => env('GERENCIANET_ENVIRONMENT'),
+    'secret' => env('PAYMENT_SECRET'),
     'gerencianet' => [
         'baseUri' => [
             'production' => 'https://api.gerencianet.com.br',

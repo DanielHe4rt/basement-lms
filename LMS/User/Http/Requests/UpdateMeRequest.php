@@ -21,7 +21,7 @@ class UpdateMeRequest extends FormRequest
             'name' => 'string|min:6|max:80',
             'phone_number' => 'required|string',
             'birthdate' => 'required|date',
-            'address.address' => 'required|string|nullable',
+            'address.street' => 'required|string|nullable',
             'address.number' => 'required|string|nullable',
             'address.neighborhood' => 'required|string|nullable',
             'address.city' => 'required|string|nullable',

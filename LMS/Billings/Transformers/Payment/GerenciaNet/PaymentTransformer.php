@@ -24,7 +24,7 @@ class PaymentTransformer
     private function transformAddress($user): array
     {
         return [
-            'street' => $user->address->address,
+            'street' => $user->address->street,
             'number' => $user->address->number,
             'neighborhood' => $user->address->neighborhood,
             'zipcode' => str_replace('-', '', $user->address->zip_code),

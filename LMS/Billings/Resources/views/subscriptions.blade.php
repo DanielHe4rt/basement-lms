@@ -81,8 +81,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label for="inputEndereço">Endereço</label>
-                                <input type="text" class="form-control" id="inputEndereço" name="address[address]"
-                                       value="{{Auth::user()->address->address}}" placeholder="Rua das Flores">
+                                <input type="text" class="form-control" id="inputEndereço" name="address[street]"
+                                       value="{{Auth::user()->address->street}}" placeholder="Rua das Flores">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="inputEndereço">Numero</label>
@@ -214,7 +214,7 @@
                 $gn.done = fn;
             }
         };</script>
-
+{{--    // TODO: Script Gerencianet modular--}}
     <script>
         $gn.ready(function (checkout) {
             $(document).ready(function () {
@@ -271,7 +271,7 @@
                         expiration_year: expiration[1] // ano de vencimento
                     }, function (error, response) {
                         if (error) {
-                            toastr.error('deu merda');
+                            toastr.error('Houve um erro na requisição! Tente novamente.');
                             return false;
                         }
                         let lastDigits = response.data.card_mask.replaceAll('X', '')

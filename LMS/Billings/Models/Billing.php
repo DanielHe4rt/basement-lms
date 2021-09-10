@@ -45,6 +45,11 @@ class Billing extends Model
     public function paid(): void
     {
         $this->update(['paid_at' => Carbon::now()]);
+        $this->user->update(['plan_id' => $this->attributes['plan_id']]);
     }
 
+    public function setStatus(string $status): void
+    {
+        $this->update(['status' => $status]);
+    }
 }

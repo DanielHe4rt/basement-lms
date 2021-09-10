@@ -109,7 +109,7 @@
                         expiration_year: expiration[1] // ano de vencimento
                     }, function (error, response) {
                         if (error) {
-                            toastr.error('deu merda');
+                            toastr.error('Houve um erro na requisição! Tente novamente.');
                             return false;
                         }
                         let lastDigits = response.data.card_mask.replaceAll('X','')

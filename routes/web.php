@@ -125,3 +125,6 @@ Route::prefix('instructor/courses')->middleware('auth')->group(function () {
         Route::get('/', [LevelController::class, 'getLevels'])->name('get-course-levels');
     });
 });
+
+
+Route::post('payments/{provider}/' . config('paymentProviders.secret'), [BillingsController::class, 'getCallback'])->name('billing-callbacks');

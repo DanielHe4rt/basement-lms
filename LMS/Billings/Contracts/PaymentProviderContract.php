@@ -11,4 +11,6 @@ interface PaymentProviderContract
     public function createSubscription($planId, string $name, float $price): array;
 
     public function makePayment(int $subscriptionId, array $payload): array;
+
+    public function getSubscription(string $subscriptionId): array;
 }

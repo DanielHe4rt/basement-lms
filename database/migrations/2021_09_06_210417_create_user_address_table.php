@@ -18,7 +18,7 @@ class CreateUserAddressTable extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
 
-            $table->string('address')->nullable();
+            $table->string('street')->nullable();
             $table->string('number')->nullable();
             $table->string('neighborhood')->nullable();
             $table->string('city')->nullable();

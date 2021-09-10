@@ -17,9 +17,8 @@
                     <h4 class="card-title">Last Invoices</h4>
                 </div>
                 <div class="card-body">
-                    @if(auth()->user()->plan_id)
+                    @if($billings)
                     <h3>Próxima Transação</h3>
-
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -29,8 +28,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ $billings[0]->created_at->addMonth()->format('d/m/Y') }}</td>
-                                <td>{{ $bi }}</td>
+                                <td> {{ $billings[0]['next_execution']->format('d/m/Y') }} </td>
+                                <td> R$ {{ $billings[0]['price'] }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -43,19 +42,18 @@
                             <td>Data</td>
                             <td>Valor</td>
                             <td>Status</td>
-                            <td>Ver</td>
                         </tr>
                         </thead>
                         <tbody>
                             @foreach($billings as $billing)
-                                <tr>
-                                    <td>{{ $billing->created_at->format('d/m/Y') }}</td>
-                                    <td>R$ {{ $billing->plan->price }}</td>
-                                    <td>{{ $billing->status }}</td>
-                                    <td>
-                                        <button class="btn btn-primary">Ver</button>
-                                    </td>
-                                </tr>
+                                @foreach($billing['history'] as $history)
+                                    <tr>
+                                        <td>{{ $history['created_at']->format('d/m/Y') }}</td>
+                                        <td>R$ {{ $billing['price'] }}</td>
+                                        <td>{{ $history['status'] }}</td>
+
+                                    </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                     </table>

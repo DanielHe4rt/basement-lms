@@ -81,6 +81,10 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
                         'value' => $price,
                         'amount' => 1
                     ]
+                ],
+                'metadata' => [
+//                    'notification_url' => route('billing-callbacks', ['provider' => 'gerencianet'])
+                    'notification_url' => 'http://api.webhookinbox.com/i/IiZMq79w/in/'
                 ]
             ]
         ]);
@@ -99,10 +103,26 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
             'json' => $payload
         ]);
 
-        $result = json_decode($response->getBody(), true);
-        return $result;
-        return [
-            'id' => $result['data']['subscription_id']
-        ];
+        return json_decode($response->getBody(), true);
+    }
+
+    public function getSubscriptionInformation(string $token): array
+    {
+        $uri = sprintf('/v1/notification/%s', $token);
+        $response = $this->client->request('GET', $uri, [
+            'headers' => ['Authorization' => 'Bearer ' . $this->accessToken],
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+
+    public function getSubscription(string $subscriptionId): array
+    {
+        $uri = sprintf('/v1/subscription/%s', $subscriptionId);
+        $response = $this->client->request('GET', $uri, [
+            'headers' => ['Authorization' => 'Bearer ' . $this->accessToken],
+        ]);
+
+        return json_decode($response->getBody(), true)['data'];
     }
 }

@@ -15,7 +15,7 @@ class AddPlanIdIntoUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignIdFor(Plan::class)->nullable()->after('id');
+            $table->foreignIdFor(Plan::class)->after('id')->nullable();
         });
     }
 
@@ -27,7 +27,9 @@ class AddPlanIdIntoUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('plan_id');
+            if(DB::connection()->getDatabaseName() != ':memory:') {
+                $table->dropForeign('plan_id');
+            }
         });
     }
 }

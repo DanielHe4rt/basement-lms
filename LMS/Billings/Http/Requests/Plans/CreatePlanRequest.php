@@ -16,7 +16,7 @@ class CreatePlanRequest extends FormRequest
         return [
             'name' => 'required|unique:billing_plans',
             'interval' => 'required|unique:billing_plans',
-            'price' => 'required|'
+            'price' => 'required|numeric'
         ];
     }
 }
