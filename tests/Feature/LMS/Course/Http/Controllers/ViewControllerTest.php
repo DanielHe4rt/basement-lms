@@ -29,6 +29,7 @@ class ViewControllerTest extends TestCase
             ->preservingOriginal()
             ->toMediaCollection();
 
+        $course->author->assignRole('admin');
         // Act
         $this->actingAs($course->author);
         $response = $this->get(route('instructor-courses'));
@@ -41,7 +42,7 @@ class ViewControllerTest extends TestCase
     public function testUserCanViewCoursesCreationPage() {
         // Prepare
         $user = User::factory()->create();
-
+        $user->assignRole('admin');
         // Act
         $this->actingAs($user);
         $response = $this->get(route('instructor-courses-new'));
@@ -59,7 +60,7 @@ class ViewControllerTest extends TestCase
             ->preservingOriginal()
             ->toMediaCollection();
 
-
+        $course->author->assignRole('admin');
         // Act
         $this->actingAs($course->author);
         $response = $this->get(route('instructor-course-manage', ['course' => $course->id]));

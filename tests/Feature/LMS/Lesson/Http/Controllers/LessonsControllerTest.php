@@ -36,6 +36,7 @@ class LessonsControllerTest extends TestCase
             'description' => 'dasdsadsa'
         ];
         // Act
+        $module->course->author->assignRole('admin');
         $this->actingAs($module->course->author);
         $response = $this->post(
             route('instructor-course-lesson-new', ['course' => $module->course, 'module' => $module]),
@@ -57,6 +58,7 @@ class LessonsControllerTest extends TestCase
             'title' => 'dasdsadasdasdsa',
             'description' => 'dasdsadsa'
         ];
+        $module1->course->author->assignRole('admin');
         // Act
         $this->actingAs($module1->course->author);
         $response = $this->post(
@@ -80,7 +82,7 @@ class LessonsControllerTest extends TestCase
         $payload = [
             'video' => UploadedFile::fake()->create('fakelesson.mp4')
         ];
-
+        $lesson->module->course->author->assignRole('admin');
 
         // Act
         $this->actingAs($lesson->module->course->author);

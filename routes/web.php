@@ -60,41 +60,37 @@ Route::prefix('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'getLogout'])->name('auth-logout')->middleware('auth');
 });
 
-Route::prefix('billings')->middleware('auth')->group(function () {
+Route::get('/billings', [BillingsViewController::class, 'viewBillings'])->name('billings-invoices');
 
-    Route::get('/', [BillingsViewController::class,'viewBillings'])->name('billings-invoices');
+Route::prefix('subscriptions')->middleware('auth')->group(function () {
+    Route::get('/', [SubscriptionViewController::class, 'viewSubscriptions'])->name('billings-subscriptions-view');
 
-    Route::prefix('/payments')->group(function() {
+    Route::prefix('/payments')->group(function () {
         Route::post('/', [BillingsController::class, 'postBilling'])->name('billings-payments-create');
     });
 
-    Route::prefix('/providers')->group(function() {
+    Route::prefix('/providers')->group(function () {
         Route::get('/', [ProviderViewController::class, 'viewProviders'])->name('billings-providers-list');
         Route::put('/{provider}', [ProvidersController::class, 'putProvider'])->name('billings-providers-update');
     });
 
-    Route::prefix('/plans')->group(function() {
+    Route::prefix('/plans')->group(function () {
         Route::get('/', [PlansViewController::class, 'viewPlans'])->name('billings-plans-list');
         Route::post('/', [PlansController::class, 'postPlan'])->name('billings-plans-create');
     });
 
-    Route::prefix('/cards')->group(function() {
+    Route::prefix('/cards')->group(function () {
         Route::get('/', [CardsViewController::class, 'viewCard'])->name('billings-card-view');
         Route::post('/', [CardController::class, 'postCard'])->name('billings-card-create');
         Route::delete('/', [CardController::class, 'deleteCard'])->name('billings-card-delete');
     });
-
-    Route::prefix('/subscriptions')->group(function() {
-        Route::get('/', [SubscriptionViewController::class, 'viewSubscriptions'])->name('billings-subscriptions-view');
-        Route::post('/', [SubscriptionController::class, 'postCard'])->name('billings-subscription-create');
-    });
 });
 
 Route::prefix('users/me')->middleware('auth')->group(function () {
-     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
+    Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
 });
 
-Route::prefix('instructor/courses')->middleware('auth')->group(function () {
+Route::prefix('instructor/courses')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/', [CoursesViewController::class, 'viewCourses'])->name('instructor-courses');
     Route::get('/new', [CoursesViewController::class, 'viewCreateCourse'])->name('instructor-courses-new');
     Route::prefix('/{course}')->group(function () {
