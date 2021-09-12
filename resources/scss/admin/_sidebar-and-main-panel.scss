@@ -311,12 +311,7 @@
         }
 
         .photo {
-
-
-            //overflow: hidden;
-            //float: left;
             z-index: 5;
-            //margin-right: 11px;
             text-align: center;
             margin: 10px;
             @include shadow-big();
