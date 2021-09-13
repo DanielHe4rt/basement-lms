@@ -37,7 +37,7 @@ class CoursesControllerTest extends TestCase
             'cover' => UploadedFile::fake()->image('super-thumb.png'),
             'paid' => false
         ];
-
+        $user->assignRole('admin');
         // Act
         $this->actingAs($user);
         $response = $this->post(route('instructor-courses-create'), $payload);
@@ -54,6 +54,7 @@ class CoursesControllerTest extends TestCase
         // Prepare
         $course = Course::factory()->create();
 
+        $course->author->assignRole('admin');
         // Act
         $this->actingAs($course->author);
         $result = $this->delete(route('instructor-courses-delete', ['course' => $course->id]));

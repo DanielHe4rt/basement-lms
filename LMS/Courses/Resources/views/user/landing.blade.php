@@ -63,19 +63,24 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-3">
+                                            @hasanyrole('admin|subscriber|free')
+                                                @if(Auth::user()->enrollments()->find($course->id))
+                                                    <a href="{{ route('course-lesson-redirect', ['slug' => $course->slug]) }}"
+                                                       class="btn btn-primary btn-block">Acessar curso</a>
+                                                @else
+                                                    <form method="POST"
+                                                          action="{{ route('course-join', ['course' => $course]) }}">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-primary btn-block">Inscrever no curso
+                                                        </button>
+                                                    </form>
 
-                                            @if(Auth::user()->enrollments()->find($course->id))
-                                                <a href="{{ route('course-lesson-redirect', ['slug' => $course->slug]) }}"
-                                                   class="btn btn-primary btn-block">Acessar curso</a>
+                                                @endif
                                             @else
-                                                <form method="POST"
-                                                      action="{{ route('course-join', ['course' => $course]) }}">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary btn-block">Inscrever no curso
-                                                    </button>
-                                                </form>
+                                                <a href="{{ route('course-lesson-redirect', ['slug' => $course->slug]) }}"
+                                                   class="btn btn-primary btn-block">Assinar Plataforma</a>
+                                            @endhasanyrole
 
-                                            @endif
                                         </div>
                                         <div class="col-8">
                                             <div class="progress-container pt-1">
@@ -104,20 +109,18 @@
                     Grade Curricular
                 </div>
                 <div class="card-body">
-                    <h4 class="card-title">Special title treatment</h4>
                     <div id="accordion" role="tablist">
                         @foreach($course->modules()->orderBy('order')->get() as $key => $module)
                             <div class="card card-collapse">
-                                <div class="card-header" role="tab" id="moduleH-{{ $key }}">
+                                <div class="card-header">
                                     <h5 class="mb-0">
-                                        <a data-toggle="collapse" href="#module-{{ $key }}" aria-expanded="true">
+                                        <a data-toggle="collapse" href="#module-{{ $key }}" aria-expanded="true" data-parent="#accordion">
                                             {{ $key + 1 }} {{ $module->name }} {{ $module->duration }}
                                             <i class="material-icons">keyboard_arrow_down</i>
                                         </a>
                                     </h5>
                                 </div>
-                                <div id="module-{{ $key }}" class="collapse {{ $key == 0 ? 'show' : '' }}"
-                                     role="tabpanel">
+                                <div id="module-{{ $key }}" class="collapse {{ $key == 0 ? 'show' : '' }}" role="tabpanel">
                                     <div class="card-body">
                                         <table class="table">
                                             @foreach($module->lessons as $key => $lesson)
@@ -134,7 +137,7 @@
                                                             🤔
                                                             @break;
                                                         @endswitch
-                                                        Aula {{ $counter++ }} -{{ $lesson->title }}
+                                                        Aula {{ $counter++ }} - {{ $lesson->title }}
                                                     </td>
                                                     <td>  {{ $lesson->duration }}</td>
                                                 </tr>

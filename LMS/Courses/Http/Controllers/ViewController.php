@@ -62,6 +62,10 @@ class ViewController extends Controller
             abort(404);
         }
 
+        if (!Auth::user()->hasAnyRole(['admin', 'subscriber', 'free'])) {
+            return redirect(route('billings-subscriptions-view'));
+        }
+
         return view('lessons::lecture', compact(['course', 'lesson']));
     }
 }

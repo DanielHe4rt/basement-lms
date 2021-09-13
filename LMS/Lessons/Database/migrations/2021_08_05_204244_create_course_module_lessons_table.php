@@ -21,7 +21,7 @@ class CreateCourseModuleLessonsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->text('content')->nullable();
-            $table->time('duration')->nullable();
+            $table->integer('duration')->nullable();
 
             $table->timestamps();
         });

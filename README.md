@@ -34,13 +34,20 @@ danielhe4rt: hey@danielheart.dev
           4. [] Ordenação de Lições
     2. [] Modelagem User 
        1. [] Pagina inicial com todos os cursos
-       2. [] Pagina principal de um curso
-       3. [] Pagina para assistir o curso
+       2. [x] Pagina principal de um curso
+       3. [x] Pagina para assistir o curso
 4. [] Subscrição
-    1. [] Método de pagamento: Stripe, GerenciaNet, Pagarme, Picpay
-    2. [] Vinculação com Twitch: Subzada do Daniel é na faixa
-    3. [] Formulário não pagante: Se não houver condições de comprar, deixa o salve que a gente libera!
+    1. [] Método de pagamento: 
+       1. [] Stripe
+       2. [x] GerenciaNet
+       3. [] Pagarme
+       4. [] Paypal
+    2. [] Formulário não pagante: Se não houver condições de comprar, deixa o salve que a gente libera!
 5. Gameficação
+   1. [] Leveling 
+      1. [] Ao assistir uma aula
+      2. [] Ao responder um questionário
+   2. [] Tabela de EXP: definir um algoritmo de leveling pra não se preocupar com banco
 
 
 ### Instalação
@@ -56,7 +63,14 @@ $ cd basement-lms
 ```terminal
 $ composer install
 ``` 
-4. Copie o arquivo de configuração de exemplo para um arquivo de configuração real:
+
+4. Rode o comando de instalação das bibliotecas do Node para que possamos ter todas nossas depedências do front-end instaladas.
+```terminal
+$ npm i
+$ npm run watch
+```
+
+5. Copie o arquivo de configuração de exemplo para um arquivo de configuração real:
 ```terminal
 $ cp .env.example .env
 ```
