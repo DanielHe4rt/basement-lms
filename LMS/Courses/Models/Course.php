@@ -44,8 +44,19 @@ class Course extends Model implements HasMedia
     protected $appends = [
         'lessonsCount',
         'lessonsWatched',
-        'progress'
+        'progress',
+        'duration'
     ];
+
+    /*
+     * Get all lessons duration in seconds.
+     * Hint: use gmdate() to output
+     */
+    public function getDurationAttribute(): int
+    {
+        return $this->lessons()->sum('duration');
+    }
+
 
     public function getProgressAttribute() {
 

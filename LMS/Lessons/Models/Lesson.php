@@ -45,7 +45,7 @@ class Lesson extends Model implements HasMedia
 
     public function getDurationAttribute(): string
     {
-        return substr($this->attributes['duration'], 3, 6);
+        return substr(gmdate('H:i:s', $this->attributes['duration']), 3, 6);
     }
 
     public function type(): BelongsTo
