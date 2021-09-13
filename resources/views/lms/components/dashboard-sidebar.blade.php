@@ -54,7 +54,7 @@
                 <div class="collapse" id="userArea">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('users-me-profile') }}">
                                 <span class="sidebar-mini"> P </span>
                                 <span class="sidebar-normal"> Perfil </span>
                             </a>
