@@ -14,6 +14,7 @@ class UserProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'user');
         Gate::before(function ($user, $ability) {
             if ($user->hasRole('admin')) {
                 return true;
