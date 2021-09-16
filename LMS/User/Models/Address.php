@@ -27,15 +27,15 @@ class Address extends Model
 
     public function getFullAddress(): string
     {
-        $fullAddress = $this->street.'-'.$this->number.'-'.$this->neighborhood;
+        $fullAddress = $this->street . ', ' . $this->number . ', ' . $this->neighborhood;
         if($this->complement){
-            $fullAddress = $this->street.' - '.$this->number.' - '.$this->neighborhood.' - '.$this->complement;
+            $fullAddress = $this->street. ' , ' .$this->number. ' , ' .$this->neighborhood. ' , ' .$this->complement;
         }
         return $fullAddress;
     }
 
     public function getCityAndState(): string
     {
-        return $this->city.'/'.$this->state;
+        return $this->city . ' / ' . $this->state;
     }
 }
