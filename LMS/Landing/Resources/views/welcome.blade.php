@@ -78,10 +78,9 @@
                             <i class="material-icons">school</i>
                         </div>
                         <h4 class="info-title">
-                            <span style="font-weight: bold">1k+</span>
+                            <span style="font-weight: bold">{{ $landingData['achievements']['students'] }}</span>
                             estudantes
                         </h4>
-
                     </div>
                 </div>
 
@@ -91,7 +90,7 @@
                             <i class="material-icons">videocam</i>
                         </div>
                         <h4 class="info-title">
-                            <span style="font-weight: bold">40h</span>
+                            <span style="font-weight: bold">{{ $landingData['achievements']['contentHours'] }}h</span>
                             de conteúdo
                         </h4>
                     </div>
@@ -103,8 +102,8 @@
                             <i class="material-icons">cast_for_education</i>
                         </div>
                         <h4 class="info-title">
-                            <span style="font-weight: bold">1000k</span>
-                            de aulas assistidas
+                            <span style="font-weight: bold">{{ $landingData['achievements']['watchedLessons'] }}</span>
+                            aulas assistidas
                         </h4>
                     </div>
                 </div>
@@ -131,12 +130,16 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <div class="price">
-                                <h4>{{ $course->paid ? trans('courses::view.manage.form.paid.true') : trans('courses::view.manage.form.paid.false') }}</h4>
+                            <div class="stats">
+                                <p class="card-category">
+                                    <i class="material-icons">shopping_cart</i>{{ $course->paid ? trans('courses::view.manage.form.paid.true') : trans('courses::view.manage.form.paid.false') }}
+                                    <i class="material-icons ml-2">extension</i>{{ $course->level->name }}
+
+                                </p>
                             </div>
                             <div class="stats">
                                 <p class="card-category"><i
-                                        class="material-icons">place</i> {{ $course->level->name }}</p>
+                                        class="material-icons">schedule</i> {{ gmdate('H:i', $course->duration) }}</p>
                             </div>
                         </div>
                     </div>
@@ -162,12 +165,13 @@
                     <div class="card-body">
                         <h3 class="card-title">Grátis</h3>
                         <ul class="card-description">
-                            <li><b>{{ \LMS\Courses\Models\Course::where('paid', false)->count() }}</b> Cursos</li>
-                            <li><b>50</b> Horas de conteúdo</li>
+                            <li><b>{{ $landingData['courses']['free']['count'] }}</b> Cursos</li>
+                            <li><b>{{ $landingData['courses']['free']['time'] }}</b> Horas de conteúdo</li>
+                            <li><b>{{ $landingData['courses']['free']['support'] }}</b> Suporte no Discord</li>
                         </ul>
                     </div>
                     <div class="card-footer justify-content-center ">
-                        <a href="#pablo" class="btn btn-round btn-white">Registrar</a>
+                        <a href="#" class="btn btn-round btn-rose">Registrar</a>
                     </div>
                 </div>
             </div>
@@ -175,16 +179,15 @@
                 <div class="card card-pricing ">
                     <h6 class="card-category">Mensal</h6>
                     <div class="card-body">
-
                         <h3 class="card-title">R$ 35,00</h3>
-                        <p class="card-description">
-                        <ul>
-                            <li><b>{{ \LMS\Courses\Models\Course::where('paid', true)->count() }}</b> Cursos</li>
+                        <ul class="card-description">
+                            <li><b>{{ $landingData['courses']['paid']['count'] }}</b> Cursos</li>
+                            <li><b>{{ $landingData['courses']['paid']['time'] }}</b> Horas de conteúdo</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> Suporte no Discord</li>
                         </ul>
-                        </p>
                     </div>
                     <div class="card-footer justify-content-center ">
-                        <a href="#pablo" class="btn btn-round btn-rose">Assinar Plano</a>
+                        <a href="#" class="btn btn-round btn-rose">Assinar Plano</a>
                     </div>
                 </div>
             </div>
@@ -193,14 +196,14 @@
                     <h6 class="card-category">Semestral</h6>
                     <div class="card-body">
                         <h3 class="card-title">R$ 189,00</h3>
-                        <p class="card-description">
-                        <ul>
-                            <li><b>{{ \LMS\Courses\Models\Course::where('paid', true)->count() }}</b> Cursos</li>
+                        <ul class="card-description">
+                            <li><b>{{ $landingData['courses']['paid']['count'] }}</b> Cursos</li>
+                            <li><b>{{ $landingData['courses']['paid']['time'] }}</b> Horas de conteúdo</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> Suporte no Discord</li>
                         </ul>
-                        </p>
                     </div>
                     <div class="card-footer justify-content-center ">
-                        <a href="#pablo" class="btn btn-round btn-white">Assinar Plano</a>
+                        <a href="#" class="btn btn-round btn-rose">Assinar Plano</a>
                     </div>
                 </div>
             </div>
@@ -209,20 +212,19 @@
                     <h6 class="card-category"> Plano Anual</h6>
                     <div class="card-body">
                         <h3 class="card-title">R$ 350,00</h3>
-                        <p class="card-description">
-                        <ul>
-                            <li><b>{{ \LMS\Courses\Models\Course::where('paid', true)->count() }}</b> Cursos</li>
+                        <ul class="card-description">
+                            <li><b>{{ $landingData['courses']['paid']['count'] }}</b> Cursos</li>
+                            <li><b>{{ $landingData['courses']['paid']['time'] }}</b> Horas de conteúdo</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> Suporte no Discord</li>
                         </ul>
-                        </p>
                     </div>
                     <div class="card-footer justify-content-center ">
-                        <a href="#pablo" class="btn btn-round btn-white">Choose Plan</a>
+                        <a href="#" class="btn btn-round btn-rose">Assinar Plano</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <hr>
 </div>
 
@@ -233,30 +235,16 @@
             <ul>
                 <li>
                     <a href="http://www.creative-tim.com">
-                        Creative Tim
-                    </a>
-                </li>
-                <li>
-                    <a href="http://presentation.creative-tim.com">
-                        About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.creative-tim.com">
-                        Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.creative-tim.com/license">
-                        Licenses
+                        {{ config('app.name') }}
                     </a>
                 </li>
             </ul>
         </nav>
         <div class="copyright pull-right">
             ©
+            {{ config('app.name') }}
             <script>document.write(new Date().getFullYear())</script>
-            2021, made with <i class="fa fa-heart heart"></i> by Creative Tim
+            made with <i class="fa fa-heart heart"></i> by <a href="https://github.com/danielhe4rt">DanielHe4rt</a>
         </div>
     </div>
 </footer>
