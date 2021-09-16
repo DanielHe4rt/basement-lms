@@ -20,6 +20,7 @@ use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
 use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
 use LMS\User\Http\Controllers\MeController;
+use LMS\User\Http\Controllers\ViewController as UserViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,7 @@ Route::prefix('subscriptions')->middleware('auth')->group(function () {
 
 Route::prefix('users/me')->middleware('auth')->group(function () {
     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
+    Route::get('/profile', [UserViewController::class, 'viewProfile'])->name('users-me-profile');
 });
 
 Route::prefix('instructor/courses')->middleware(['auth', 'role:admin'])->group(function () {
