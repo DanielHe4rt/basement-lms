@@ -33,7 +33,7 @@ use LMS\User\Http\Controllers\MeController;
 |
 */
 
-Route::get('/', [LandingViewController::class, 'viewLandingPage']);
+Route::get('/', [LandingViewController::class, 'viewLandingPage'])->name('landing');
 
 Route::get('/dashboard', function () {
     return view('lms.dashboard');

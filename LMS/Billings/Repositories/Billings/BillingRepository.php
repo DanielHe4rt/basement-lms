@@ -71,6 +71,11 @@ class BillingRepository extends AbstractRepository
         $status = $lastResult['status']['current'];
 
         $billing = Billing::where('data', $subscriptionId)->first();
+
+        if (!$billing) {
+            throw new \Exception('eae');
+        }
+
         $this->handleSubscription($billing, $status);
 
     }

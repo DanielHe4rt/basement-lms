@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use LMS\Billings\Models\Billing;
 use LMS\Billings\Models\Card;
+use LMS\Billings\Models\Plan;
 use LMS\Courses\Models\Course;
 use LMS\Lessons\Models\Lesson;
 use Spatie\Permission\Traits\HasRoles;
@@ -64,7 +65,7 @@ class User extends Authenticatable
 
     public function plan(): BelongsTo
     {
-        return $this->belongsTo();
+        return $this->belongsTo(Plan::class);
     }
 
     public function address(): HasOne
