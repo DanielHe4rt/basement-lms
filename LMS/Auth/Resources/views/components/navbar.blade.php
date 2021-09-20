@@ -12,14 +12,14 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                @auth()
                 <li class="nav-item {{ Route::currentRouteName() == 'landing' ? 'active' : '' }}">
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    <a href="{{ route('landing') }}" class="nav-link">
                         <i class="material-icons">dashboard</i>
-                        Dashboard
+                        Home
                         <div class="ripple-container"></div>
                     </a>
                 </li>
+                @auth()
                 <li class="nav-item {{ Route::currentRouteName() == 'register' ? 'active' : '' }}">
                     <a href="#" class="nav-link">
                         <i class="material-icons">person</i>
@@ -40,13 +40,6 @@
                 </li>
                 @endauth
                 @guest()
-                    <li class="nav-item {{ Route::currentRouteName() == 'landing' ? 'active' : '' }}">
-                        <a href="{{ route('landing') }}" class="nav-link">
-                            <i class="material-icons">dashboard</i>
-                            Home
-                            <div class="ripple-container"></div>
-                        </a>
-                    </li>
                     <li class="nav-item {{ Route::currentRouteName() == 'register' ? 'active' : '' }}">
                         <a href="{{ route('register') }}" class="nav-link">
                             <i class="material-icons">person_add</i>
