@@ -11,8 +11,8 @@ class SendGreetings extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private User $user;
 
-    private $user;
 
     /**
      * Create a new message instance.
@@ -31,6 +31,6 @@ class SendGreetings extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->view('auth::mailing.welcome', ['user' => $this->user]);
     }
 }
