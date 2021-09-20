@@ -67,6 +67,26 @@ class MediaService
         return json_decode($response->getBody(), true);
     }
 
+    public function deleteAsset(string $assetName)
+    {
+        $uri = sprintf(
+            '/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Media/mediaServices/%s/assets/%s?api-version=%s',
+            config('streaming.azure.subscription_id'),
+            config('streaming.azure.resource_group'),
+            config('streaming.azure.account_name'),
+            $assetName,
+            $this->apiVersion
+        );
+
+        $response = $this->client->delete($uri, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->apiKey
+            ]
+        ]);
+
+        return json_decode($response->getBody() ?? [], true);
+    }
+
     public function grantAssetPermissions(string $assetName, string $permissions = 'ReadWrite'): array
     {
         $uri = sprintf(
@@ -185,6 +205,24 @@ class MediaService
         $response = $this->client->put($uri, [
             'headers' => ['Authorization' => 'Bearer ' . $this->apiKey],
             'json' => $payload
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+
+    public function deleteStreamingLocator(string $streamingLocatorName)
+    {
+        $uri = sprintf(
+            '/subscriptions/%s/resourceGroups/%s/providers/Microsoft.Media/mediaServices/%s/streamingLocators/%s?api-version=%s',
+            config('streaming.azure.subscription_id'),
+            config('streaming.azure.resource_group'),
+            config('streaming.azure.account_name'),
+            $streamingLocatorName,
+            $this->apiVersion
+        );
+
+        $response = $this->client->delete($uri, [
+            'headers' => ['Authorization' => 'Bearer ' . $this->apiKey],
         ]);
 
         return json_decode($response->getBody(), true);

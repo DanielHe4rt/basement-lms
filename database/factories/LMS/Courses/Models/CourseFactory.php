@@ -22,7 +22,7 @@ class CourseFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'author_id' => User::factory()->create(),
@@ -33,6 +33,7 @@ class CourseFactory extends Factory
             'description' => $this->faker->sentence,
             'paid' => false,
             'published_at' => null,
+            'slug' => $this->faker->slug(3),
         ];
     }
 }

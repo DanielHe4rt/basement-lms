@@ -20,6 +20,7 @@ class CreateCoursesTable extends Migration
             $table->foreignId('course_level_id')->references('id')->on('course_levels');
             $table->string('title',60);
             $table->string('subtitle', 120);
+            $table->string('slug');
             $table->text('description');
             $table->boolean('paid');
             $table->timestamp('published_at')->nullable();
