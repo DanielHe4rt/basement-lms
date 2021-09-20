@@ -19,9 +19,12 @@
         <div class="container">
             @yield('content')
         </div>
-        @yield('footer', View::make('auth::components.footer'))
+
     </div>
+    @yield('footer', View::make('auth::components.footer'))
+
 </div>
+
 
 <script src="{{asset('js/admin.js')}}"></script>
 @yield('scripts')
