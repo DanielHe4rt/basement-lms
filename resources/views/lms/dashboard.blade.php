@@ -36,12 +36,15 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <div class="price">
-                                    <h4>{{ $course->paid ? trans('courses::view.manage.form.paid.true') : trans('courses::view.manage.form.paid.false') }}</h4>
+                                <div class="stats">
+                                    <p class="card-category">
+                                        <i class="material-icons" style="top: 0;">shopping_cart</i>{{ $course->paid ? trans('courses::view.manage.form.paid.true') : trans('courses::view.manage.form.paid.false') }}
+                                        <i class="material-icons ml-2" style="top: 0;">extension</i>{{ $course->level->name }}
+                                    </p>
                                 </div>
                                 <div class="stats">
                                     <p class="card-category"><i
-                                            class="material-icons">place</i> {{ $course->level->name }}</p>
+                                            class="material-icons" style="top: 0;">schedule</i> {{ gmdate('H:i', $course->duration) }}</p>
                                 </div>
                             </div>
                         </div>

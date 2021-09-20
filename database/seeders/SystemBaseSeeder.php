@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use LMS\Courses\Models\Status;
+use LMS\Lessons\Enums\LessonTypes;
+use LMS\Lessons\Models\Lesson;
 use LMS\User\Models\User;
 
 class SystemBaseSeeder extends Seeder
@@ -83,7 +85,18 @@ Neste curso abordaremos os recursos que o Laravel oferece e você estará apto a
                 ->toMediaCollection();
 
             foreach ($modules as $module) {
-                $course->modules()->create($module);
+                $module = $course->modules()->create($module);
+                $lessons = Lesson::factory()->count(5)->create([
+                    'type_id' => LessonTypes::VIDEO,
+                    'module_id' => $module->id,
+                    'content' => '{"streamingUrls":[{"protocol":"Hls","url":"https:\/\/basement-brso.streaming.media.azure.net\/\/3ac22ab0-2936-4939-9b80-89e48ac24fb1\/ig-arguments-2.ism\/manifest(format=m3u8-aapl)"},{"protocol":"Dash","url":"https:\/\/basement-brso.streaming.media.azure.net\/\/3ac22ab0-2936-4939-9b80-89e48ac24fb1\/ig-arguments-2.ism\/manifest(format=mpd-time-csf)"},{"protocol":"SmoothStreaming","url":"https:\/\/basement-brso.streaming.media.azure.net\/\/3ac22ab0-2936-4939-9b80-89e48ac24fb1\/ig-arguments-2.ism\/manifest"}],"info":{"status":"done","percent":"100","asset":"1-1-744936e1-fd3b-4357-a027-a65fc17fd07e-21-36-13_Output_20210915-213613","locator":"locator-20210915-213658"}}',
+                    'duration' => 17
+                ]);
+
+                foreach ($lessons as $lesson) {
+                    $lesson->addMediaFromUrl($image)
+                        ->toMediaCollection();
+                }
             }
         }
 
