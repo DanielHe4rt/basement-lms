@@ -3,7 +3,7 @@
         <nav class="pull-left">
             <ul>
                 <li>
-                    <a href="http://www.creative-tim.com">
+                    <a href="{{ route('landing') }}">
                         {{ config('app.name') }}
                     </a>
                 </li>
