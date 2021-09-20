@@ -16,6 +16,7 @@ use LMS\Billings\Http\Controllers\Subscriptions\ViewController as SubscriptionVi
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
+use LMS\Landing\Http\Controllers\ViewController as LandingViewController;
 use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
 use LMS\Modules\Http\Controllers\ViewController as ModulesViewController;
@@ -33,9 +34,7 @@ use LMS\User\Http\Controllers\ViewController as UserViewController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingViewController::class, 'viewLandingPage'])->name('landing');
 
 Route::get('/dashboard', function () {
     return view('lms.dashboard');

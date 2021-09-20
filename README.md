@@ -48,7 +48,8 @@ danielhe4rt: hey@danielheart.dev
       1. [] Ao assistir uma aula
       2. [] Ao responder um questionário
    2. [] Tabela de EXP: definir um algoritmo de leveling pra não se preocupar com banco
-
+6. Landing Page
+   1. [x] Layout Base com integrações
 
 ### Instalação
 1. Clone este repositório usando esse comando:

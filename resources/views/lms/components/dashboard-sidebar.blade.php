@@ -20,12 +20,13 @@
             <div class="user-info">
                 <p>
                     <span class="username">
-                        {{ auth()->user()->name }}
+                        {{ auth()->user()->name }}<br>
+                         {{ '@' .  auth()->user()->username }}
                     </span><br><br>
                     @if(auth()->user()->plan_id)
-                        <span class="username">
-                            {{ auth()->user()->plan->name }}
-                        </span>
+                    <p class="username">
+                            Plano: <br><span class="text-warning">{{ auth()->user()->plan->name }}</span>
+                    </p>
                     @else
                         <p class="username">
                             Sem plano ativo

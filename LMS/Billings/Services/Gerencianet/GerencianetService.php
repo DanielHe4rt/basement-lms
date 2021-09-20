@@ -83,7 +83,10 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
                     ]
                 ],
                 'metadata' => [
-                    'notification_url' => route('billing-callbacks', ['provider' => 'gerencianet'])
+                    'notification_url' =>
+                        config('app.env') == 'production'
+                        ? route('billing-callbacks', ['provider' => 'gerencianet'])
+                        : config('paymentProviders.gerencianet.webhook_url')
                 ]
             ]
         ]);
