@@ -34,7 +34,7 @@ class LandingRepository
         return [
             'count' => $model->where('paid', false)->count(),
             'time' => gmdate('H:i:s', $courseTime),
-            'support' => '❌'
+            'support' => false
         ];
     }
 
@@ -49,7 +49,7 @@ class LandingRepository
         return [
             'count' => $model->where('paid', true)->count(),
             'time' => gmdate('H:i:s', $courseTime),
-            'support' => '✅'
+            'support' => true
         ];
     }
 

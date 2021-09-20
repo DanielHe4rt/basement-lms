@@ -10,9 +10,7 @@
             </ul>
         </nav>
         <div class="copyright pull-right">
-            ©
-            {{ config('app.name') }}
-            <script> document.write(new Date().getFullYear()) </script>
+            © {{ config('app.name') . ' ' . date('Y') }}
             made with <i class="fa fa-heart heart"></i> by <a href="https://github.com/danielhe4rt">DanielHe4rt</a>
         </div>
     </div>

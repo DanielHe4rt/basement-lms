@@ -59,9 +59,8 @@ class BillingRepository extends AbstractRepository
         };
     }
 
-    private function gerenciaNetCallback(string $notificationToken)
+    private function gerenciaNetCallback(string $notificationToken): void
     {
-
         $service = $this->getProvider();
         $service->authenticate();
         $result = $service->getSubscriptionInformation($notificationToken)['data'];
@@ -72,12 +71,7 @@ class BillingRepository extends AbstractRepository
 
         $billing = Billing::where('data', $subscriptionId)->first();
 
-        if (!$billing) {
-            throw new \Exception('eae');
-        }
-
         $this->handleSubscription($billing, $status);
-
     }
 
     private function handleSubscription(Billing $billing, mixed $status)

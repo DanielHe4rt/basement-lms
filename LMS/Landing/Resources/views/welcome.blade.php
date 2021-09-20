@@ -89,7 +89,7 @@
 
                     <div class="card card-product">
                         <div class="card-header card-header-image">
-                            <img class="img" src="{{ $course->getFirstMediaUrl() }}">
+                            <img class="img" src="{{ $course->getFirstMediaUrl() }}" alt="Capa do curso {{ $course->title }}">
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">
@@ -134,7 +134,7 @@
                         <ul class="card-description">
                             <li><b>{{ $landingData['courses']['free']['count'] }}</b> {{ trans('landing::view.pricing.card.descriptions.courseCount') }}</li>
                             <li><b>{{ $landingData['courses']['free']['time'] }}</b> {{ trans('landing::view.pricing.card.descriptions.hoursCount') }}</li>
-                            <li><b>{{ $landingData['courses']['free']['support'] }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
+                            <li><b>{{ $landingData['courses']['free']['support'] ? '✅' : '❌' }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
                         </ul>
                     </div>
                     <div class="card-footer justify-content-center ">
@@ -150,7 +150,7 @@
                         <ul class="card-description">
                             <li><b>{{ $landingData['courses']['paid']['count'] }}</b> {{ trans('landing::view.pricing.card.descriptions.courseCount') }}</li>
                             <li><b>{{ $landingData['courses']['paid']['time'] }}</b> {{ trans('landing::view.pricing.card.descriptions.hoursCount') }}</li>
-                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] ? '✅' : '❌' }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
                         </ul>
                     </div>
                     <div class="card-footer justify-content-center ">
@@ -166,7 +166,7 @@
                         <ul class="card-description">
                             <li><b>{{ $landingData['courses']['paid']['count'] }}</b> {{ trans('landing::view.pricing.card.descriptions.courseCount') }}</li>
                             <li><b>{{ $landingData['courses']['paid']['time'] }}</b> {{ trans('landing::view.pricing.card.descriptions.hoursCount') }}</li>
-                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] ? '✅' : '❌' }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
                         </ul>
                     </div>
                     <div class="card-footer justify-content-center ">
@@ -182,7 +182,7 @@
                         <ul class="card-description">
                             <li><b>{{ $landingData['courses']['paid']['count'] }}</b> {{ trans('landing::view.pricing.card.descriptions.courseCount') }}</li>
                             <li><b>{{ $landingData['courses']['paid']['time'] }}</b> {{ trans('landing::view.pricing.card.descriptions.hoursCount') }}</li>
-                            <li><b>{{ $landingData['courses']['paid']['support'] }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
+                            <li><b>{{ $landingData['courses']['paid']['support'] ? '✅' : '❌' }}</b> {{ trans('landing::view.pricing.card.descriptions.support') }}</li>
                         </ul>
                     </div>
                     <div class="card-footer justify-content-center ">
