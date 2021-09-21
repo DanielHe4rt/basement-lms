@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 class ViewController extends Controller
 {
-    public function viewProfile (): View
+    public function viewProfile(): View
     {
         $user = Auth::user();
         return view('user::profile', compact('user'));
