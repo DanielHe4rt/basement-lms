@@ -3,18 +3,21 @@
 namespace LMS\Billings\Exceptions;
 
 use Exception;
+use Log;
 use Throwable;
 
 class GerencianetException extends Exception
 {
     const GENERIC_ERROR = 3500034;
+    const INVALID_DOCUMENT = 4600026;
 
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
         $data = json_decode($message, true);
-        $message = match ($data['code']) {
+        $message = match (intval($data['code'])) {
             self::GENERIC_ERROR => $this->genericErrorHandler($data),
-            default => $data['error_description']['message']
+            self::INVALID_DOCUMENT => "O CPF digitado no campo acima é inválido.",
+            default => $data['code'] . ' - ' . ($data['error_description']['message'] ??  $data['error_description'])
         };
 
         parent::__construct($message, $code, $previous);
