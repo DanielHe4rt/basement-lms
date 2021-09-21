@@ -52,22 +52,16 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
     public function createPlan(string $name, int $interval): array
     {
         $uri = '/v1/plan';
-        try {
-            $response = $this->client->request('POST', $uri, [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->accessToken
-                ],
-                'json' => [
-                    'name' => $name,
-                    'interval' => $interval,
-                    'repeats' => null
-                ]
-            ]);
-        } catch (ServerException $exception) {
-            throw new GerencianetException(
-                $exception->getResponse()->getBody()->getContents()
-            );
-        }
+        $response = $this->client->request('POST', $uri, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->accessToken
+            ],
+            'json' => [
+                'name' => $name,
+                'interval' => $interval,
+                'repeats' => null
+            ]
+        ]);
 
         $result = json_decode($response->getBody(), true);
 
@@ -79,32 +73,27 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
     public function createSubscription($planId, string $name, float $price): array
     {
         $uri = sprintf('/v1/plan/%s/subscription', $planId);
-        try {
-            $response = $this->client->request('POST', $uri, [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->accessToken
-                ],
-                'json' => [
-                    'items' => [
-                        [
-                            'name' => $name,
-                            'value' => $price,
-                            'amount' => 1
-                        ]
-                    ],
-                    'metadata' => [
-                        'notification_url' =>
-                            config('app.env') == 'production'
-                                ? route('billing-callbacks', ['provider' => 'gerencianet'])
-                                : config('paymentProviders.gerencianet.webhook_url')
+        $response = $this->client->request('POST', $uri, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->accessToken
+            ],
+            'json' => [
+                'items' => [
+                    [
+                        'name' => $name,
+                        'value' => $price,
+                        'amount' => 1
                     ]
+                ],
+                'metadata' => [
+                    'notification_url' =>
+                        config('app.env') == 'production'
+                            ? route('billing-callbacks', ['provider' => 'gerencianet'])
+                            : config('paymentProviders.gerencianet.webhook_url')
                 ]
-            ]);
-        } catch (GuzzleException $exception) {
-            throw new GerencianetException(
-                $exception->getResponse()->getBody()->getContents()
-            );
-        }
+            ]
+        ]);
+
         $result = json_decode($response->getBody(), true);
         return [
             'id' => $result['data']['subscription_id']
@@ -113,17 +102,11 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
 
     public function makePayment(int $subscriptionId, array $payload): array
     {
-        try {
-            $uri = sprintf('/v1/subscription/%s/pay', $subscriptionId);
-            $response = $this->client->request('POST', $uri, [
-                'headers' => ['Authorization' => 'Bearer ' . $this->accessToken],
-                'json' => $payload
-            ]);
-        } catch(ServerException $exception) {
-            throw new GerencianetException(
-                $exception->getResponse()->getBody()->getContents()
-            );
-        }
+        $uri = sprintf('/v1/subscription/%s/pay', $subscriptionId);
+        $response = $this->client->request('POST', $uri, [
+            'headers' => ['Authorization' => 'Bearer ' . $this->accessToken],
+            'json' => $payload
+        ]);
 
         return json_decode($response->getBody(), true);
     }
