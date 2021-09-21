@@ -14,7 +14,7 @@ class GerencianetException extends Exception
         $data = json_decode($message, true);
         $message = match ($data['code']) {
             self::GENERIC_ERROR => $this->genericErrorHandler($data),
-            default => 'deu merda'
+            default => $data['error_description']['message']
         };
 
         parent::__construct($message, $code, $previous);
