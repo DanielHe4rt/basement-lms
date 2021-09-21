@@ -27,7 +27,9 @@ class PlansController extends Controller
             Log::error('[Plans Alert] Plan creation error', [
                 'message' => $exception->getMessage()
             ]);
-            return response()->json(['Error'], 500);
+            return response()->json([
+                'errors' => ['internal' => [$exception->getMessage()]]
+            ], 422);
         }
 
     }

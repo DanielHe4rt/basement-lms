@@ -187,7 +187,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block" type="submit">
+                        <button class="btn btn-primary btn-block" id="btnSubmit" type="submit">
                             Submit Subscription
                         </button>
 
@@ -258,6 +258,7 @@
                 });
 
                 $("#formCC").submit(function (e) {
+                    $("#btnSubmit").attr('disabled', true)
                     e.preventDefault()
                     let cardNumber = $("#credit_card").val()
                     let brand = $.payment.cardType(cardNumber)
@@ -281,15 +282,20 @@
                             brand: brand,
                             plan_id: $(".selected").data('id')
                         };
+
                         $.ajax({
                             type: 'POST',
                             url: '{{ route('billings-payments-create') }}',
                             headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
                             data: payload,
                             success: function (data) {
-                                toastr.success("Plano criado!")
+                                toastr.success("Pagamento pré-processado! Em alguns minutos sua assinatura será ativa.")
+                                setTimeout(() => {
+                                    window.location.href = '{{ route('dashboard') }}'
+                                }, 4000)
                             },
                             error: function (data) {
+                                $("#btnSubmit").removeAttr('disabled')
                                 let errors = data.responseJSON.errors;
                                 for (let i in errors) {
                                     toastr.error(errors[i]);
