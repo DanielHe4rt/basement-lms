@@ -1,9 +1,8 @@
 @extends('lms.templates.dashboard')
 @section('breadcrumb')
     <ol class="navbar-brand breadcrumb mt-4">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Cursos</a></li>
-        <li class="breadcrumb-item">Payments</li>
-        <li class="breadcrumb-item">Providers</li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item">Planos</li>
     </ol>
 @endsection
 @section('css')
@@ -68,7 +67,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">CPF</label>
-                                <input type="CPF" class="form-control inputDocument" name="document_number" id="inputCPF4"
+                                <input type="CPF" class="form-control inputDocument" name="document_number"
+                                       id="inputCPF4"
                                        value="{{Auth::user()->document_number}}" placeholder="CPF">
                             </div>
                             <div class="form-group col-md-6">
@@ -199,11 +199,16 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/3.0.0/jquery.payment.min.js"></script>
+
     <script type='text/javascript'>
-        var s = document.createElement('script');
+        let url = '{{ config('app.env') }}' === 'production'
+            ? 'https://api.gerencianet.com.br/'
+            : 'https://sandbox.gerencianet.com.br/'
+
+        let s = document.createElement('script');
         s.type = 'text/javascript';
-        var v = parseInt(Math.random() * 1000000);
-        s.src = 'https://sandbox.gerencianet.com.br/v1/cdn/841723a54fd283e758f72782896f708a/' + v;
+        let v = parseInt(Math.random() * 1000000);
+        s.src = url + 'v1/cdn/841723a54fd283e758f72782896f708a/' + v;
         s.async = false;
         s.id = '841723a54fd283e758f72782896f708a';
         if (!document.getElementById('841723a54fd283e758f72782896f708a')) {
@@ -214,15 +219,16 @@
                 $gn.done = fn;
             }
         };</script>
-{{--    // TODO: Script Gerencianet modular--}}
+
+    {{--    // TODO: Script Gerencianet modular--}}
     <script>
 
-        $(document).on('keyup','#phoneNumber', function() {
+        $(document).on('keyup', '#phoneNumber', function () {
             let SPMaskBehavior = function (val) {
                     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
                 },
                 spOptions = {
-                    onKeyPress: function(val, e, field, options) {
+                    onKeyPress: function (val, e, field, options) {
                         field.mask(SPMaskBehavior.apply({}, arguments), options);
                     }
                 };
