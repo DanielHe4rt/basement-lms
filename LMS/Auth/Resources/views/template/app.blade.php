@@ -21,9 +21,9 @@
         </div>
 
     </div>
-    @yield('footer', View::make('auth::components.footer'))
-
 </div>
+
+@yield('footer', View::make('auth::components.footer'))
 
 
 <script src="{{asset('js/admin.js')}}"></script>
