@@ -60,15 +60,15 @@
                                        value="{{Auth::user()->email}}" placeholder="Email" readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Telefone</label>
-                                <input type="tel" class="form-control" name="phone_number" id="inputEmail4"
+                                <label for="phoneNumber">Telefone</label>
+                                <input type="tel" class="form-control inputPhone" name="phone_number" id="phoneNumber"
                                        value="{{Auth::user()->phone_number}}" placeholder="Telefone">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">CPF</label>
-                                <input type="CPF" class="form-control" name="document_number" id="inputCPF4"
+                                <input type="CPF" class="form-control inputDocument" name="document_number" id="inputCPF4"
                                        value="{{Auth::user()->document_number}}" placeholder="CPF">
                             </div>
                             <div class="form-group col-md-6">
@@ -216,11 +216,27 @@
         };</script>
 {{--    // TODO: Script Gerencianet modular--}}
     <script>
+
+        $(document).on('keyup','#phoneNumber', function() {
+            let SPMaskBehavior = function (val) {
+                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+                },
+                spOptions = {
+                    onKeyPress: function(val, e, field, options) {
+                        field.mask(SPMaskBehavior.apply({}, arguments), options);
+                    }
+                };
+
+            $('.phoneNumber').mask(SPMaskBehavior, spOptions);
+        })
+
         $gn.ready(function (checkout) {
             $(document).ready(function () {
                 $("#credit_card").payment('formatCardNumber');
                 $("#expiration").payment('formatCardExpiry');
                 $("#cvc").payment('formatCardCVC');
+                $(".inputPhone").mask('(00) 000000000')
+                $(".inputDocument").mask('000.000.000-00')
 
 
                 $(".subscriptionBtn").click(function (e) {

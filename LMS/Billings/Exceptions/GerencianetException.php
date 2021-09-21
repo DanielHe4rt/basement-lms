@@ -32,6 +32,11 @@ class GerencianetException extends Exception
     private function genericErrorHandler(array $payload): string
     {
         $description = $payload['error_description'];
+
+        if (is_string($description)) {
+            return $description;
+        }
+
         return match ($payload['error']) {
             'validation_error' => $this->transformValidationError($description),
             default => $description['message']
@@ -47,7 +52,7 @@ class GerencianetException extends Exception
         $properties = explode('/', $description['property']);
         $property = end($properties);
 
-        return match($property) {
+        return match ($property) {
             'zipcode' => 'O CEP cadastrado é invalido.',
             'phone_number' => 'O número de telefone cadastrado é invalido.',
             default => 'Houve um problema no campo ' . $property

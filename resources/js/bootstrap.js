@@ -5,6 +5,7 @@ window.$ = window.jQuery = $;
 window.Popper = require('popper.js').default;
 window.Plyr = require('plyr')
 
+
 /**
  * Basic Toastr config
  */
