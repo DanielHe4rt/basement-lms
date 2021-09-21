@@ -92,7 +92,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger btn-link" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-link">Criar Lição</button>
+                        <button type="submit" class="btn btn-link">Criar plano</button>
                     </div>
                 </form>
             </div>
