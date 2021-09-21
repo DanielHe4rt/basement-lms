@@ -1,7 +1,7 @@
 @extends('auth::template.app')
 @section('page', 'login')
 @section('content')
-<div class="row" style="margin-top: 25% !important">
+<div class="row">
     <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
         <form id="loginForm" class="form" method="POST" action="{{ route('auth-login') }}">
             @csrf
