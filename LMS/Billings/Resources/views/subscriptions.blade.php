@@ -1,9 +1,8 @@
 @extends('lms.templates.dashboard')
 @section('breadcrumb')
     <ol class="navbar-brand breadcrumb mt-4">
-        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Cursos</a></li>
-        <li class="breadcrumb-item">Payments</li>
-        <li class="breadcrumb-item">Providers</li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li class="breadcrumb-item">Planos</li>
     </ol>
 @endsection
 @section('css')
@@ -60,15 +59,16 @@
                                        value="{{Auth::user()->email}}" placeholder="Email" readonly>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Telefone</label>
-                                <input type="tel" class="form-control" name="phone_number" id="inputEmail4"
+                                <label for="phoneNumber">Telefone</label>
+                                <input type="tel" class="form-control inputPhone" name="phone_number" id="phoneNumber"
                                        value="{{Auth::user()->phone_number}}" placeholder="Telefone">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">CPF</label>
-                                <input type="CPF" class="form-control" name="document_number" id="inputCPF4"
+                                <input type="CPF" class="form-control inputDocument" name="document_number"
+                                       id="inputCPF4"
                                        value="{{Auth::user()->document_number}}" placeholder="CPF">
                             </div>
                             <div class="form-group col-md-6">
@@ -187,7 +187,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block" type="submit">
+                        <button class="btn btn-primary btn-block" id="btnSubmit" type="submit">
                             Submit Subscription
                         </button>
 
@@ -199,11 +199,16 @@
 @endsection
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/3.0.0/jquery.payment.min.js"></script>
+
     <script type='text/javascript'>
-        var s = document.createElement('script');
+        let url = '{{ config('app.env') }}' === 'production'
+            ? 'https://api.gerencianet.com.br/'
+            : 'https://sandbox.gerencianet.com.br/'
+
+        let s = document.createElement('script');
         s.type = 'text/javascript';
-        var v = parseInt(Math.random() * 1000000);
-        s.src = 'https://sandbox.gerencianet.com.br/v1/cdn/841723a54fd283e758f72782896f708a/' + v;
+        let v = parseInt(Math.random() * 1000000);
+        s.src = url + 'v1/cdn/841723a54fd283e758f72782896f708a/' + v;
         s.async = false;
         s.id = '841723a54fd283e758f72782896f708a';
         if (!document.getElementById('841723a54fd283e758f72782896f708a')) {
@@ -214,13 +219,30 @@
                 $gn.done = fn;
             }
         };</script>
-{{--    // TODO: Script Gerencianet modular--}}
+
+    {{--    // TODO: Script Gerencianet modular--}}
     <script>
+
+        $(document).on('keyup', '#phoneNumber', function () {
+            let SPMaskBehavior = function (val) {
+                    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+                },
+                spOptions = {
+                    onKeyPress: function (val, e, field, options) {
+                        field.mask(SPMaskBehavior.apply({}, arguments), options);
+                    }
+                };
+
+            $('.phoneNumber').mask(SPMaskBehavior, spOptions);
+        })
+
         $gn.ready(function (checkout) {
             $(document).ready(function () {
                 $("#credit_card").payment('formatCardNumber');
                 $("#expiration").payment('formatCardExpiry');
                 $("#cvc").payment('formatCardCVC');
+                $(".inputPhone").mask('(00) 000000000')
+                $(".inputDocument").mask('000.000.000-00')
 
 
                 $(".subscriptionBtn").click(function (e) {
@@ -258,6 +280,7 @@
                 });
 
                 $("#formCC").submit(function (e) {
+                    $("#btnSubmit").attr('disabled', true)
                     e.preventDefault()
                     let cardNumber = $("#credit_card").val()
                     let brand = $.payment.cardType(cardNumber)
@@ -281,15 +304,20 @@
                             brand: brand,
                             plan_id: $(".selected").data('id')
                         };
+
                         $.ajax({
                             type: 'POST',
                             url: '{{ route('billings-payments-create') }}',
                             headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
                             data: payload,
                             success: function (data) {
-                                toastr.success("Plano criado!")
+                                toastr.success("Pagamento pré-processado! Em alguns minutos sua assinatura será ativa.")
+                                setTimeout(() => {
+                                    window.location.href = '{{ route('dashboard') }}'
+                                }, 4000)
                             },
                             error: function (data) {
+                                $("#btnSubmit").removeAttr('disabled')
                                 let errors = data.responseJSON.errors;
                                 for (let i in errors) {
                                     toastr.error(errors[i]);

@@ -38,7 +38,7 @@ class PaymentTransformer
         return [
             'name' => $user->name,
             'cpf' => str_replace(['.','-'], '', $user->document_number),
-            'phone_number' => $user->phone_number,
+            'phone_number' => preg_replace('/[^0-9]/','',$user->phone_number),
             'email' => $user->email,
             'birth' => $user->birthdate
         ];

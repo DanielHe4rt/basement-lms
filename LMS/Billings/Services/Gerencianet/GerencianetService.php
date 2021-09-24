@@ -3,7 +3,10 @@
 namespace LMS\Billings\Services\Gerencianet;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ServerException;
 use LMS\Billings\Contracts\PaymentProviderContract;
+use LMS\Billings\Exceptions\GerencianetException;
 use LMS\Billings\Services\AbstractService;
 
 class GerencianetService extends AbstractService implements PaymentProviderContract
@@ -85,8 +88,8 @@ class GerencianetService extends AbstractService implements PaymentProviderContr
                 'metadata' => [
                     'notification_url' =>
                         config('app.env') == 'production'
-                        ? route('billing-callbacks', ['provider' => 'gerencianet'])
-                        : config('paymentProviders.gerencianet.webhook_url')
+                            ? route('billing-callbacks', ['provider' => 'gerencianet'])
+                            : config('paymentProviders.gerencianet.webhook_url')
                 ]
             ]
         ]);

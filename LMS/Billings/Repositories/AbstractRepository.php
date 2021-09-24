@@ -3,6 +3,7 @@
 namespace LMS\Billings\Repositories;
 
 use Illuminate\Support\Str;
+use LMS\Billings\Adapters\GerencianetAdapter;
 use LMS\Billings\Contracts\PaymentProviderContract;
 use LMS\Billings\Models\Provider;
 use LMS\Billings\Services\Gerencianet\GerencianetService;
@@ -22,7 +23,7 @@ abstract class AbstractRepository
     public function getProvider(): PaymentProviderContract
     {
         return match (Str::slug($this->providerName)) {
-            'gerencianet' => new GerencianetService(),
+            'gerencianet' => new GerencianetAdapter(),
             default => throw new \Exception('Repository not found')
         };
     }
