@@ -41,7 +41,7 @@ class AuthController extends Controller
         try {
             $this->repository->authenticate($payload);
         } catch (UnauthorizedException $exception) {
-            return new JsonResponse([$exception->getMessage()], 401);
+            return new JsonResponse(['errors' => [trans('auth.password')]], 401);
         }
     }
 
