@@ -16,6 +16,7 @@ use LMS\Billings\Http\Controllers\Subscriptions\ViewController as SubscriptionVi
 use LMS\Courses\Http\Controllers\CoursesController;
 use LMS\Courses\Http\Controllers\LevelController;
 use LMS\Courses\Http\Controllers\ViewController as CoursesViewController;
+use LMS\Dashboard\Http\Controllers\ViewController as DashboardViewController;
 use LMS\Landing\Http\Controllers\ViewController as LandingViewController;
 use LMS\Lessons\Http\Controllers\LessonsController;
 use LMS\Modules\Http\Controllers\ModulesController;
@@ -36,9 +37,7 @@ use LMS\User\Http\Controllers\ViewController as UserViewController;
 
 Route::get('/', [LandingViewController::class, 'viewLandingPage'])->name('landing');
 
-Route::get('/dashboard', function () {
-    return view('lms.dashboard');
-})->name('dashboard')->middleware('auth');
+Route::get('/dashboard', [DashboardViewController::class, 'viewDashboard'])->name('dashboard')->middleware('auth');
 
 Route::prefix('courses')
     ->middleware('auth')
