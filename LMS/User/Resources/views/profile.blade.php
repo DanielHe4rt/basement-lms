@@ -20,7 +20,7 @@
                         <p>{{ $user->email }}</p>
                         <p>Membro desde: {{  $user['created_at']->format('d/m/Y H:i') }}</p>
                         <p>Último acesso: {{ $user->last_seen }}</p>
-{{--                        <p>Plano Atual: {{ $user->plan?->name ?? "Sem Plano"}}</p>--}}
+                        <p>Plano Atual: {{ $user->plan?->name ?? "Sem Plano"}}</p>
                         <hr>
                         <p>Cidade: {{$user->address->getCityAndState()}}</p>
                         <p>Endereço: {{$user->address->getFullAddress()}}</p>
