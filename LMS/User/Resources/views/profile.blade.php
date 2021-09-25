@@ -11,8 +11,8 @@
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="card">
-                <div class="row justify-content-between mt-2">
-                    <div class="col-4 m-2">
+                <div class="row justify-content-around mt-2">
+                    <div class="col-4 d-flex justify-content-center align-items-center">
                         <img src="https://placehold.it/300x300" class="photo-profile">
                     </div>
                     <div class="col-7">
