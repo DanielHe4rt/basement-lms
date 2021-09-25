@@ -16,7 +16,8 @@
                         <img src="https://placehold.it/300x300" class="photo-profile">
                     </div>
                     <div class="col-7">
-                        <h3>{{ $user->username }}</h3>
+                        <h3>{{ $user->name }}</h3>
+                        <p>{{ $user->username }}</p>
                         <p>{{ $user->email }}</p>
                         <p>Membro desde: {{  $user['created_at']->format('d/m/Y H:i') }}</p>
                         <p>Último acesso: {{ $user->last_seen }}</p>
