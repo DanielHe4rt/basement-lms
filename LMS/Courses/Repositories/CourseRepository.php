@@ -38,6 +38,9 @@ class CourseRepository
 
     public function enroll(Course $course)
     {
-        Auth::user()->enrollments()->attach($course, ['joined_at' => Carbon::now()]);
+        $alreadyEnrolled = Auth::user()->enrollments()->find($course);
+        if (!$alreadyEnrolled) {
+            Auth::user()->enrollments()->attach($course, ['joined_at' => Carbon::now()]);
+        }
     }
 }

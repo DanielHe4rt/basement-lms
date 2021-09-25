@@ -37,6 +37,14 @@ class DashboardRepository
 
     private function getMostRatedCourse()
     {
-        return Course::first();
+        $count = 0;
+        foreach (Course::where('paid', false)->get() as $course) {
+            $studentsCount = $course->students()->count();
+            if ($studentsCount > $count) {
+                $result = $course;
+                $count = $studentsCount;
+            }
+        }
+        return $result ?? Course::first();
     }
 }
