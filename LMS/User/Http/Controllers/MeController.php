@@ -20,6 +20,6 @@ class MeController extends Controller
     public function putMe(UpdateMeRequest $request): JsonResponse
     {
         $this->repository->updateBaseInformation($request->validated());
-        return response()->json(['message' => 'Informações atualizadas com sucesso!'],Response::HTTP_CREATED);
+        return response()->json(['message' => 'Informações atualizadas com sucesso!'],Response::HTTP_OK);
     }
 }
