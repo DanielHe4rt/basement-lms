@@ -58,7 +58,8 @@ class Course extends Model implements HasMedia
     }
 
 
-    public function getProgressAttribute() {
+    public function getProgressAttribute(): int|string
+    {
 
         return $this->lessonsWatched && $this->lessonsCount
             ?number_format(($this->lessonsWatched / $this->lessonsCount ?? 0) * 100,2)

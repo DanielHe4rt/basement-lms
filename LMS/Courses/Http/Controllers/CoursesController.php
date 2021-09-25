@@ -41,6 +41,6 @@ class CoursesController extends Controller
     public function postEnrollment(Course $course): RedirectResponse
     {
         $this->repository->enroll($course);
-        return back();
+        return redirect(route('course-lesson-redirect', ['slug' => $course->slug]));
     }
 }
