@@ -112,4 +112,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Billing::class);
     }
+
+    public function getUsernameAttribute($value): string
+    {
+        return '@'.$value;
+    }
 }
