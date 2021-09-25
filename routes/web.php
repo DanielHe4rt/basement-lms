@@ -89,6 +89,7 @@ Route::prefix('subscriptions')->middleware('auth')->group(function () {
 Route::prefix('users/me')->middleware('auth')->group(function () {
     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
     Route::get('/profile', [UserViewController::class, 'viewProfile'])->name('users-me-profile');
+    Route::get('/edit', [UserViewController::class, 'viewEditProfile'])->name('edit-profile');
 });
 
 Route::prefix('instructor/courses')->middleware(['auth', 'role:admin'])->group(function () {
