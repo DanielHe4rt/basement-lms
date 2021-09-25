@@ -21,7 +21,7 @@
                 <p>
                     <span class="username">
                         {{ auth()->user()->name }}<br>
-                         {{ '@' .  auth()->user()->username }}
+                         {{ auth()->user()->username }}
                     </span><br><br>
                     @if(auth()->user()->plan_id)
                     <p class="username">
