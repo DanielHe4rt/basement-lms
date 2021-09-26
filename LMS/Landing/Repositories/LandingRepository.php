@@ -2,12 +2,21 @@
 
 namespace LMS\Landing\Repositories;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use LMS\Courses\Models\Course;
 use LMS\User\Models\User;
 
 class LandingRepository
 {
+
+    private $courseModel;
+
+    public function __construct(Course $courseModel)
+    {
+        $this->courseModel = $courseModel;
+    }
+
     public function retrieveData(): array
     {
         return [
@@ -25,31 +34,27 @@ class LandingRepository
 
     private function getFreeCourseInformation(): array
     {
-        $model = new Course();
-        $courseTime = 0;
-        foreach ($model->where('paid', false)->get() as $value) {
-            $courseTime += $value->duration;
-        }
-
-        return [
-            'count' => $model->where('paid', false)->count(),
-            'time' => gmdate('H:i:s', $courseTime),
-            'support' => false
-        ];
+        return $this->getCourseInformationByPaidAttribute(false);
     }
 
     private function getPaidCourseInformation(): array
     {
-        $model = new Course();
-        $courseTime = 0;
-        foreach ($model->where('paid', true)->get() as $value) {
-            $courseTime += $value->duration;
-        }
+        return $this->getCourseInformationByPaidAttribute(true);
+    }
+
+    private function getCourseInformationByPaidAttribute(bool $paid): array
+    {
+        $where = [
+            'paid' => $paid
+        ];
+
+        $courses = $this->getCoursesWhere($where);
+        $courseTime = $this->getCoursesTotalTime($courses);
 
         return [
-            'count' => $model->where('paid', true)->count(),
+            'count' => $courses->count(),
             'time' => gmdate('H:i:s', $courseTime),
-            'support' => true
+            'support' => $paid
         ];
     }
 
@@ -60,12 +65,12 @@ class LandingRepository
 
     private function getCourseTotalTime(): string
     {
-        $model = new Course();
-        $courseTime = 0;
+        $where = [
+            'paid' => true
+        ];
 
-        foreach ($model->where('paid', true)->get() as $value) {
-            $courseTime += $value->duration;
-        }
+        $courses = $this->getCoursesWhere($where);
+        $courseTime = $this->getCoursesTotalTime($courses);
 
         return gmdate('H', $courseTime);
     }
@@ -73,5 +78,19 @@ class LandingRepository
     private function getTotalWatchedLessons(): int
     {
         return DB::table('user_watched_lessons')->count();
+    }
+
+    private function getCoursesWhere(array $where) : Collection
+    {
+        return $this->courseModel->where($where)->get();
+    }
+
+    private function getCoursesTotalTime(Collection $courses): int
+    {
+        $result = 0;
+        foreach ($courses as $course) {
+            $result += $course->duration;
+        }
+        return $result;
     }
 }
