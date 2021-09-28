@@ -115,6 +115,6 @@ class User extends Authenticatable
 
     public function getUsernameAttribute($value): string
     {
-        return '@'.$value;
+        return '@' . $value;
     }
 }
