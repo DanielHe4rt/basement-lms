@@ -13,4 +13,10 @@ class ViewController extends Controller
         $user = Auth::user();
         return view('user::profile', compact('user'));
     }
+
+    public function viewEditProfile(): View
+    {
+        $user = Auth::user();
+        return view('user::editProfile', compact('user'));
+    }
 }
