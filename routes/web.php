@@ -87,6 +87,7 @@ Route::prefix('subscriptions')->middleware('auth')->group(function () {
 
 Route::prefix('users/me')->middleware('auth')->group(function () {
     Route::put('/', [MeController::class, 'putMe'])->name('users-me-update');
+    Route::post('/profile-image', [MeController::class, 'postMeProfilePicture'])->name('users-me-picture');
     Route::get('/profile', [UserViewController::class, 'viewProfile'])->name('users-me-profile');
     Route::get('/edit', [UserViewController::class, 'viewEditProfile'])->name('edit-profile');
 });

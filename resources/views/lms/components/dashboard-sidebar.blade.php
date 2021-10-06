@@ -15,13 +15,13 @@
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="https://placehold.it/300x300">
+                <img src="{{ auth()->user()->image_url }}" class="profile-img">
             </div>
             <div class="user-info">
                 <p>
                     <span class="username">
                         {{ auth()->user()->name }}<br>
-                         {{ auth()->user()->username }}
+                        {{ auth()->user()->username }}
                     </span><br><br>
                     @if(auth()->user()->plan_id)
                     <p class="username">

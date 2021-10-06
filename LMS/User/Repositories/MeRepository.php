@@ -2,6 +2,7 @@
 
 namespace LMS\User\Repositories;
 
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class MeRepository
@@ -14,5 +15,11 @@ class MeRepository
         $user->update($payload);
         $user->address()->update($address);
         return true;
+    }
+
+    public function updateProfilePicture()
+    {
+        Auth::user()->clearMediaCollection();
+        return Auth::user()->addMediaFromRequest('image')->toMediaCollection();
     }
 }

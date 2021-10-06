@@ -16,11 +16,13 @@ use LMS\Billings\Models\Card;
 use LMS\Billings\Models\Plan;
 use LMS\Courses\Models\Course;
 use LMS\Lessons\Models\Lesson;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -57,6 +59,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = [
+        'image_url'
+    ];
+
+    public function getImageUrlAttribute()
+    {
+        return $this->getFirstMediaUrl() ?: 'https://placehold.it/300x300';
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('user-avatar');
+    }
 
     public function setPasswordAttribute($value): void
     {
@@ -113,8 +129,4 @@ class User extends Authenticatable
         return $this->hasMany(Billing::class);
     }
 
-    public function getUsernameAttribute($value): string
-    {
-        return '@' . $value;
-    }
 }
